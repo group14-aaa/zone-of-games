@@ -14,7 +14,7 @@ export default defineConfig({
   server: {
     middleware: [
       (req, res, next) => {
-        // Set cache control headers for static assets
+        // Set cache control headers for static assets 
         if (req.url.includes('/assets/')) {
           res.setHeader('Cache-Control', 'public, max-age=31536000'); // 1 year in seconds
         }
