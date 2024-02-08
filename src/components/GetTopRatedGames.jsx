@@ -26,13 +26,16 @@ const TopRatedGames = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Top 9 Rated Games:</h2>
-      <ul>
-        {topGames.map((game, index) => (
-          <li key={game.id}>{`${index + 1}. ${game.name} - Rating: ${game.rating}`}</li>
-        ))}
-      </ul>
+    <div className="flex flex-wrap justify-center">
+      {topGames.map((game, index) => (
+        <div key={game.id} className="max-w-sm rounded overflow-hidden shadow-lg m-4">
+          <img className="w-full h-64 object-cover" src={game.short_screenshots[0].image} alt={game.name} />
+          <div className="px-6 py-4">
+            <div className="font-bold text-xl mb-2">{`${index + 1}. ${game.name}`}</div>
+            <p className="text-gray-700 text-base">Rating: {game.rating}</p>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
