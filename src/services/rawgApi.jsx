@@ -1,13 +1,15 @@
 import axios from "axios";
 
-const RAWG_API_KEY = "9932deaed8d54313ab121a703e996f36";
+const RAWG_BASE_URL = "https://api.rawg.io/api/";
 
-const axiosResponse = axios.create({
-   baseURL: "https://api.rawg.io/api",
+const axiosCreateRawgApi = axios.create({
+   baseURL: RAWG_BASE_URL,
 });
 
-const getAllGames = axiosResponse.get("/games?key=" + RAWG_API_KEY);
+const getGenreList = axiosCreateRawgApi.get("/genres?key=" + import.meta.env.VITE_RAWG_API_KEY);
+const getGamesList = axiosCreateRawgApi.get("/games?key=" + import.meta.env.VITE_RAWG_API_KEY);
 
 export default {
-   getAllGames,
+   getGenreList,
+   getGamesList,
 };
