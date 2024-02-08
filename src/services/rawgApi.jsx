@@ -39,9 +39,7 @@ export const getGamesByGenre = async (genre) => {
 
     return games;
   } catch (error) {
-    console.error('Error fetching games from Rawg API:', error);
-    throw error;
+      console.error('Error fetching games from Rawg API:', error);
+      throw error;
   }
 };
-
-

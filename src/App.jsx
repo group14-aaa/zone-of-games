@@ -5,6 +5,7 @@ import PageLayout from './components/PageLayout';
 import { getGamesByGenre } from './services/rawgApi';
 import TopRatedGames from './components/GetTopRatedGames';
 
+
 // Pages
 import Home from './pages/Home';
 import { ThemeContext } from './context/ThemeContext';
@@ -18,19 +19,18 @@ function App() {
     document.documentElement.className = theme;
   }, [theme]);
 
-  // useEffect(() => {
-  //   getGamesByGenre('action')
-  //     .then((gamesData) => {
-  //       setGames(gamesData);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching games:', error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    getGamesByGenre('action')
+      .then((gamesData) => {
+        setGames(gamesData);
+      })
+      .catch((error) => {
+        console.error('Error fetching games:', error);
+      });
+  }, []);
 
-  //  // Log games data only once when the component mounts
-  //  console.log('Games in App component:', games);
-
+   // Log games data only once when the component mounts
+   console.log('Games in App component:', games);
 
 
 
