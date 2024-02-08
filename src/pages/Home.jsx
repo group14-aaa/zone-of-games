@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-// Components
 import Sidebar from '../components/Sidebar';
 import RawgTopRatedGames from '../components/RawgTopRatedGames';
 import TwitchTopGames from '../components/TwitchTopGames';
 import GameBanner from '../components/GameBanner';
 import rawgApi from '../services/rawgApi';
+import Banner from "../components/Banner";
 // import TwitchTopStreams from '../components/TwitchTopStreams';
 
-
 const Home = () => {
-
     // State for top games list from RAWG Api
     const [allGamesList, setAllGamesList] = useState([]);
 
