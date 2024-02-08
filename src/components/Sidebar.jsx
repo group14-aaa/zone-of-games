@@ -36,14 +36,14 @@ const Sidebar = () => {
     };
 
     return (
-        <div className={`relative overflow-hidden ${isSidebarCollapsed ? 'w-32' : 'w-64'} transition-all duration-300 ease-in-out bg-${theme === 'dark' ? darkModeColors.background : 'gray-200'} text-${theme === 'dark' ? darkModeColors.text : 'gray-800'} ${theme === 'dark' ? 'shadow-pulse-orange' : ''} rounded-md`}>
+        <div className={`relative overflow-hidden ${isSidebarCollapsed ? 'w-32' : 'w-64'} transition-all duration-300 ease-in-out bg-${theme === 'dark' ? darkModeColors.background : 'gray-200'} text-${theme === 'dark' ? darkModeColors.text : 'gray-800'} ${theme === 'dark' ? 'shadow-pulse-orange' : ''} rounded-md flex flex-col ${isSidebarCollapsed ? '' : 'h-full'}`}>
             {/* Toggle Sidebar Button */}
             <button onClick={toggleSidebar} className="absolute top-4 right-4 text-gray-500 focus:outline-none">
                 {isSidebarCollapsed ? '>' : '<'}
             </button>
 
             {/* Sidebar Content */}
-            <div className={`flex flex-col h-full rounded-md`}>
+            <div className={`flex flex-col rounded-md flex-grow`}>
                 {/* Sidebar Header with Logo */}
                 <div className={`py-4 px-6 ${theme === 'dark' ? 'bg-black' : 'bg-gray-300'} flex justify-between items-center`}>
                     <img src={logo} alt="Logo" className="h-10" />
@@ -62,25 +62,23 @@ const Sidebar = () => {
                             <li className="py-2">
                                 <a href="/contact" className={`hover:text-${theme === 'dark' ? 'gray-300' : 'gray-700'}`}>Contacts</a>
                             </li>
+                            {/* Game Genres Button (Displayed only when Sidebar is open) */}
+                            <li className="py-2">
+                                <button className={`w-full py-2 ${theme === 'dark' ? 'bg-black text-white shadow-orange' : 'bg-gray-300 text-gray-800 shadow-orange'} text-left rounded-md hover:text-${theme === 'dark' ? 'gray-300' : 'gray-700'}`}
+                                        onClick={toggleGenres}
+                                        style={{ padding: '0.5rem' }}>
+                                    Game Genres
+                                </button>
+                                {showGenres && (
+                                    <div className={`mt-2 overflow-y-auto ${theme === 'dark' ? 'bg-black text-white shadow-orange' : 'bg-gray-200 text-gray-800 shadow-orange'} rounded-md`}>
+                                        <RawgGenreList />
+                                    </div>
+                                )}
+                            </li>
                         </ul>
                     </nav>
                 )}
 
-                {/* Rawg Genres Button */}
-                {!isSidebarCollapsed && (
-                    <div className="p-4">
-                        <button className={`w-full py-2 ${theme === 'dark' ? 'bg-black text-white shadow-orange' : 'bg-gray-300 text-gray-800 shadow-orange'} text-left rounded-md hover:text-${theme === 'dark' ? 'gray-300' : 'gray-700'}`}
-                                onClick={toggleGenres}
-                                style={{ padding: '0.5rem' }}> {/* Adjust padding here */}
-                            Game Genres
-                        </button>
-                        {showGenres && (
-                            <div className={`mt-2 max-h-40 overflow-y-auto ${theme === 'dark' ? 'bg-black text-white shadow-orange' : 'bg-gray-200 text-gray-800 shadow-orange'} rounded-md`}>
-                                <RawgGenreList />
-                            </div>
-                        )}
-                    </div>
-                )}
             </div>
         </div>
     );
