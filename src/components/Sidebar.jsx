@@ -22,8 +22,21 @@ const Sidebar = () => {
     // Choose the appropriate logo based on the theme
     const logo = theme === 'dark' ? logoDark : logoLight;
 
+    // Define colors for dark mode from CSS variables
+    const darkModeColors = {
+        primary: 'var(--color-primary)',
+        secondary: 'var(--color-secondary)',
+        accent: 'var(--color-accent)',
+        text: 'var(--color-text)',
+        success: 'var(--color-success)',
+        info: 'var(--color-info)',
+        warn: 'var(--color-warn)',
+        error: 'var(--color-error)',
+        background: 'var(--color-background)',
+    };
+
     return (
-        <div className={`relative overflow-hidden ${isSidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 ease-in-out ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'}`}>
+        <div className={`relative overflow-hidden ${isSidebarCollapsed ? 'w-32' : 'w-64'} transition-all duration-300 ease-in-out bg-${theme === 'dark' ? darkModeColors.background : 'gray-200'} text-${theme === 'dark' ? darkModeColors.text : 'gray-800'} ${theme === 'dark' ? 'shadow-pulse-orange' : ''}`}>
             {/* Toggle Sidebar Button */}
             <button onClick={toggleSidebar} className="absolute top-4 right-4 text-gray-500 focus:outline-none">
                 {isSidebarCollapsed ? '>' : '<'}
