@@ -31,45 +31,15 @@ export const platform = [
 
 export const getGamesByGenre = async (genre) => {
   try {
-      const response = await axios.get(`${RAWG_API_BASE_URL}games?key=${RAWG_API_KEY}&genres=${genre}`);
-      const games = response.data.results;
+    const response = await axios.get(`${RAWG_API_BASE_URL}games?key=${RAWG_API_KEY}&genres=${genre}`);
+    const games = response.data.results;
 
-      // Display the response in the console
-      console.log(`Games with genre in rawgAPI.jsx'${genre}':`, games);
+    // Display the response in the console
+    console.log(`Games with genre in rawgAPI.jsx'${genre}':`, games);
 
-      return games;
+    return games;
   } catch (error) {
       console.error('Error fetching games from Rawg API:', error);
       throw error;
   }
 };
-
-
-
-
-// // Function to fetch games by genre
-// export const GetGamesByGenre = async (genre) => {
-//   try {
-//     const response = await axios.get(`${RAWG_API_BASE_URL}games?key=${RAWG_API_KEY}&genres=${genre}`);
-//     return response.data.results;
-//   } catch (error) {
-//     console.error('Error fetching games from Rawg API:', error);
-//     throw error;
-//   }
-// };
-
-// // Function to fetch games by a specific genre and export the result
-// export const fetchGamesAndExportResult = async () => {
-//   try {
-//     // Select a genre from the array
-//     const selectedGenreIndex = 0; // Choose the index of the genre you want to select
-//     const genre = gameGenres[selectedGenreIndex];
-
-//     // Call the function to get games by the selected genre
-//     const games = await GetGamesByGenre(genre);
-//     return games; // Return the result
-//   } catch (error) {
-//     console.error('Error:', error);
-//     throw error;
-//   }
-// };

@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 // Components
 import PageLayout from './components/PageLayout';
 import { getGamesByGenre } from './services/rawgApi';
+import TopRatedGames from './components/GetTopRatedGames';
+
 
 // Pages
 import Home from './pages/Home';
@@ -38,6 +40,7 @@ function App() {
         <PageLayout>
           <Home />
         </PageLayout>
+    <TopRatedGames />
       </div>
     </ThemeContext.Provider>
   );
