@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 // Components
 import PageLayout from "./components/PageLayout";
 
-import TopRatedGames from "./components/GetTopRatedGames";
-
 // Pages
 import Home from "./pages/Home";
 import { ThemeContext } from "./context/ThemeContext";
