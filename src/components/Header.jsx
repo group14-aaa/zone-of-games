@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 
 // Components
 import { ThemeContext } from '../context/ThemeContext';
@@ -12,15 +12,10 @@ import { MdLightMode, MdDarkMode } from "react-icons/md";
 
 
 const Header = () => {
-    const [toggle, setToggle] = useState(false);
     const { theme, setTheme } = useContext(ThemeContext);
 
-    useEffect(() => {
-        console.log(theme);
-    }, [])
-
     return (
-        <div className='flex items-center p-3'>
+        <div className='flex items-center p-3 border-b-2 border-accent'>
             <img src={logo} width={120} height={60} alt='Logo image' />
             <div className='flex bg-slate-200 p-2 w-full mx-5 rounded-full items-center'>
                 <IoSearchSharp />
@@ -30,10 +25,12 @@ const Header = () => {
                 {theme === 'light' ?
                     <MdDarkMode
                         className='text-[35px] bg-slate-200 text-black p-1 rounded-full cursor-pointer'
-                        onClick={() => setTheme('dark')} /> :
+                        onClick={() => { setTheme('dark'); localStorage.setItem('theme', 'dark') }}
+                    /> :
                     <MdLightMode
                         className='text-[35px] bg-slate-200 text-black p-1 rounded-full cursor-pointer'
-                        onClick={() => setTheme('light')} />}
+                        onClick={() => { setTheme('light'); localStorage.setItem('theme', 'light') }}
+                    />}
             </div>
         </div>
     );

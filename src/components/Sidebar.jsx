@@ -1,7 +1,11 @@
+import RawgGenreList from "./RawgGenreList";
+
 const Sidebar = () => {
     return (
-        <div>
-            Main
-        </div>
+        <>
+            <RawgGenreList />
+        </>
     );
 }
+
+export default Sidebar;
