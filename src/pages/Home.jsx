@@ -38,7 +38,7 @@ const Home = () => {
                 {allGamesList?.length > 0 ? (
                     <GameBanner game={allGamesList[Math.floor(Math.random() * allGamesList.length)]} />
                 ) : null}
-                <RawgTopRatedGames />
+                <RawgTopRatedGames gamesList={allGamesList} />
                 <TwitchTopGames />
                 {/* <TwitchTopStreams /> */}
             </div>
