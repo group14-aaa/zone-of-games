@@ -9,50 +9,65 @@ import logoLight from '../../src/assets/images/logo-no-background.png';
 const Sidebar = () => {
     const { theme } = useContext(ThemeContext);
     const [showGenres, setShowGenres] = useState(false);
+    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
     const toggleGenres = () => {
         setShowGenres(!showGenres);
+    };
+
+    const toggleSidebar = () => {
+        setIsSidebarCollapsed(!isSidebarCollapsed);
     };
 
     // Choose the appropriate logo based on the theme
     const logo = theme === 'dark' ? logoDark : logoLight;
 
     return (
-        <div className={`flex flex-col w-64 ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'}`}>
-            {/* Sidebar Header with Logo */}
-            <div className={`py-4 px-6 ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-300'}`}>
-                <img src={logo} alt="Logo" className="h-10" />
-            </div>
+        <div className={`relative overflow-hidden ${isSidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 ease-in-out ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'}`}>
+            {/* Toggle Sidebar Button */}
+            <button onClick={toggleSidebar} className="absolute top-4 right-4 text-gray-500 focus:outline-none">
+                {isSidebarCollapsed ? '>' : '<'}
+            </button>
 
-            {/* Sidebar Navigation */}
-            <nav className="flex-grow">
-                <ul className="p-4">
-                    <li className="py-2">
-                        <a href="/" className={`hover:text-${theme === 'dark' ? 'gray-300' : 'gray-700'}`}>Home</a>
-                    </li>
-                    <li className="py-2">
-                        <a href="/about" className={`hover:text-${theme === 'dark' ? 'gray-300' : 'gray-700'}`}>About</a>
-                    </li>
-                    <li className="py-2">
-                        <a href="/contact" className={`hover:text-${theme === 'dark' ? 'gray-300' : 'gray-700'}`}>Contacts</a>
-                    </li>
-                </ul>
-            </nav>
+            {/* Sidebar Content */}
+            <div className="flex flex-col h-full">
+                {/* Sidebar Header with Logo */}
+                <div className={`py-4 px-6 ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-300'} flex justify-between items-center`}>
+                    <img src={logo} alt="Logo" className="h-10" />
+                </div>
 
-            {/* Rawg Genres Button */}
-            <div className="p-4">
-                <button className={`w-full py-2 ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-300 text-gray-800'} text-left rounded-md hover:text-${theme === 'dark' ? 'gray-300' : 'gray-700'}`}
-                        onClick={toggleGenres}>
-                    Game Genres
-                </button>
-                {showGenres && (
-                    <div className={`mt-2 max-h-40 overflow-y-auto ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'}`}>
-                        <RawgGenreList />
+                {/* Sidebar Navigation */}
+                {!isSidebarCollapsed && (
+                    <nav className="flex-grow">
+                        <ul className="p-4">
+                            <li className="py-2">
+                                <a href="/" className={`hover:text-${theme === 'dark' ? 'gray-300' : 'gray-700'}`}>Home</a>
+                            </li>
+                            <li className="py-2">
+                                <a href="/about" className={`hover:text-${theme === 'dark' ? 'gray-300' : 'gray-700'}`}>About</a>
+                            </li>
+                            <li className="py-2">
+                                <a href="/contact" className={`hover:text-${theme === 'dark' ? 'gray-300' : 'gray-700'}`}>Contacts</a>
+                            </li>
+                        </ul>
+                    </nav>
+                )}
+
+                {/* Rawg Genres Button */}
+                {!isSidebarCollapsed && (
+                    <div className="p-4">
+                        <button className={`w-full py-2 ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-300 text-gray-800'} text-left rounded-md hover:text-${theme === 'dark' ? 'gray-300' : 'gray-700'}`}
+                                onClick={toggleGenres}>
+                            Game Genres
+                        </button>
+                        {showGenres && (
+                            <div className={`mt-2 max-h-40 overflow-y-auto ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'}`}>
+                                <RawgGenreList />
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
-
-            
         </div>
     );
 }
