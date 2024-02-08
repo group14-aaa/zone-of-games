@@ -43,7 +43,7 @@ const Sidebar = () => {
             <div className="p-4">
                 <button className={`w-full py-2 ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-300 text-gray-800'} text-left rounded-md hover:text-${theme === 'dark' ? 'gray-300' : 'gray-700'}`}
                         onClick={toggleGenres}>
-                    Rawg Genres
+                    Game Genres
                 </button>
                 {showGenres && (
                     <div className={`mt-2 max-h-40 overflow-y-auto ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'}`}>
