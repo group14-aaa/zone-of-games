@@ -15,7 +15,7 @@ const RawgTopRatedGames = ({ gamesList }) => {
 
         {/* Container for the top games */}
         <div className="flex flex-wrap w-full justify-center">
-          {gamesList.slice(0).map((game, index) => index < 12 && (
+          {gamesList.sort((a, b) => b.rating - a.rating).map((game, index) => index < 12 && (
             <div key={game.id} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 bg-secondary rounded overflow-hidden shadow-lg m-4 group hover:scale-110 transition-all duration-300 ease cursor-pointer">
 
               {/* Game image */}
