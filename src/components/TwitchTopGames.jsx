@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
+
 import twitchApi from "../services/twitchApi";
 
 function TwitchTopGames() {
@@ -15,7 +17,7 @@ function TwitchTopGames() {
       try {
          const response = await twitchApi.getTwitchTopGames;
          // display data to the console
-         // console.log(response.data.data);
+         console.log(response.data.data);
 
          setTwitchTopGames(response.data.data);
       } catch (error) {
@@ -32,7 +34,9 @@ function TwitchTopGames() {
                      {/* Stream game name */}
                      <h3 className="text-xl font-bold text-gray-400 mb-2 overflow-ellipsis h-16">{game.name}</h3>
                      {/* Stream game image */}
+                     <Link to={`/projects/${game.id}`}>
                      <img src={game.box_art_url.replace("{width}", "300").replace("{height}", "400")} alt={game.name} className="w-full h-48 object-cover rounded-md mb-2" />
+                     </Link>
                   </div>
                </div>
             ))}
