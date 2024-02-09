@@ -34,7 +34,7 @@ function TwitchTopGames() {
                      {/* Stream game name */}
                      <h3 className="text-xl font-bold text-gray-400 mb-2 overflow-ellipsis h-16">{game.name}</h3>
                      {/* Stream game image */}
-                     <Link to={`/projects/${game.id}`}>
+                     <Link to={`/streams/${game.id}`}>
                      <img src={game.box_art_url.replace("{width}", "300").replace("{height}", "400")} alt={game.name} className="w-full h-48 object-cover rounded-md mb-2" />
                      </Link>
                   </div>
