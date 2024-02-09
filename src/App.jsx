@@ -5,6 +5,7 @@ import { ThemeContext } from "./context/ThemeContext";
 
 // Components
 import PageLayout from "./components/PageLayout";
+import Footer from "./components/Footer"; // Import the Footer component
 
 // Pages
 import Home from "./pages/Home";
@@ -23,6 +24,7 @@ function App() {
          <div className={`${theme} ${theme === "dark" ? "bg-background" : "bg-background"} min-h-[100vh]`}>
             <PageLayout>
                <Home />
+               <Footer /> {/* Include the Footer component here */}
             </PageLayout>
          </div>
       </ThemeContext.Provider>
