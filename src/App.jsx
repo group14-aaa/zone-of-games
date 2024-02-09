@@ -6,6 +6,7 @@ import { ThemeContext } from "./context/ThemeContext";
 // Components
 import PageLayout from "./components/PageLayout";
 
+
 // Pages
 import Home from "./pages/Home";
 
@@ -23,6 +24,7 @@ function App() {
          <div className={`${theme} ${theme === "dark" ? "bg-background" : "bg-background"} min-h-[100vh]`}>
             <PageLayout>
                <Home />
+              
             </PageLayout>
          </div>
       </ThemeContext.Provider>
