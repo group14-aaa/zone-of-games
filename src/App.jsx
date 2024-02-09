@@ -7,6 +7,7 @@ import { ThemeContext } from "./context/ThemeContext";
 // Components
 import PageLayout from "./components/PageLayout";
 
+
 // Pages
 import Home from "./pages/Home";
 // import About from './pages/about';

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "../components/Sidebar";
 import RawgTopRatedGames from "../components/RawgTopRatedGames";
 import TwitchTopGames from "../components/TwitchTopGames";
-import TwitchTopStreams from "../components/TwitchTopStreams";
 import GameBanner from "../components/GameBanner";
 import rawgApi from "../services/rawgApi";
 
