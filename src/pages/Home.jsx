@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-
 import Sidebar from "../components/Sidebar";
 import RawgTopRatedGames from "../components/RawgTopRatedGames";
 import TwitchTopGames from "../components/TwitchTopGames";
+import TwitchTopStreams from "../components/TwitchTopStreams";
 import GameBanner from "../components/GameBanner";
 import rawgApi from "../services/rawgApi";
 
@@ -30,17 +30,15 @@ const Home = () => {
    };
 
    return (
-      <div className="grid grid-cols-4">
-         <div className="bg-primary text-text h-full hidden md:block">
-            <Sidebar />
-         </div>
-         <div className="col-span-4 md:col-span-3 bg-primary text-text">
-            {allGamesList?.length > 0 ? <GameBanner game={allGamesList[Math.floor(Math.random() * allGamesList.length)]} /> : null}
-            <RawgTopRatedGames gamesList={allGamesList} />
-            <TwitchTopGames />
-            {/* <TwitchTopStreams /> */}
-         </div>
-      </div>
+      <>
+         {allGamesList?.length > 0 ?
+            <GameBanner
+               game={allGamesList[
+                  Math.floor(Math.random() * allGamesList.length)
+               ]} /> : null}
+         <RawgTopRatedGames gamesList={allGamesList} />
+         <TwitchTopGames />
+      </>
    );
 };
 
