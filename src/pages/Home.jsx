@@ -9,6 +9,7 @@ import rawgApi from "../services/rawgApi";
 const Home = () => {
    // State for top games list from RAWG Api
    const [allGamesList, setAllGamesList] = useState([]);
+   
 
    useEffect(() => {
       // Fetch top games list when component mounts
@@ -34,7 +35,7 @@ const Home = () => {
                game={allGamesList[
                   Math.floor(Math.random() * allGamesList.length)
                ]} /> : null}
-         <RawgTopRatedGames gamesList={allGamesList} />
+         <RawgTopRatedGames gamesList={allGamesList} genre= "" />
          <TwitchTopGames />
       </>
    );
