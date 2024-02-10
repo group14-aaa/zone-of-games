@@ -7,6 +7,9 @@ import { useContext, useState } from 'react';
 import RawgGenreList from "./RawgGenreList";
 import { ThemeContext } from '../context/ThemeContext';
 
+
+import GamesByGenre from './GamesByGenre';
+
 // Import your logo image
 import logoDark from '../../src/assets/images/logo-no-background.png';
 import logoLight from '../../src/assets/images/logo-no-background.png';
@@ -15,6 +18,7 @@ const Sidebar = () => {
     const { theme } = useContext(ThemeContext);
     const [showGenres, setShowGenres] = useState(false);
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
+    const [selectedGenre, setSelectedGenre] = useState(null);
 
     const toggleGenres = () => {
         setShowGenres(!showGenres);
@@ -23,6 +27,10 @@ const Sidebar = () => {
     const toggleSidebar = () => {
         setIsSidebarCollapsed(!isSidebarCollapsed);
     };
+
+    const handleGenreSelect = (genre) => {
+          setSelectedGenre(genre);
+       };
 
     // Choose the appropriate logo based on the theme
     const logo = theme === 'dark' ? logoDark : logoLight;
@@ -85,10 +93,11 @@ const Sidebar = () => {
                             </button>
                             {showGenres && (
                                 <div className={`mt-2 overflow-y-auto ${theme === 'dark' ? 'bg-black text-white shadow-orange' : 'bg-gray-200 text-gray-800 shadow-orange'} rounded-md`}>
-                                    <RawgGenreList />
+                                <RawgGenreList handleGenreSelect={handleGenreSelect} />
                                 </div>
                             )}
                         </li>
+                        
                     </ul>
                 </nav>
             )}
