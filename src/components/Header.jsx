@@ -22,13 +22,13 @@ const Header = () => {
          </div>
          <div className="hidden sm:mx-6 sm:block">
             <div className="flex space-x-4">
-               <a href="#" className="text-white hover:bg-navItemColor rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
+               <a href="/" className="text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
                   Home
                </a>
-               <a href="#" className="text-white hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+               <a href="#" className="text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-medium">
                   About
                </a>
-               <a href="#" className="text-white hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+               <a href="#" className="text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-medium">
                   Contact
                </a>
             </div>
