@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
-
+//import fontstyles into react for nav icons
+import { faHome, faInfoCircle, faAddressBook } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Components
 import { ThemeContext } from "../context/ThemeContext";
 
 // Images
 import logo from "./../assets/images/logo-no-background.png";
+import logoDark from "../../src/assets/images/logo-no-background.png";
+import logoLight from "../../src/assets/images/logo-no-background.png";
 
 // Icons
 import { IoSearchSharp } from "react-icons/io5";
@@ -20,15 +24,18 @@ const Header = () => {
             <IoSearchSharp />
             <input type="text" placeholder="Search Games..." className="px-2 bg-transparent outline-none w-full" />
          </div>
-         <div className="hidden sm:mx-6 sm:block">
+         <div className="hidden sm:mr-6 sm:block">
             <div className="flex space-x-4">
-               <a href="/" className="text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
+               <a href="/" className="flex items-center text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
+                  <FontAwesomeIcon icon={faHome} className="mr-2" />
                   Home
                </a>
-               <a href="#" className="text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+               <a href="#" className="flex items-center text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                  <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />
                   About
                </a>
-               <a href="#" className="text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+               <a href="#" className="flex items-center text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                  <FontAwesomeIcon icon={faAddressBook} className="mr-2" />
                   Contact
                </a>
             </div>
