@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import rawgApi from '../services/rawgApi'   
+
+// API
+import rawgApi from '../services/rawgApi'
 
 
-const RawgGenreList = ({ handleGenreSelect }) => {
+const RawgGenreList = ({ onGenreSelect }) => {
 
     // State for genre list from RAWG Api
     const [genreList, setGenreList] = useState([]);
@@ -26,21 +28,14 @@ const RawgGenreList = ({ handleGenreSelect }) => {
         }
     }
 
-    const handleGenreClick = (index) => {
-        setActiveIndex(index);
-        // Call prop function to handle genre selection
-        handleGenreSelect(genreList[index]);
-        console.log("Genre clicked:", genreList[index]);
-    };
-
     return (
         <>
-            <h2 className='text-[30px] font-bold text-text px-5'>Genre</h2>
+           
             {genreList.map((item, index) => (
                 // Each genre item
                 <div
                     key={index}
-                    onClick={() => handleGenreClick(index)} 
+                    onClick={() => { setActiveIndex(index); onGenreSelect(item.id) }}
                     className={`flex gap-2 items-center mb-2 ml-5 px-2 py-2 cursor-pointer hover:bg-secondary group rounded-lg ${activeIndex === index ? "bg-secondary" : ""}`}>
 
                     {/* Genre image */}
