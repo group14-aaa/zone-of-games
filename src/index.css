@@ -3,48 +3,50 @@
 @tailwind utilities;
 
 * {
-  @apply transition-colors duration-200;
+   @apply transition-colors duration-200;
 }
 
 @layer base {
-  /* Light Theme */
-  :root[class~="light"] {
-    --color-primary: 245 245 245;
-    --color-secondary: 237 237 237;
-    --color-accent: 0 123 255;
-    --color-text: 33 33 33;
-    --color-success: 0 200 81;
-    --color-info: 51 181 229;
-    --color-warn: 255 187 51;
-    --color-error: 254 78 78;
-    --color-background: 255 255 255;
-  }
+   /* Light Theme */
+   :root[class~="light"] {
+      --color-primary: 245 245 245;
+      --color-secondary: 237 237 237;
+      --color-accent: 0 123 255;
+      --color-text: 33 33 33;
+      --color-success: 0 200 81;
+      --color-info: 51 181 229;
+      --color-warn: 255 187 51;
+      --color-error: 254 78 78;
+      --color-background: 255 255 255;
+      --color-navColor: 187 145 53;
+   }
 
-  /* Dark Theme */
-  :root[class~="dark"] {
-    --color-primary: 30 30 30;
-    --color-secondary: 20 20 20;
-    --color-accent: 250 153 79;
-    --color-text: 255 255 255;
-    --color-success: 0 200 81;
-    --color-info: 51 181 229;
-    --color-warn: 255 187 51;
-    --color-error: 254 78 78;
-    --color-background: 25 25 25;
-  }
+   /* Dark Theme */
+   :root[class~="dark"] {
+      --color-primary: 30 30 30;
+      --color-secondary: 20 20 20;
+      --color-accent: 250 153 79;
+      --color-text: 255 255 255;
+      --color-success: 0 200 81;
+      --color-info: 51 181 229;
+      --color-warn: 255 187 51;
+      --color-error: 254 78 78;
+      --color-background: 25 25 25;
+      --color-navColor: 187 145 53;
+   }
 }
 @keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 153, 79, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(255, 153, 79, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 153, 79, 0);
-  }
+   0% {
+      box-shadow: 0 0 0 0 rgba(255, 153, 79, 0.7);
+   }
+   70% {
+      box-shadow: 0 0 0 10px rgba(255, 153, 79, 0);
+   }
+   100% {
+      box-shadow: 0 0 0 0 rgba(255, 153, 79, 0);
+   }
 }
 
 .shadow-pulse-orange {
-  animation: pulse 1.5s infinite;
+   animation: pulse 1.5s infinite;
 }
