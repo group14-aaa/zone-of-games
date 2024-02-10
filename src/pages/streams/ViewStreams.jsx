@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
+
 import ReactPlayer from 'react-player';
 import twitchApi from '../../services/twitchApi';
 import '../../assets/styles/twitch.css';
 
-function ViewStreams({ limit }) {
+const ViewStreams = ({ limit }) => {
     const { gameId } = useParams();
     const [twitchTopStreams, setTwitchTopStreams] = useState([]);
     const [selectedStream, setSelectedStream] = useState(null);
