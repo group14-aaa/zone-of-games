@@ -13,7 +13,6 @@ function TwitchTopStreams({ limit }) {
     useEffect(() => {
         // Fetch top streams when the component mounts
         fetchTwitchTopStreams(gameId, limit);
-        fetchGameName(gameId);
     }, [gameId, limit]);
 
     // Get top streams from Twitch Api
@@ -26,20 +25,11 @@ function TwitchTopStreams({ limit }) {
                     sort: 'viewers', // Sort by viewership
                 },
             });
-            console.log(response.data.data);
+            // console.log(response.data.data);
             setTwitchTopStreams(response.data.data);
+            setGameName(response.data.data[0].game_name || '');
         } catch (error) {
             console.error('Error fetching twitch streams:', error);
-        }
-    };
-
-    const fetchGameName = async (gameId) => {
-        try {
-            const response = await twitchApi.getTwitchStreams(gameId);
-            console.log('Game Name Response:', response.data);
-            setGameName(response.data.data[0]?.game_name || '');
-        } catch (error) {
-            console.error('Error fetching game name:', error);
         }
     };
 
