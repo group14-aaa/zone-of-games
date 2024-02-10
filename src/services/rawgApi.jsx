@@ -8,9 +8,7 @@ const axiosCreateRawgApi = axios.create({
 
 const getGenreList = axiosCreateRawgApi.get("/genres?key=" + import.meta.env.VITE_RAWG_API_KEY);
 const getGamesList = axiosCreateRawgApi.get("/games?key=" + import.meta.env.VITE_RAWG_API_KEY);
-
-//get games from api using genre id (4 = action)
-const getGamesByGenreId = (selectedGenre) => axiosCreateRawgApi.get("/games?genres=${selectedGenre}&key=" + import.meta.env.VITE_RAWG_API_KEY);
+const getGamesByGenreId = (id) => axiosCreateRawgApi.get("/games?key=" + import.meta.env.VITE_RAWG_API_KEY + "&genres=" + id);
 
 
 export default {
