@@ -13,6 +13,7 @@ import Home from "./pages/Home";
 // import About from './pages/about';
 // import Contact from './pages/contact';
 import Streams from './pages/streams/';
+import ViewStreams from './pages/streams/ViewStreams';
 import ErrorPage from './pages/404';
 
 
@@ -21,7 +22,8 @@ const routes = [
    { path: '/', component: Home },
    // { path: '/about', component: About },
    // { path: '/Contact', component: Contact },
-   { path: '/streams/:gameId', component: Streams },
+   { path: '/streams/', component: Streams },
+   { path: '/streams/:gameId', component: ViewStreams },
    { path: '*', component: ErrorPage },
 ];
 

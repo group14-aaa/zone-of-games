@@ -8,7 +8,6 @@ import GameBanner from "../components/GameBanner";
 import RawgGenreList from "../components/RawgGenreList";
 import RawgTopRatedGames from "../components/RawgTopRatedGames";
 import RawgGamesByGenreId from "../components/GamesByGenre";
-import TwitchTopGames from "../components/TwitchTopGames";
 
 const Home = () => {
    // State for top games list from RAWG Api
@@ -42,8 +41,6 @@ const Home = () => {
          // display data to the console
          // console.log(response.data.results);
 
-         
-
          setAllGamesByGenreId(response.data.results);
       } catch (error) {
          console.log('An error occurred while trying to get games by genre', error);
@@ -53,34 +50,33 @@ const Home = () => {
    //toggle for genres
    const toggleGenres = () => {
       setShowGenres(!showGenres);
-  };
+   };
 
-  return (
-   <div className="grid grid-cols-4">
-      <div className="col-span-1 bg-primary text-text">
-     
-      <button
-   onClick={toggleGenres}
-   className="text-3xl font-bold text-text px-5"
->
-   Genre
-</button>
-         {showGenres && (
-            <div className="bg-primary text-text h-full hidden md:block">
-               <RawgGenreList onGenreSelect={(onGenreSelect) => fetchRawgGamesByGenreId(onGenreSelect)} />
+   return (
+      <div className="grid grid-cols-4">
+         <div className="col-span-1 bg-primary text-text">
+
+            <button
+               onClick={toggleGenres}
+               className="text-3xl font-bold text-text px-5">
+               Genre
+            </button>
+
+            {showGenres && (
+               <div className="bg-primary text-text hidden md:block">
+                  <RawgGenreList onGenreSelect={(onGenreSelect) => fetchRawgGamesByGenreId(onGenreSelect)} />
+               </div>
+            )}
+         </div>
+         {allGamesList?.length > 0 && allGamesByGenreId.length > 0 && (
+            <div className="col-span-3 bg-primary text-text">
+               <GameBanner game={allGamesList[Math.floor(Math.random() * allGamesList.length)]} />
+               <RawgTopRatedGames gamesList={allGamesList} />
+               <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} />
             </div>
          )}
       </div>
-      {allGamesList?.length > 0 && allGamesByGenreId.length > 0 && (
-         <div className="col-span-3 bg-primary text-text">
-            <GameBanner game={allGamesList[Math.floor(Math.random() * allGamesList.length)]} />
-            <RawgTopRatedGames gamesList={allGamesList} />
-            <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} />
-            <TwitchTopGames />
-         </div>
-      )}
-   </div>
-);
+   );
 };
 
 export default Home;

@@ -26,7 +26,7 @@ function TwitchTopGames() {
    };
    return (
       <div className="p-5">
-         <h2 className="text-3xl font-bold text-gray-400 mb-4 mt-6 text-center">Top Streams on Twitch</h2>
+         <h2 className="text-3xl font-bold text-gray-400 mb-4 mt-6 text-center">Top Games Streaming on Twitch</h2>
          <div className="flex flex-wrap -mx-4">
             {twitchTopGames.map((game) => (
                <div key={game.id} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-4 mb-4">
