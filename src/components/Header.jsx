@@ -24,7 +24,7 @@ const Header = () => {
             <IoSearchSharp />
             <input type="text" placeholder="Search Games..." className="px-2 bg-transparent outline-none w-full" />
          </div>
-         <div className="hidden sm:mr-6 sm:block">
+         <div className="hidden sm:mr-5 sm:block">
             <div className="flex space-x-4">
                <a href="/" className="flex items-center text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-bold" aria-current="page">
                   <FontAwesomeIcon icon={faHome} className="mr-2" />
@@ -43,7 +43,7 @@ const Header = () => {
          <div>
             {theme === "light" ? (
                <MdDarkMode
-                  className="text-[35px] bg-slate-200 text-black p-1 rounded-full cursor-pointer"
+                  className="text-[30px] bg-slate-200 text-black p-1 rounded-full cursor-pointer"
                   onClick={() => {
                      setTheme("dark");
                      localStorage.setItem("theme", "dark");
@@ -51,7 +51,7 @@ const Header = () => {
                />
             ) : (
                <MdLightMode
-                  className="text-[35px] bg-slate-200 text-black p-1 rounded-full cursor-pointer"
+                  className="text-[30px] bg-slate-200 text-black p-1 rounded-full cursor-pointer"
                   onClick={() => {
                      setTheme("light");
                      localStorage.setItem("theme", "light");
