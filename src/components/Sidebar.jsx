@@ -14,7 +14,7 @@ import GamesByGenre from './GamesByGenre';
 import logoDark from '../../src/assets/images/logo-no-background.png';
 import logoLight from '../../src/assets/images/logo-no-background.png';
 
-const Sidebar = () => {
+const Sidebar = ({ onGenreSelect }) => {
     const { theme } = useContext(ThemeContext);
     const [showGenres, setShowGenres] = useState(false);
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
@@ -30,6 +30,7 @@ const Sidebar = () => {
 
     const handleGenreSelect = (genre) => {
           setSelectedGenre(genre);
+          onGenreSelect(genre);
        };
 
     // Choose the appropriate logo based on the theme
