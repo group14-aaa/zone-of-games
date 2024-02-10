@@ -1,6 +1,6 @@
   import React, { useEffect } from 'react'
 
-  const RawgTopRatedGames = ({ gamesList, genre }) => {
+  const RawgTopRatedGames = ({ gamesList }) => {
     useEffect(() => {
       // display game data
       // console.log(game);
