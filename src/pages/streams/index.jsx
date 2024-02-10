@@ -6,14 +6,14 @@ import '../../assets/styles/twitch.css';
 
 function TwitchTopStreams({ limit }) {
     const { gameId } = useParams();
-    // State for top streams from Twitch Api
     const [twitchTopStreams, setTwitchTopStreams] = useState([]);
-    // State to track the currently selected stream
     const [selectedStream, setSelectedStream] = useState(null);
+    const [gameName, setGameName] = useState('');
 
     useEffect(() => {
         // Fetch top streams when the component mounts
         fetchTwitchTopStreams(gameId, limit);
+        fetchGameName(gameId);
     }, [gameId, limit]);
 
     // Get top streams from Twitch Api
@@ -33,6 +33,16 @@ function TwitchTopStreams({ limit }) {
         }
     };
 
+    const fetchGameName = async (gameId) => {
+        try {
+            const response = await twitchApi.getTwitchStreams(gameId);
+            console.log('Game Name Response:', response.data);
+            setGameName(response.data.data[0]?.game_name || '');
+        } catch (error) {
+            console.error('Error fetching game name:', error);
+        }
+    };
+
     // Function to handle thumbnail click and start playing the stream
     const handleThumbnailClick = (stream) => {
         setSelectedStream(stream);
@@ -41,7 +51,7 @@ function TwitchTopStreams({ limit }) {
     return (
         <div className="p-5">
             <h2 className="text-3xl font-bold text-gray-400 mb-4 mt-6 text-center">
-                Most viewed Live Streams on Twitch
+                Most viewed Live Streams on Twitch - {gameName}
             </h2>
             <div className="flex flex-wrap justify-center">
                 {twitchTopStreams.map((stream) => (
@@ -93,10 +103,10 @@ function TwitchTopStreams({ limit }) {
                         )}
                         <div className="px-6 py-4">
                             <div className="font-bold text-base mb-2">
-                                <h3 className="text-lg font-semibold">
+                                <h3 className="text-text text-lg font-semibold">
                                     {stream.user_name}</h3>
                             </div>
-                            <p>Viewers: {stream.viewer_count}</p>
+                            <p className='text-text'>Viewers: {stream.viewer_count}</p>
                         </div>
                     </div>
                 ))}
