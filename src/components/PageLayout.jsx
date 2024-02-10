@@ -13,6 +13,7 @@ const PageLayout = ({ children }) => {
         <div className={`font-montserrat relative`}>
             <Header />
             {children}
+            <Footer />
         </div>
     );
 }
