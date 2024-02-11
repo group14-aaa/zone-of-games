@@ -2,13 +2,20 @@ import React from "react";
 
 const About = () => {
    const techLinks = [
-      { href: "https://html.com/", title: "HTML - The Standard Markup Language for Documents", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" },
+      { href: "https://html.com/", title: "HTML - The Standard Markup Language for Documents", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/8/82/Devicon-html5-plain.svg" },
       {
          href: "https://www.w3.org/Style/CSS/",
          title: "CSS - The Language for Describing the Presentation of Web Pages",
-         imgSrc: "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg",
+         imgSrc: "https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg",
       },
-      { href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript", title: "JavaScript - MDN Web Docs", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" },
+      {
+         href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+         title: "JavaScript - MDN Web Docs",
+         imgSrc:
+            "https://png2.cleanpng.com/sh/46b3a444d0026659760dd8f3cfbbb20a/L0KzQYm3VsA2N5l9hJH0aYP2gLBuTfpifpJ4eARycISwgMP2hCJidZ5qip93b3ToPbv6Tgdmal5miOJ1aXPkhLr2jr13bZR5hAQ2bXH1e8b3Tfxidph6edluLUXlQYi6hvMzOGJqSaY8Lke4RIS6VcY0OWY3UKQAMEOzRoG3V8cveJ9s/kisspng-javascript-programmer-node-js-web-application-vector-markup-language-5b173fc201e143.7543356315282503060077.png",
+      },
+      { href: "https://vitejs.dev/", title: "Vite - Next Generation Frontend Tooling", imgSrc: "https://vitejs.dev/logo.svg" },
+
       { href: "https://reactjs.org/", title: "React - A JavaScript library for building user interfaces", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" },
 
       {
@@ -17,11 +24,11 @@ const About = () => {
          imgSrc: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg",
       },
 
-      { href: "https://git-scm.com/", title: "Git - Distributed Version Control System", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-logo.svg/200px-Git-logo.svg.png" },
+      { href: "https://git-scm.com/", title: "Git - Distributed Version Control System", imgSrc: "https://git-scm.com/images/logos/downloads/Git-Logo-1788C.svg" },
       {
          href: "https://github.com/",
          title: "GitHub - Development Platform",
-         imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/200px-Octicons-mark-github.svg.png",
+         imgSrc: "https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.png",
       },
    ];
 
@@ -65,7 +72,7 @@ const About = () => {
             </div>
          </div>
 
-         <div className="container mx-auto px-4 mb-10">
+         <div className="container mx-auto px-4 mb-5">
             <div className="text-center">
                <h2 className="text-3xl font-bold text-text">APIs Used</h2>
             </div>
