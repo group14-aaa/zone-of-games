@@ -40,3 +40,4 @@ jobs:
           FOLDER: build  #build artifacts
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MESSAGE: "Build: ({sha}) {msg}"
+          VITE_RAWG_API_KEY: ${{ secrets.VITE_RAWG_API_KEY }}
