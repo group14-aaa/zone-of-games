@@ -2,18 +2,26 @@ import React from "react";
 
 const About = () => {
    const techLinks = [
-      { href: "https://www.w3.org/html/", title: "HTML - The Standard Markup Language for Documents", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" },
+      { href: "https://html.com/", title: "HTML - The Standard Markup Language for Documents", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" },
       {
          href: "https://www.w3.org/Style/CSS/",
          title: "CSS - The Language for Describing the Presentation of Web Pages",
          imgSrc: "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg",
       },
+      { href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript", title: "JavaScript - MDN Web Docs", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" },
       { href: "https://reactjs.org/", title: "React - A JavaScript library for building user interfaces", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" },
 
       {
          href: "https://tailwindcss.com/",
          title: "Tailwind CSS - A utility-first CSS framework for rapidly building custom designs",
          imgSrc: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg",
+      },
+
+      { href: "https://git-scm.com/", title: "Git - Distributed Version Control System", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-logo.svg/200px-Git-logo.svg.png" },
+      {
+         href: "https://github.com/",
+         title: "GitHub - Development Platform",
+         imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/200px-Octicons-mark-github.svg.png",
       },
    ];
 
@@ -46,9 +54,9 @@ const About = () => {
             <div className="text-center">
                <h2 className="text-3xl font-bold text-text">Technologies Used</h2>
             </div>
-            <div className="flex justify-center flex-wrap mt-8">
+            <div className="flex justify-center flex-wrap mt-8 ">
                {techLinks.map((tech, index) => (
-                  <div key={index} className="p-2 sm:w-1/4 md:w-1/6">
+                  <div key={index} className="p-2 sm:w-1/4 md:w-1/6 hover:scale-125 transition duration-300 ease-in-out">
                      <a href={tech.href} target="_blank" rel="noopener noreferrer" title={tech.title}>
                         <img width={100} src={tech.imgSrc} alt={tech.title} className="h-20 mx-auto" />
                      </a>
@@ -57,13 +65,13 @@ const About = () => {
             </div>
          </div>
 
-         <div className="container mx-auto px-4">
+         <div className="container mx-auto px-4 mb-10">
             <div className="text-center">
                <h2 className="text-3xl font-bold text-text">APIs Used</h2>
             </div>
-            <div className="flex justify-center flex-wrap mt-8">
+            <div className="flex justify-center flex-wrap mt-8 ">
                {apiLinks.map((tech, index) => (
-                  <div key={index} className="p-2 sm:w-1/4 md:w-1/6">
+                  <div key={index} className="p-2 sm:w-1/4 md:w-1/6 hover:scale-125 transition duration-300 ease-in-out">
                      <a href={tech.href} target="_blank" rel="noopener noreferrer" title={tech.title}>
                         <img width={100} src={tech.imgSrc} alt={tech.title} className="h-20 mx-auto" />
                      </a>
