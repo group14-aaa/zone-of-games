@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 
+
+
 const GameBanner = ({ game }) => {
     useEffect(() => {
         // display game data

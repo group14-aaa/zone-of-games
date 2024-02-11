@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import rawgApi from '../services/rawgApi'
 
 
+
 const RawgGenreList = ({ onGenreSelect }) => {
 
     // State for genre list from RAWG Api
@@ -30,7 +31,6 @@ const RawgGenreList = ({ onGenreSelect }) => {
 
     return (
         <>
-           
             {genreList.map((item, index) => (
                 // Each genre item
                 <div

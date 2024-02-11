@@ -10,25 +10,11 @@ import { FaStarHalfAlt } from "react-icons/fa";
 
 const GamesByGenre = ({ gamesByGenreList }) => {
     useEffect(() => {
-        const fetchGames = async () => {
-            try {
-                const response = await rawgApi.getGamesByGenreId({
-                    //get ratings from api
-                    params: {
-                        genres: selectedGenre,
-                        ordering: '-rating',
-                        page_size: 20
-                    }
-                });
-                setGamesList(response.data.results);
-                console.log(gamesByGenreList);
-            } catch (error) {
-                console.error('Error fetching games:', error);
-            }
-        };
-     
+        //
+        // Check this data and pick what info you want to display on the card
+        //
+        // console.log(gamesByGenreList);
     })
-
 
     return (
         <div className="p-5">

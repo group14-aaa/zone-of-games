@@ -1,18 +1,15 @@
 import React, { useContext } from "react";
-//import fontstyles into react for nav icons
-import { faHome, faInfoCircle, faAddressBook } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 // Components
 import { ThemeContext } from "../context/ThemeContext";
 
 // Images
 import logo from "./../assets/images/logo-no-background.png";
-import logoDark from "../../src/assets/images/logo-no-background.png";
-import logoLight from "../../src/assets/images/logo-no-background.png";
 
 // Icons
 import { IoSearchSharp } from "react-icons/io5";
 import { MdLightMode, MdDarkMode } from "react-icons/md";
+import { FaHome, FaInfoCircle, FaAddressBook  } from "react-icons/fa";
 
 const Header = () => {
    const { theme, setTheme } = useContext(ThemeContext);
@@ -27,15 +24,15 @@ const Header = () => {
          <div className="hidden sm:mr-5 sm:block">
             <div className="flex space-x-4">
                <a href="/" className="flex items-center text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-bold" aria-current="page">
-                  <FontAwesomeIcon icon={faHome} className="mr-2" />
+                  <FaHome className="mr-2" />
                   Home
                </a>
                <a href="/about" className="flex items-center text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-bold">
-                  <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />
+                  <FaInfoCircle className="mr-2" />
                   About
                </a>
                <a href="/contact" className="flex items-center text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-bold">
-                  <FontAwesomeIcon icon={faAddressBook} className="mr-2" />
+                  <FaAddressBook className="mr-2" />
                   Contact
                </a>
             </div>
