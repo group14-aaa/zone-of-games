@@ -10,7 +10,7 @@ import PageLayout from "./components/PageLayout";
 // Pages
 import Home from "./pages/Home";
 import About from "./pages/About";
-// import Contact from './pages/contact';
+import Contact from "./pages/Contact";
 import Streams from "./pages/streams/";
 import GamePage from "./pages/games/GamePage";
 import ViewStreams from "./pages/streams/ViewStreams";
@@ -20,7 +20,7 @@ import ErrorPage from "./pages/404";
 const routes = [
    { path: "/", component: Home },
    { path: "/about", component: About },
-   // { path: '/Contact', component: Contact },
+   { path: "/Contact", component: Contact },
    { path: "/streams/", component: Streams },
    { path: "/games/:gId", component: GamePage },
    { path: "/streams/:gameId", component: ViewStreams },
