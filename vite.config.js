@@ -22,6 +22,9 @@ export default defineConfig({
           res.setHeader('Cache-Control', 'public, max-age=31536000'); // 1 year in seconds
         }
 
+        // Set SameSite=None; Secure for all cookies
+        res.setHeader('Set-Cookie', 'SameSite=None; Secure');
+
         // Continue to the next middleware
         next();
       },
