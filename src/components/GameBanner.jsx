@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom';
 
 
 
@@ -15,9 +16,11 @@ const GameBanner = ({ game }) => {
                         <h2 className='text-[32px] text-text text-bold'>
                             {game.name}
                         </h2>
-                        <button className='bg-accent text-text px-2 p-1 rounded-xl'>
-                            View game
-                        </button>
+                        <Link to={`/games/${game.id}`}>
+                            <button className='bg-accent z-10 text-text px-2 p-1 rounded-xl'>
+                                View game
+                            </button>
+                        </Link>
                     </div>
                     {/* Game image */}
                     <img
@@ -26,7 +29,7 @@ const GameBanner = ({ game }) => {
                         alt={game.name}
                     />
                     {/* Background overlay main image */}
-                    <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center text-text text-[40px] font-bold bg-accent opacity-10">
+                    <div className="absolute z-0 top-0 left-0 right-0 bottom-0 flex items-center justify-center text-text text-[40px] font-bold bg-accent opacity-10">
                     </div>
                 </div>
             </div>

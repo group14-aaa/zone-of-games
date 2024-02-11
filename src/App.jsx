@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 // import About from './pages/about';
 // import Contact from './pages/contact';
 import Streams from './pages/streams/';
+import GamePage from './pages/games/GamePage';
 import ViewStreams from './pages/streams/ViewStreams';
 import ErrorPage from './pages/404';
 
@@ -22,6 +23,7 @@ const routes = [
    // { path: '/about', component: About },
    // { path: '/Contact', component: Contact },
    { path: '/streams/', component: Streams },
+   { path: '/games/:gId', component: GamePage },
    { path: '/streams/:gameId', component: ViewStreams },
    { path: '*', component: ErrorPage },
 ];
