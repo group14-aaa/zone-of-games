@@ -15,6 +15,8 @@ jobs:
     name: Build and Push
     env:
       VITE_RAWG_API_KEY: ${{ secrets.VITE_RAWG_API_KEY }}
+      VITE_TWITCH_CLIENT_ID: ${{ secrets.VITE_TWITCH_CLIENT_ID }}
+      VITE_TWITCH_OAUTH_TOKEN: ${{ secrets.VITE_TWITCH_OAUTH_TOKEN }}
     # Steps in job
     steps:
       # Get code from repo
@@ -28,8 +30,12 @@ jobs:
       # Run npm install and build on our code
       - name: Install all dependencies
         run: npm install
-      - name: Set up environment variables
+      - name: Set up RAWG environment variables
         run: echo "VITE_RAWG_API_KEY=${{ secrets.VITE_RAWG_API_KEY }}" > .env
+      - name: Set up TWITCH CLIENT ID environment variables
+        run: echo "VITE_TWITCH_CLIENT_ID=${{ secrets.VITE_TWITCH_CLIENT_ID }}" > .env
+      - name: Set up TWITCH OAUTH TOKEN environment variables
+        run: echo "VITE_TWITCH_OAUTH_TOKEN=${{ secrets.VITE_TWITCH_OAUTH_TOKEN }}" > .env
       - name: Build
         run: npm run build
 
