@@ -10,6 +10,9 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
     target: 'esnext',
     polyfill: false, // disable polyfill
+    rollupOptions: {
+      input: 'index.html', // specify the entry module
+    },
   },
   server: {
     middleware: [
