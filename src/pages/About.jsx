@@ -63,7 +63,7 @@ const About = () => {
             </div>
             <div className="flex justify-center flex-wrap mt-8 ">
                {techLinks.map((tech, index) => (
-                  <div key={index} className="p-2 sm:w-1/4 md:w-1/6 hover:scale-125 transition duration-300 ease-in-out">
+                  <div key={index} className="p-2 md:w-1/4  mb-10 hover:scale-125 transition duration-300 ease-in-out">
                      <a href={tech.href} target="_blank" rel="noopener noreferrer" title={tech.title}>
                         <img width={100} src={tech.imgSrc} alt={tech.title} className="h-20 mx-auto" />
                      </a>
