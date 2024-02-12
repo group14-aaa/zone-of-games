@@ -19,11 +19,13 @@ const Home = () => {
    const [allGamesByGenreId, setAllGamesByGenreId] = useState([]);
    //state for genres at side
    const [showGenres, setShowGenres] = useState(false);
-    //state for platform at side
-    const [showPlatforms, setShowPlatforms] = useState(false);
-      // State for games by platform
-      const [platformList, setPlatformList] = useState([]);
-   
+   const [error, setError] = useState(null);
+
+   //state for platform at side
+   const [showPlatforms, setShowPlatforms] = useState(false);
+   // State for games by platform
+   const [platformList, setPlatformList] = useState([]);
+
 
    useEffect(() => {
       // Fetch top games list when component mounts
@@ -40,6 +42,7 @@ const Home = () => {
 
          setAllGamesList(response.data.results);
       } catch (error) {
+         setError("Error fetching top rated games");
          console.error("Error fetching top rated games:", error);
       }
    };
@@ -47,18 +50,27 @@ const Home = () => {
    const fetchRawgGamesByGenreId = async (id) => {
       try {
          const response = await rawgApi.getGamesByGenreId(id);
-      
+
 
          setAllGamesByGenreId(response.data.results);
       } catch (error) {
+         setError("Error fetching games by genre");
          console.log('An error occurred while trying to get games by genre', error);
       }
+   }
+
+   if (error) {
+      return (
+         <div className="p-5 text-text">
+            <p className="text-xl">Error: {error}</p>
+         </div>
+      );
    }
 
    const fetchRawgGamesByPlatform = async () => {
       try {
          const response = await rawgApi.getPlatformList();
-   
+
          setPlatformList(response.data.results);
       } catch (error) {
          console.log('An error occurred while trying to get games by platform', error);
@@ -70,12 +82,12 @@ const Home = () => {
       console.log("Platform ID selected:", platformId);
    };
 
-   
+
    //toggle for genres
    const toggleGenres = () => {
       setShowGenres(!showGenres);
    };
-   
+
 
    //toggle for platform
    const togglePlatforms = () => {
@@ -92,12 +104,12 @@ const Home = () => {
                Genre
             </button>
 
-             {/* Platform Button */}
-         <button
-            onClick={togglePlatforms} // Need to add onClick handler for platform button
-            className="text-3xl font-bold text-text px-5 pt-2 mt-2"> {/* Add mt-2 for margin-top */}
-            Platform
-         </button>
+            {/* Platform Button */}
+            <button
+               onClick={togglePlatforms} // Need to add onClick handler for platform button
+               className="text-3xl font-bold text-text px-5 pt-2 mt-2"> {/* Add mt-2 for margin-top */}
+               Platform
+            </button>
 
 
             {showGenres && (
@@ -108,11 +120,11 @@ const Home = () => {
 
             {showPlatforms && (
                <div className="bg-primary text-text hidden md:block">
-               <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} />
+                  <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} />
                   {/* <AllGamesByPlatform onPlatformSelect={(allGamesByPlatform) => fetchRawgGamesByPlatform(onPlatformSelect)} /> */}
                </div>
             )}
-   
+
          </div>
          {allGamesList?.length > 0 && allGamesByGenreId.length > 0 && (
             <div className="col-span-3 bg-primary text-text">
