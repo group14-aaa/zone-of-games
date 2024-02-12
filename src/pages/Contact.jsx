@@ -6,18 +6,26 @@ function Contact() {
       {
          name: "Anjal Sali",
          imgSrc: anjalProfile,
+         linkedInLink: "https://www.linkedin.com/in/anjalsali/",
+         gitHubLink: "https://github.com/anjalsali",
       },
       {
          name: "Anjal Sali",
          imgSrc: anjalProfile,
+         linkedInLink: "https://www.linkedin.com/in/anjalsali/",
+         gitHubLink: "https://github.com/anjalsali",
       },
       {
          name: "Anjal Sali",
          imgSrc: anjalProfile,
+         linkedInLink: "https://www.linkedin.com/in/anjalsali/",
+         gitHubLink: "https://github.com/anjalsali",
       },
       {
          name: "Anjal Sali",
          imgSrc: anjalProfile,
+         linkedInLink: "https://www.linkedin.com/in/anjalsali/",
+         gitHubLink: "https://github.com/anjalsali",
       },
    ];
    return (
@@ -34,10 +42,10 @@ function Contact() {
                         <div className="absolute inset-0 flex flex-col items-start justify-end p-4 bg-gradient-to-t from-black/50 to-transparent">
                            <div className="text-3xl font-bold text-white mb-5">{profile.name}</div>
                            <div className="flex space-x-4">
-                              <a href="#" className="text-white text-lg">
+                              <a href={profile.linkedInLink} target="_blank" rel="noopener noreferrer" className="text-white text-lg">
                                  <FaLinkedin alt="LinkedIn" size={24} />
                               </a>
-                              <a href="#" className="text-white text-lg">
+                              <a href={profile.gitHubLink} target="_blank" rel="noopener noreferrer" className="text-white text-lg">
                                  <FaGithub alt="GitHub" size={24} />
                               </a>
                            </div>
