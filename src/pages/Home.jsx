@@ -8,6 +8,7 @@ import GameBanner from "../components/GameBanner";
 import RawgGenreList from "../components/RawgGenreList";
 import RawgTopRatedGames from "../components/RawgTopRatedGames";
 import RawgGamesByGenreId from "../components/GamesByGenre";
+import AllGamesByPlatform from "../components/GamesByPlatform";
 
 
 const Home = () => {
@@ -19,12 +20,15 @@ const Home = () => {
    const [showGenres, setShowGenres] = useState(false);
     //state for platform at side
     const [showPlatforms, setShowPlatforms] = useState(false);
+      // State for games by platform
+   const [allGamesByPlatform, setAllGamesByPlatform] = useState([]); 
    
 
    useEffect(() => {
       // Fetch top games list when component mounts
       fetchRawgAllGamesList();
       fetchRawgGamesByGenreId(4);
+      fetchRawgGamesByPlatform()
    }, []);
 
    const fetchRawgAllGamesList = async () => {
@@ -42,8 +46,7 @@ const Home = () => {
    const fetchRawgGamesByGenreId = async (id) => {
       try {
          const response = await rawgApi.getGamesByGenreId(id);
-         // display data to the console
-         // console.log(response.data.results);
+      
 
          setAllGamesByGenreId(response.data.results);
       } catch (error) {
@@ -51,15 +54,13 @@ const Home = () => {
       }
    }
 
-   const fetchRawgGamesByPlatform = async (id) => {
+   const fetchRawgGamesByPlatform = async () => {
       try {
-         const response = await rawgApi.getGamesByGenreId(id);
-         // display data to the console
-         // console.log(response.data.results);
-
-         setAllGamesByGenreId(response.data.results);
+         const response = await rawgApi.getPlatformList();
+   
+         setAllGamesByPlatform(response.data.results);
       } catch (error) {
-         console.log('An error occurred while trying to get games by genre', error);
+         console.log('An error occurred while trying to get games by platform', error);
       }
    }
 
@@ -97,11 +98,11 @@ const Home = () => {
                </div>
             )}
 
-            {/* {showPlatforms && (
+            {showPlatforms && (
                <div className="bg-primary text-text hidden md:block">
-                  <RawgGenreList onPlatformSelect={(onPlatformSelect) => fetchRawgGamesByPlatform(onPlatformSelect)} />
+                  <AllGamesByPlatform onPlatformSelect={(allGamesByPlatform) => fetchRawgGamesByPlatform(onPlatformSelect)} />
                </div>
-            )} */}
+            )}
    
          </div>
          {allGamesList?.length > 0 && allGamesByGenreId.length > 0 && (
@@ -109,6 +110,7 @@ const Home = () => {
                <GameBanner game={allGamesList[Math.floor(Math.random() * allGamesList.length)]} />
                <RawgTopRatedGames gamesList={allGamesList} />
                <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} />
+               <AllGamesByPlatform />
             </div>
          )}
       </div>
