@@ -12,10 +12,7 @@ import { FaStarHalfAlt } from "react-icons/fa";
 
 const GamesByGenre = ({ gamesByGenreList }) => {
     useEffect(() => {
-        //
-        // Check this data and pick what info you want to display on the card
-        //
-        // console.log(gamesByGenreList);
+       
     })
 
     return (
