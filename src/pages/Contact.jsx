@@ -38,15 +38,15 @@ function Contact() {
                {profileLinks.map((profile, index) => (
                   <div key={index} className="relative overflow-hidden max-w-xs rounded-lg shadow-lg group m-5">
                      <div className="relative">
-                        <img className="rounded-lg transition-transform group-hover:scale-150 duration-300" src={profile.imgSrc} alt="profile picture" />
+                        <img className="rounded-lg transition-transform group-hover:scale-125 duration-300" src={profile.imgSrc} alt="profile picture" />
                         <div className="absolute inset-0 flex flex-col items-start justify-end p-4 bg-gradient-to-t from-black/50 to-transparent">
                            <div className="text-3xl font-bold text-white mb-5">{profile.name}</div>
                            <div className="flex space-x-4">
+                              <a href={profile.gitHubLink} target="_blank" rel="noopener noreferrer" className="text-white  hover:scale-150 transition duration-300 ease-in-out text-lg">
+                                 <FaGithub alt="GitHub" size={24} />
+                              </a>
                               <a href={profile.linkedInLink} target="_blank" rel="noopener noreferrer" className="text-white hover:scale-150 transition duration-300 ease-in-out text-lg">
                                  <FaLinkedin alt="LinkedIn" size={24} />
-                              </a>
-                              <a href={profile.gitHubLink} target="_blank" rel="noopener noreferrer" className="text-white hover:scale-150 transition duration-300 ease-in-out text-lg">
-                                 <FaGithub alt="GitHub" size={24} />
                               </a>
                            </div>
                         </div>
