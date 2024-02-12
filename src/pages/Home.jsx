@@ -9,6 +9,7 @@ import RawgGenreList from "../components/RawgGenreList";
 import RawgTopRatedGames from "../components/RawgTopRatedGames";
 import RawgGamesByGenreId from "../components/GamesByGenre";
 import AllGamesByPlatform from "../components/GamesByPlatform";
+import RawgPlatformList from "../components/RawgPlatformList";
 
 
 const Home = () => {
@@ -21,7 +22,7 @@ const Home = () => {
     //state for platform at side
     const [showPlatforms, setShowPlatforms] = useState(false);
       // State for games by platform
-   const [allGamesByPlatform, setAllGamesByPlatform] = useState([]); 
+      const [platformList, setPlatformList] = useState([]);
    
 
    useEffect(() => {
@@ -58,7 +59,7 @@ const Home = () => {
       try {
          const response = await rawgApi.getPlatformList();
    
-         setAllGamesByPlatform(response.data.results);
+         setPlatformList(response.data.results);
       } catch (error) {
          console.log('An error occurred while trying to get games by platform', error);
       }
