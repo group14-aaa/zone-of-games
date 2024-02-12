@@ -16,6 +16,8 @@ const Home = () => {
    const [allGamesByGenreId, setAllGamesByGenreId] = useState([]);
    //state for genres at side
    const [showGenres, setShowGenres] = useState(false);
+   const [error, setError] = useState(null);
+
 
    useEffect(() => {
       // Fetch top games list when component mounts
@@ -31,6 +33,7 @@ const Home = () => {
 
          setAllGamesList(response.data.results);
       } catch (error) {
+         setError("Error fetching top rated games");
          console.error("Error fetching top rated games:", error);
       }
    };
@@ -43,8 +46,17 @@ const Home = () => {
 
          setAllGamesByGenreId(response.data.results);
       } catch (error) {
+         setError("Error fetching games by genre");
          console.log('An error occurred while trying to get games by genre', error);
       }
+   }
+
+   if (error) {
+      return (
+         <div className="p-5 text-text">
+            <p className="text-xl">Error: {error}</p>
+         </div>
+      );
    }
 
    //toggle for genres
