@@ -77,9 +77,14 @@ const Home = () => {
       }
    }
 
-   const handlePlatformSelect = (platformId) => {
-      // You can implement fetching games by platform here if needed
-      console.log("Platform ID selected:", platformId);
+   const handlePlatformSelect = async (platformId) => {
+      try {
+         const response = await rawgApi.getGamesByPlatform(platformId);
+         // Update the state with the fetched games
+         setAllGamesList(response.data.results);
+      } catch (error) {
+         console.error("Error fetching games by platform:", error);
+      }
    };
 
 
@@ -98,6 +103,7 @@ const Home = () => {
       <div className="grid grid-cols-4">
          <div className="col-span-1 bg-primary text-text flex flex-col">
 
+  {/* genreButton */}
             <button
                onClick={toggleGenres}
                className="text-3xl font-bold text-text px-5 pt-2">
@@ -120,8 +126,9 @@ const Home = () => {
 
             {showPlatforms && (
                <div className="bg-primary text-text hidden md:block">
-                  <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} />
-                  {/* <AllGamesByPlatform onPlatformSelect={(allGamesByPlatform) => fetchRawgGamesByPlatform(onPlatformSelect)} /> */}
+                  <RawgPlatformList platformList={platformList}  onPlatformSelect={handlePlatformSelect} />
+                  {/* <AllGamesByPlatform onPlatformSelect={handlePlatformSelect} /> */}
+                  {/* <AllGamesByPlatform onPlatformSelect={(allGamesByPlatform) => fetchRawgGamesByPlatform(handlePlatformSelect)} /> */}
                </div>
             )}
 

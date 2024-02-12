@@ -30,7 +30,9 @@ const RawgPlatformList = ({ onPlatformSelect }) => {
                 // Each platform item
                 <div
                     key={index}
-                    onClick={() => { setActiveIndex(index); onPlatformSelect(item.id) }}
+                    onClick={() => { 
+                        console.log("Platform clicked:", item.id);
+                        setActiveIndex(index); onPlatformSelect(item.id) }}
                     className={`flex gap-2 items-center mb-2 ml-5 px-2 py-2 cursor-pointer hover:bg-secondary group rounded-lg ${activeIndex === index ? "bg-secondary" : ""}`}>
 
                     {/* Genre image */}
