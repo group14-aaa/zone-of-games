@@ -64,10 +64,17 @@ const Home = () => {
       }
    }
 
+   const handlePlatformSelect = (platformId) => {
+      // You can implement fetching games by platform here if needed
+      console.log("Platform ID selected:", platformId);
+   };
+
+   
    //toggle for genres
    const toggleGenres = () => {
       setShowGenres(!showGenres);
    };
+   
 
    //toggle for platform
    const togglePlatforms = () => {
@@ -100,7 +107,8 @@ const Home = () => {
 
             {showPlatforms && (
                <div className="bg-primary text-text hidden md:block">
-                  <AllGamesByPlatform onPlatformSelect={(allGamesByPlatform) => fetchRawgGamesByPlatform(onPlatformSelect)} />
+               <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} />
+                  {/* <AllGamesByPlatform onPlatformSelect={(allGamesByPlatform) => fetchRawgGamesByPlatform(onPlatformSelect)} /> */}
                </div>
             )}
    

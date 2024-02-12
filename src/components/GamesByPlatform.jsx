@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import RawgPlatformList from './RawgPlatformList';
 
 // Icons
 import { FcRating } from 'react-icons/fc';
@@ -7,9 +8,11 @@ import { MdRateReview } from "react-icons/md";
 import { FaGripfire } from "react-icons/fa6";
 import { FaStarHalfAlt } from "react-icons/fa";
 
-const AllGamesByPlatform = ({ gamesByPlatform }) => {
+const AllGamesByPlatform = ({ gamesByPlatform, onPlatformSelect }) => {
     useEffect(() => {
-       
+        if (gamesByPlatform) {
+            console.log("gamesByPlatform:", gamesByPlatform);
+        }
     }, [gamesByPlatform]);
 
     return (
@@ -19,7 +22,6 @@ const AllGamesByPlatform = ({ gamesByPlatform }) => {
             </h2>
             <div className="flex flex-wrap justify-center">
                 <div className="flex flex-wrap w-full justify-center">
-                
                     {gamesByPlatform && gamesByPlatform.map((game) => (
                         <div key={game.id} className="relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 bg-secondary rounded overflow-hidden shadow-lg m-4 group hover:scale-110 transition-all duration-300 ease cursor-pointer">
                             <Link to={`/games/${game.id}`}>
