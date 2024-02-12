@@ -10,11 +10,12 @@ const getGenreList = axiosCreateRawgApi.get("/genres?key=" + import.meta.env.VIT
 const getGamesList = axiosCreateRawgApi.get("/games?key=" + import.meta.env.VITE_RAWG_API_KEY);
 const getGamesByGenreId = (id) => axiosCreateRawgApi.get("/games?key=" + import.meta.env.VITE_RAWG_API_KEY + "&genres=" + id);
 const getGameData = (gId) => axiosCreateRawgApi.get("/games/" + gId + "?key=" + import.meta.env.VITE_RAWG_API_KEY);
-
+const getPlatformList = () =>  axiosCreateRawgApi.get("/platforms?key=" + import.meta.env.VITE_RAWG_API_KEY);
 
 export default {
    getGenreList,
    getGamesList,
    getGamesByGenreId,
    getGameData,
+   getPlatformList,
 };
