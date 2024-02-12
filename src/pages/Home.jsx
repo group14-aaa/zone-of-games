@@ -126,7 +126,8 @@ const Home = () => {
 
             {showPlatforms && (
                <div className="bg-primary text-text hidden md:block">
-                  <RawgPlatformList platformList={platformList}  onPlatformSelect={handlePlatformSelect} />
+                  <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} />
+
                   {/* <AllGamesByPlatform onPlatformSelect={handlePlatformSelect} /> */}
                   {/* <AllGamesByPlatform onPlatformSelect={(allGamesByPlatform) => fetchRawgGamesByPlatform(handlePlatformSelect)} /> */}
                </div>
