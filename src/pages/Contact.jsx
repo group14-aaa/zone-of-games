@@ -2,6 +2,7 @@ import React from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import anjalProfile from "../assets/images/anjal-profile-pic.jpg";
 import adamProfile from "../assets/images/adam-profile-pic.png";
+import mihaiProfile from "../assets/images/mihai-profile-pic.png";
 function Contact() {
    const profileLinks = [
       {
@@ -17,10 +18,10 @@ function Contact() {
          gitHubLink: "https://github.com/adampriley1",
       },
       {
-         name: "Anjal Sali",
-         imgSrc: anjalProfile,
-         linkedInLink: "https://www.linkedin.com/in/anjalsali/",
-         gitHubLink: "https://github.com/anjalsali",
+         name: "Mihai Pirvu",
+         imgSrc: mihaiProfile,
+         linkedInLink: "https://www.linkedin.com/in/mihaidev/",
+         gitHubLink: "https://github.com/pmAdriaan",
       },
       {
          name: "Anjal Sali",
