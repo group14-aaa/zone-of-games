@@ -155,7 +155,7 @@ const GamePage = () => {
          <div className="relative flex flex-col items-center mt-20 mb-20">
             {/* Title, Release Date, and Rating */}
             <div className="text-center mb-10">
-               <h1 className="text-5xl cursor-pointer hover:scale-150 transition duration-200 ease-in-out font-bold mb-6">{gameData.name}</h1>
+               <h1 className="text-5xl cursor-pointer hover:scale-150 transition duration-500 ease-in-out font-bold mb-6">{gameData.name}</h1>
                <p className="text-lg">Released date: {formatReleaseDate(gameData.released)}</p>
                <p className="text-xl font-bold flex items-center justify-center gap-1 mt-2">
                   <FaStarHalfAlt alt="The number of ratings" /> {gameData.rating} / {gameData.rating_top}
@@ -165,7 +165,9 @@ const GamePage = () => {
             {/* Trailer and Description */}
             <div className="flex flex-col md:flex-row w-full mt-20 mb-20">
                <div className="md:w-1/2 md:pr-8 mb-16">
-                  <h2 className="text-2xl font-bold mb-5">Game Trailer</h2>
+                  <div className="border border-accent rounded-md overflow-hidden mt-4 mb-5">
+                     <img className="w-full hover:scale-110 duration-300 transition ease-in-out object-cover rounded-md" src={gameData.background_image} alt={gameData.name} />
+                  </div>
                   {/* Video Placeholder For Youtube Trailer */}
                   <div className="border border-accent rounded-md overflow-hidden">
                      <ReactPlayer
