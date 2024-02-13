@@ -42,7 +42,7 @@ const Header = () => {
    return (
       <div className="flex items-center p-3 border-b-2 border-accent">
          <a href="/">
-            <img className="hover:scale-125 ml-1" src={logoSrc} width={100} height={50} alt="Logo image" />
+            <img className="hover:scale-125 transition duration-200 ease-in-out ml-1" src={logoSrc} width={100} height={50} alt="Logo image" />
          </a>
 
          <div className="flex bg-slate-200 p-2 w-full mx-5 rounded-full items-center">
