@@ -14,6 +14,8 @@ const About = () => {
          imgSrc:
             "https://png2.cleanpng.com/sh/46b3a444d0026659760dd8f3cfbbb20a/L0KzQYm3VsA2N5l9hJH0aYP2gLBuTfpifpJ4eARycISwgMP2hCJidZ5qip93b3ToPbv6Tgdmal5miOJ1aXPkhLr2jr13bZR5hAQ2bXH1e8b3Tfxidph6edluLUXlQYi6hvMzOGJqSaY8Lke4RIS6VcY0OWY3UKQAMEOzRoG3V8cveJ9s/kisspng-javascript-programmer-node-js-web-application-vector-markup-language-5b173fc201e143.7543356315282503060077.png",
       },
+      { href: "https://nodejs.org/", title: "Node.js - JavaScript runtime", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Node.js_logo_2015.svg" },
+
       { href: "https://vitejs.dev/", title: "Vite - Next Generation Frontend Tooling", imgSrc: "https://vitejs.dev/logo.svg" },
 
       { href: "https://reactjs.org/", title: "React - A JavaScript library for building user interfaces", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" },
@@ -30,11 +32,21 @@ const About = () => {
          title: "GitHub - Development Platform",
          imgSrc: "https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.png",
       },
+      {
+         href: "https://www.adobe.com/products/photoshop.html",
+         title: "Adobe Photoshop - Image Editing Software",
+         imgSrc: "https://www.adobe.com/content/dam/acom/one-console/icons_rebrand/ps_appicon.svg",
+      },
    ];
 
    const apiLinks = [
       { href: "https://rawg.io/", title: "RAWG API - Video Games Database", imgSrc: "https://rawg.io/assets/en/share-vk.png?v=4" },
       { href: "https://dev.twitch.tv/", title: "Twitch API - Developer Resources", imgSrc: "https://dev.twitch.tv/marketing-assets/images/TwitchDev.png" },
+      {
+         href: "https://developers.google.com/youtube/v3",
+         title: "YouTube API - Video Hosting and Streaming",
+         imgSrc: "https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg",
+      },
    ];
 
    return (
@@ -63,9 +75,9 @@ const About = () => {
             </div>
             <div className="flex justify-center flex-wrap mt-8 ">
                {techLinks.map((tech, index) => (
-                  <div key={index} className="p-2 md:w-1/4  mb-10 hover:scale-125 transition duration-300 ease-in-out">
+                  <div key={index} className="p-2 md:w-1/5  mb-10 hover:scale-125 transition duration-200 ease-in-out">
                      <a href={tech.href} target="_blank" rel="noopener noreferrer" title={tech.title}>
-                        <img width={100} src={tech.imgSrc} alt={tech.title} className="h-20 mx-auto" />
+                        <img width={80} src={tech.imgSrc} alt={tech.title} className="h-20 mx-auto rounded-xl" />
                      </a>
                   </div>
                ))}
@@ -78,9 +90,9 @@ const About = () => {
             </div>
             <div className="flex justify-center flex-wrap mt-8 ">
                {apiLinks.map((tech, index) => (
-                  <div key={index} className="p-2 sm:w-1/4 md:w-1/6 hover:scale-125 transition duration-300 ease-in-out">
+                  <div key={index} className="p-2 sm:w-1/4 md:w-1/6 hover:scale-125 transition duration-200 ease-in-out">
                      <a href={tech.href} target="_blank" rel="noopener noreferrer" title={tech.title}>
-                        <img width={100} src={tech.imgSrc} alt={tech.title} className="h-20 mx-auto" />
+                        <img width={100} src={tech.imgSrc} alt={tech.title} className="h-20 mx-auto rounded-xl" />
                      </a>
                   </div>
                ))}
