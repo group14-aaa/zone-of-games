@@ -3,6 +3,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import anjalProfile from "../assets/images/anjal-profile-pic.jpg";
 import adamProfile from "../assets/images/adam-profile-pic.png";
 import mihaiProfile from "../assets/images/mihai-profile-pic.png";
+import chrisProfile from "../assets/images/chris-profile-pic.png";
 function Contact() {
    const profileLinks = [
       {
@@ -24,10 +25,10 @@ function Contact() {
          gitHubLink: "https://github.com/pmAdriaan",
       },
       {
-         name: "Anjal Sali",
-         imgSrc: anjalProfile,
-         linkedInLink: "https://www.linkedin.com/in/anjalsali/",
-         gitHubLink: "https://github.com/anjalsali",
+         name: "Chris Di Luca",
+         imgSrc: chrisProfile,
+         linkedInLink: "https://www.linkedin.com/",
+         gitHubLink: "https://github.com/Revan369",
       },
    ];
    return (
@@ -102,9 +103,9 @@ function Contact() {
                   </div>
                   <button
                      type="submit"
-                     className="py-3 px-5 text-sm font-medium text-center text-black dark:text-white rounded-lg bg-primary-700 sm:w-fit bg-black focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-white dark:hover:bg-black dark:focus:ring-primary-800"
+                     className="py-3 px-5 text-sm font-bold text-center bg-black text-white hover:bg-navItemColor dark:text-black dark:bg-white rounded-xl dark:hover:bg-navItemColor dark:hover:text-white"
                   >
-                     Send message
+                     Send Message
                   </button>
                </form>
             </div>
