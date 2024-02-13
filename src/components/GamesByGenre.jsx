@@ -8,7 +8,6 @@ import { FaGripfire } from "react-icons/fa6";
 import { FaStarHalfAlt } from "react-icons/fa";
 import rawgApi from '../services/rawgApi';
 
-//added platform id here
 const GamesByGenre = ({ gamesByGenreList, platformId }) => {
     const [gamesList, setGamesList] = useState([]);
 
