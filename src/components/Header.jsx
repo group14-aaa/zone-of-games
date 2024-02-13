@@ -51,14 +51,14 @@ const Header = () => {
          </div>
          <button
             onClick={() => setOpenMenu(!openMenu)}
-            className="inline-flex items-center p-2 sm:hidden text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold cursor-pointer"
+            className="inline-flex items-center p-2 md:hidden text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold cursor-pointer"
          >
             <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
          </button>
 
-         <div className={`fixed rounded-xl top-0 w-max right-0 z-50 py-5 pr-10 dark:bg-primary bg-white shadow-md sm:hidden ${openMenu ? "block" : "hidden"}`}>
+         <div className={`fixed rounded-xl top-0 w-max right-0 z-50 py-5 pr-10 dark:bg-primary bg-white shadow-md md:hidden ${openMenu ? "block" : "hidden"}`}>
             <button onClick={() => setOpenMenu(false)} className="absolute top-2 right-2 text-gray-600 hover:text-gray-800">
                <IoCloseOutline className="text-2xl font-bold" />
             </button>
@@ -66,7 +66,7 @@ const Header = () => {
                <li>
                   <a
                      href="/"
-                     className={`flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold ${activeIndex === 0 ? "bg-white text-white" : ""}`}
+                     className={`flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold ${activeIndex === 0 ? "border-b-4 border-accent" : ""}`}
                      aria-current="page"
                   >
                      <FaHome className="mr-2" />
@@ -74,13 +74,19 @@ const Header = () => {
                   </a>
                </li>
                <li>
-                  <a href="/about" className={`flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold ${activeIndex === 1 ? "bg-accent" : ""}`}>
+                  <a
+                     href="/about"
+                     className={`flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold ${activeIndex === 1 ? "border-b-4 border-accent" : ""}`}
+                  >
                      <FaInfoCircle className="mr-2" />
                      About
                   </a>
                </li>
                <li>
-                  <a href="/contact" className={`flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold ${activeIndex === 2 ? "bg-accent" : ""}`}>
+                  <a
+                     href="/contact"
+                     className={`flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold ${activeIndex === 2 ? "border-b-4 border-accent" : ""}`}
+                  >
                      <FaAddressBook className="mr-2" />
                      Contact
                   </a>
@@ -100,7 +106,7 @@ const Header = () => {
             </ul>
          </div>
 
-         <div className="hidden sm:mr-5 sm:block">
+         <div className="hidden md:block">
             <div className="flex space-x-4">
                <a
                   href="/"
