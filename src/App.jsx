@@ -1,21 +1,25 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+// Fonts
+import '@fontsource/montserrat';
 
 // Context
 import { ThemeContext } from "./context/ThemeContext";
 
 // Components
 import PageLayout from "./components/PageLayout";
+import Loading from "./components/Loading";
 
 // Pages
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Streams from "./pages/streams/";
-import GamePage from "./pages/games/GamePage";
-import TopRatedGames from "./pages/games/top";
-import ViewStreams from "./pages/streams/ViewStreams";
-import ErrorPage from "./pages/404";
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const GamePage = lazy(() => import('./pages/games/GamePage'));
+const TopRatedGames = lazy(() => import('./pages/games/top'));
+const Streams = lazy(() => import('./pages/streams'));
+const ViewStreams = lazy(() => import('./pages/streams/ViewStreams'));
+const ErrorPage = lazy(() => import('./pages/404'));
 
 // Page path
 const routes = [
@@ -29,12 +33,15 @@ const routes = [
    { path: "*", component: ErrorPage },
 ];
 
+
+
 function App() {
-   const [theme, setTheme] = useState("dark");
+   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
+
+   const getThemeClassName = () => `${theme} ${theme === "dark" ? "bg-background" : "bg-background"}`;
 
    // Update document root class when theme changes
    useEffect(() => {
-      setTheme(localStorage.getItem("theme") ? localStorage.getItem("theme") : "dark");
       document.documentElement.className = theme;
    }, [theme]);
 
@@ -42,40 +49,14 @@ function App() {
       <Router>
          <Routes>
             {routes.map(({ path, component: Component }, index) => (
-               <Route
-                  key={path}
-                  path={path}
-                  element={
+               <Route key={path} path={path} element=
+                  {
                      <ThemeContext.Provider value={{ theme, setTheme }}>
-                        <div className={`${theme} ${theme === "dark" ? "bg-background" : "bg-background"} min-h-[100vh]`}>
+                        <div className={getThemeClassName()}>
                            <PageLayout>
-                              {index === 0 ? (
-                                 <Suspense
-                                    fallback={
-                                       <div className="flex items-center justify-center h-screen">
-                                          <div role="status">
-                                             <span className="text-text">Loading....</span>
-                                          </div>
-                                       </div>
-                                    }
-                                 >
-                                    <Component />
-                                 </Suspense>
-                              ) : (
-                                 <div key={path} className="h-full">
-                                    <Suspense
-                                       fallback={
-                                          <div className="flex items-center justify-center h-screen">
-                                             <div role="status">
-                                                <span className="text-text">Loading....</span>
-                                             </div>
-                                          </div>
-                                       }
-                                    >
-                                       <Component />
-                                    </Suspense>
-                                 </div>
-                              )}
+                              <Suspense fallback={<Loading />} >
+                                 <Component />
+                              </Suspense>
                            </PageLayout>
                         </div>
                      </ThemeContext.Provider>
@@ -86,4 +67,5 @@ function App() {
       </Router>
    );
 }
+
 export default App;

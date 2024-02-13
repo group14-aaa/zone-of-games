@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import rawgApi from '../services/rawgApi';
+
+// Components
 import CollapsibleSection from './CollapsibleSection';
+
+// API
+import rawgApi from '../services/rawgApi';
 
 
 

@@ -1,5 +1,9 @@
-import React from 'react';
-import TwitchTopGames from "../../components/TwitchTopGames";
+import React, { lazy } from 'react';
+
+// Components
+const TwitchTopGames = lazy(() => import('../../components/TwitchTopGames'));
+
+
 
 const Streams = () => {
     return (

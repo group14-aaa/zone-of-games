@@ -1,6 +1,9 @@
-
 import React, { useState } from 'react'
+
+// Icons
 import { FaPlus, FaMinus } from 'react-icons/fa';
+
+
 
 const CollapsibleSection = ({ title, children }) => {
     const [isCollapsed, setIsCollapsed] = useState(false);

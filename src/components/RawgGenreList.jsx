@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
+
+// Components
 import CollapsibleSection from './CollapsibleSection';
+
+// API
 import rawgApi from '../services/rawgApi'
 
 
@@ -26,15 +30,13 @@ const RawgGenreList = ({ onGenreSelect }) => {
         }
     }
 
-    const handleShowMore = () => {
-        // Increase the number of displayed genres
+    const handleShowMore = useCallback(() => {
         setDisplayedGenres(displayedGenres + 5);
-    };
+    }, [displayedGenres]);
 
-    const handleShowLess = () => {
-        // Decrease the number of displayed genres, but ensure it's at least 5
+    const handleShowLess = useCallback(() => {
         setDisplayedGenres(Math.max(displayedGenres - 5, 5));
-    };
+    }, [displayedGenres]);
 
     return (
         <div className="bg-secondary p-5 rounded-md shadow-md">
@@ -43,7 +45,7 @@ const RawgGenreList = ({ onGenreSelect }) => {
                 {genreList.slice(0, displayedGenres).map((item, index) => (
                     // Each genre item
                     <div
-                        key={index}
+                        key={item.id}
                         onClick={() => {
                             setActiveIndex(index);
                             onGenreSelect(item.id);
