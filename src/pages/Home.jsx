@@ -31,7 +31,7 @@ const Home = () => {
       // Fetch games list when component mounts
       fetchRawgAllGamesList();
       fetchRawgGamesByGenreId(4);
-      fetchRawgGamesByPlatform()
+      fetchRawgGamesByPlatform();
    }, []);
 
    const handleApiError = (error, errorMessage) => {
@@ -66,7 +66,6 @@ const Home = () => {
       }
    };
 
-
    if (error) {
       return (
          <div className="p-5 text-text">
@@ -78,37 +77,29 @@ const Home = () => {
    const handlePlatformSelect = async (platformId) => {
       setSelectedPlatformId(platformId);
       try {
-          const response = await rawgApi.getGamesByPlatform(platformId);
-          setAllGamesByGenreId(response?.data?.results || []);
+         const response = await rawgApi.getGamesByPlatform(platformId);
+         setAllGamesByGenreId(response?.data?.results || []);
       } catch (error) {
-          handleApiError(error, "Error fetching games by platform");
+         handleApiError(error, "Error fetching games by platform");
       }
-  };
-
+   };
 
    return (
       <div className="grid grid-cols-4">
          <div className="bg-secondary text-text hidden md:block">
-
             <Link to="/streams/">
                <div className="p-5 hover:bg-accent hover:text-white">
-                  <h2 className="text-3xl font-bold mr-2">
-                     Top Streaming
-                  </h2>
+                  <h2 className="text-3xl font-bold mr-2">Top Streaming</h2>
                </div>
             </Link>
 
             <Link to="/games/top">
                <div className="p-5 hover:bg-accent hover:text-white">
-                  <h2 className="text-3xl font-bold mr-2">
-                     Top Rated
-                  </h2>
+                  <h2 className="text-3xl font-bold mr-2">Top Rated</h2>
                </div>
             </Link>
 
             <RawgGenreList onGenreSelect={(onGenreSelect) => fetchRawgGamesByGenreId(onGenreSelect)} />
-
-            
 
             <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} />
             {/* <AllGamesByPlatform onPlatformSelect={(allGamesByPlatform) => fetchRawgGamesByPlatform(onPlatformSelect)} /> */}
@@ -116,12 +107,8 @@ const Home = () => {
 
          {allGamesList?.length > 0 && allGamesByGenreId.length > 0 && (
             <div className="col-span-4 md:col-span-3 bg-primary text-text">
-               {randomGame ? (
-                  <GameBanner game={randomGame} />
-               ) : (
-                  <Loading />
-               )}
-               
+               {randomGame ? <GameBanner gameList={allGamesList} /> : <Loading />}
+
                <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} platformId={selectedPlatformId} />
 
                {/* <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} /> */}
