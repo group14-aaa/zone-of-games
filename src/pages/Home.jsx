@@ -17,7 +17,7 @@ const Home = () => {
    const [allGamesByGenreId, setAllGamesByGenreId] = useState([]);
    const [randomGame, setRandomGame] = useState({});
    const [error, setError] = useState(null);
-
+   const [selectedPlatformId, setSelectedPlatformId] = useState(null);
    const [platformList, setPlatformList] = useState([]);
 
    useEffect(() => {
@@ -66,6 +66,7 @@ const Home = () => {
       }
    };
 
+
    if (error) {
       return (
          <div className="p-5 text-text">
@@ -74,10 +75,16 @@ const Home = () => {
       );
    }
 
-   const handlePlatformSelect = (platformId) => {
-      // You can implement fetching games by platform here if needed
-      console.log("Platform ID selected:", platformId);
-   };
+   const handlePlatformSelect = async (platformId) => {
+      setSelectedPlatformId(platformId);
+      try {
+          const response = await rawgApi.getGamesByPlatform(platformId);
+          setAllGamesByGenreId(response?.data?.results || []);
+      } catch (error) {
+          handleApiError(error, "Error fetching games by platform");
+      }
+  };
+
 
    return (
       <div className="grid grid-cols-4">
@@ -101,6 +108,8 @@ const Home = () => {
 
             <RawgGenreList onGenreSelect={(onGenreSelect) => fetchRawgGamesByGenreId(onGenreSelect)} />
 
+            
+
             <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} />
             {/* <AllGamesByPlatform onPlatformSelect={(allGamesByPlatform) => fetchRawgGamesByPlatform(onPlatformSelect)} /> */}
          </div>
@@ -112,7 +121,10 @@ const Home = () => {
                ) : (
                   <Loading />
                )}
-               <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} />
+               
+               <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} platformId={selectedPlatformId} />
+
+               {/* <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} /> */}
                {/* Other components */}
             </div>
          )}
