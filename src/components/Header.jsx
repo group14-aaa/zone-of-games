@@ -45,7 +45,7 @@ const Header = () => {
             <img className="hover:scale-125 transition duration-200 ease-in-out ml-1" src={logoSrc} width={100} height={50} alt="Logo image" />
          </a>
 
-         <div className="flex bg-slate-200 p-2 w-full mx-5 rounded-full items-center">
+         <div className="flex bg-slate-200 p-2 w-screen mx-5 rounded-full items-center">
             <IoSearchSharp />
             <input type="text" placeholder="Search Games..." className="px-2 bg-transparent outline-none w-full" />
          </div>
@@ -107,7 +107,7 @@ const Header = () => {
          </div>
 
          <div className="hidden md:block">
-            <div className="flex space-x-4">
+            <div className="flex space-x-5">
                <a
                   href="/"
                   className={`flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold ${activeIndex === 0 ? "border-b-4 border-accent" : ""}`}
@@ -136,9 +136,9 @@ const Header = () => {
                      setTheme(newTheme);
                      localStorage.setItem("theme", newTheme);
                   }}
-                  className="bg-slate-200 dark:text-white hover:scale-125  bg-transparent cursor-pointer"
+                  className="bg-slate-200 dark:text-white hover:scale-125 transition duration-200 ease-in-out bg-transparent cursor-pointer"
                >
-                  {theme === "light" ? <MdDarkMode className="text-[30px]" /> : <MdLightMode className="text-[30px]" />}
+                  {theme === "light" ? <MdDarkMode className="text-[30px]" /> : <MdLightMode className="text-[30px] mr-1" />}
                </button>
             </div>
          </div>
