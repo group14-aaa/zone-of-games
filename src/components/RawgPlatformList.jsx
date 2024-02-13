@@ -1,66 +1,53 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import rawgApi from '../services/rawgApi';
+
 import CollapsibleSection from './CollapsibleSection';
 
-// API
-import rawgApi from '../services/rawgApi'
-
-
-
-const RawgGenreList = ({ onGenreSelect }) => {
-
-    // State for genre list from RAWG Api
-    const [genreList, setGenreList] = useState([]);
-    const [displayedGenres, setDisplayedGenres] = useState(5);
+const RawgPlatformList = ({ onPlatformSelect }) => {
+    const [platformList, setPlatformList] = useState([]);
+    const [displayedPlatforms, setDisplayedPlatforms] = useState(5);
     const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
-        // Fetch genre list when component mounts
-        fetchRawgGenreList();
-    }, [])
+        fetchRawgPlatformList();
+    }, []);
 
-    // Get genre list from RAWG Api
-    const fetchRawgGenreList = async () => {
+    const fetchRawgPlatformList = async () => {
         try {
-            const response = await rawgApi.getGenreList;
-
-            setGenreList(response.data.results);
+            const response = await rawgApi.getPlatformList();
+            setPlatformList(response.data.results);
         } catch (error) {
-            console.error('Error fetching genre list:', error);
+            console.error('Error fetching platform list:', error);
         }
-    }
+    };
 
     const handleShowMore = () => {
-        // Increase the number of displayed genres
-        setDisplayedGenres(displayedGenres + 5);
+        setDisplayedPlatforms(displayedPlatforms + 5);
     };
 
     const handleShowLess = () => {
-        // Decrease the number of displayed genres, but ensure it's at least 5
-        setDisplayedGenres(Math.max(displayedGenres - 5, 5));
+        setDisplayedPlatforms(Math.max(displayedPlatforms - 5, 5));
     };
 
     return (
         <div className="bg-secondary p-5 rounded-md shadow-md">
-            {/* Collapsible Genres Section */}
-            <CollapsibleSection title="Genres">
-                {genreList.slice(0, displayedGenres).map((item, index) => (
-                    // Each genre item
+
+            {/* Collapsible Platforms Section */}
+            <CollapsibleSection title="Platforms">
+                {platformList.slice(0, displayedPlatforms).map((item, index) => (
                     <div
                         key={index}
                         onClick={() => {
                             setActiveIndex(index);
-                            onGenreSelect(item.id);
+                            onPlatformSelect(item.id);
                         }}
                         className={`flex gap-2 items-center mb-2 mt-3 px-2 py-2 cursor-pointer hover:bg-accent group rounded-lg ${activeIndex === index ? "bg-accent" : ""}`}
                     >
-                        {/* Genre image */}
                         <img
                             src={item.image_background}
-                            alt={`Genre ${item.name} background`}
+                            alt={`Platform ${item.name} background`}
                             className={`w-[40px] h-[40px] object-cover rounded-lg group-hover:scale-105 transition-all ease-out duration-300 ${activeIndex === index ? "scale-105" : ""}`}
                         />
-
-                        {/* Genre name */}
                         <h3 className={`text-text text-[18px] group-hover:font-bold hover:text-white transition-all ease-out duration-300 ${activeIndex === index ? "font-bold text-white" : ""}`}>
                             {item.name}
                         </h3>
@@ -74,7 +61,7 @@ const RawgGenreList = ({ onGenreSelect }) => {
                     >
                         Show More
                     </button>
-                    {displayedGenres > 5 && (
+                    {displayedPlatforms > 5 && (
                         <button
                             onClick={handleShowLess}
                             className="bg-primary text-text px-4 py-2 rounded-md hover:bg-error hover:opacity-90 transition duration-150 ease-in-out"
@@ -88,9 +75,4 @@ const RawgGenreList = ({ onGenreSelect }) => {
     );
 };
 
-
-
-
-
-
-export default RawgGenreList;
+export default RawgPlatformList;
