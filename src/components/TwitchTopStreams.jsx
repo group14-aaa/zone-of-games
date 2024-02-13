@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
-import twitchApi from '../services/twitchApi';
+
+// Style
 import '../assets/styles/twitch.css';
+
+// API
+import twitchApi from '../services/twitchApi';
+
 
 function TwitchTopStreams({ gameId, limit }) {
     // State for top streams from Twitch Api

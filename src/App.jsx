@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // Context
@@ -8,14 +8,14 @@ import { ThemeContext } from "./context/ThemeContext";
 import PageLayout from "./components/PageLayout";
 
 // Pages
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Streams from "./pages/streams/";
-import GamePage from "./pages/games/GamePage";
-import TopRatedGames from "./pages/games/top";
-import ViewStreams from "./pages/streams/ViewStreams";
-import ErrorPage from "./pages/404";
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const GamePage = lazy(() => import('./pages/games/GamePage'));
+const TopRatedGames = lazy(() => import('./pages/games/top'));
+const Streams = lazy(() => import('./pages/streams'));
+const ViewStreams = lazy(() => import('./pages/streams/ViewStreams'));
+const ErrorPage = lazy(() => import('./pages/404'));
 
 // Page path
 const routes = [

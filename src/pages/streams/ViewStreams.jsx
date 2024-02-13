@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-
 import ReactPlayer from 'react-player';
-import twitchApi from '../../services/twitchApi';
+
+// Style
 import '../../assets/styles/twitch.css';
+
+// Api
+import twitchApi from '../../services/twitchApi';
+
+
 
 const ViewStreams = ({ limit }) => {
     const { gameId } = useParams();

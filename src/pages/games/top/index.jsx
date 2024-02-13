@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import RawgTopRatedGames from "../../../components/RawgTopRatedGames";
+import React, { useState, useEffect, lazy } from 'react';
 
+// Components
+const RawgTopRatedGames = lazy(() => import(
+    '../../../components/RawgTopRatedGames'));
+
+// API
 import rawgApi from "../../../services/rawgApi";
+
+
 
 const TopRatedGames = () => {
     // State for top games list from RAWG Api
     const [allGamesList, setAllGamesList] = useState([]);
-
 
     useEffect(() => {
         // Fetch top games list when component mounts
@@ -34,4 +39,5 @@ const TopRatedGames = () => {
         </div>
     )
 }
+
 export default TopRatedGames;

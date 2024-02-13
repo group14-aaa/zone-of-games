@@ -1,5 +1,7 @@
 import React from "react";
 
+
+
 const About = () => {
    const techLinks = [
       { href: "https://html.com/", title: "HTML - The Standard Markup Language for Documents", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/8/82/Devicon-html5-plain.svg" },

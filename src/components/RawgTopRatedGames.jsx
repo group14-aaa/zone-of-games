@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+
+
 const RawgTopRatedGames = ({ gamesList }) => {
   return (
     <div className="p-5">

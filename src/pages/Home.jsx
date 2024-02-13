@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy } from "react";
 import { Link } from "react-router-dom";
+
+// Components
+const GameBanner = lazy(() => import('../components/GameBanner'));
+const RawgGenreList = lazy(() => import('../components/RawgGenreList'));
+const RawgGamesByGenreId = lazy(() => import('../components/GamesByGenre'));
+const AllGamesByPlatform = lazy(() => import('../components/GamesByPlatform'));
+const RawgPlatformList = lazy(() => import('../components/RawgPlatformList'));
 
 // API
 import rawgApi from "../services/rawgApi";
-
-// Components
-import GameBanner from "../components/GameBanner";
-import RawgGenreList from "../components/RawgGenreList";
-import RawgGamesByGenreId from "../components/GamesByGenre";
-import AllGamesByPlatform from "../components/GamesByPlatform";
-import RawgPlatformList from "../components/RawgPlatformList";
 
 const Home = () => {
    // State for top games list from RAWG Api
@@ -78,25 +78,6 @@ const Home = () => {
       // You can implement fetching games by platform here if needed
       console.log("Platform ID selected:", platformId);
    };
-
-   if (!allGamesList) {
-      return (
-         <div className="flex items-center justify-center h-screen">
-            <div role="status">
-               <span className="text-text">Loading....</span>
-            </div>
-         </div>
-      );
-   }
-   if (!allGamesByGenreId) {
-      return (
-         <div className="flex items-center justify-center h-screen">
-            <div role="status">
-               <span className="text-text">Loading....</span>
-            </div>
-         </div>
-      );
-   }
 
    return (
       <div className="grid grid-cols-4">
