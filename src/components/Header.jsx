@@ -9,7 +9,7 @@ import logo from "./../assets/images/logo-no-background.png";
 // Icons
 import { IoSearchSharp } from "react-icons/io5";
 import { MdLightMode, MdDarkMode } from "react-icons/md";
-import { FaHome, FaInfoCircle, FaAddressBook  } from "react-icons/fa";
+import { FaHome, FaInfoCircle, FaAddressBook } from "react-icons/fa";
 
 const Header = () => {
    const { theme, setTheme } = useContext(ThemeContext);
@@ -23,15 +23,15 @@ const Header = () => {
          </div>
          <div className="hidden sm:mr-5 sm:block">
             <div className="flex space-x-4">
-               <a href="/" className="flex items-center text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-bold" aria-current="page">
+               <a href="/" className="flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold" aria-current="page">
                   <FaHome className="mr-2" />
                   Home
                </a>
-               <a href="/about" className="flex items-center text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-bold">
+               <a href="/about" className="flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold">
                   <FaInfoCircle className="mr-2" />
                   About
                </a>
-               <a href="/contact" className="flex items-center text-text hover:bg-navItemColor hover:text-white rounded-md px-3 py-2 text-sm font-bold">
+               <a href="/contact" className="flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold">
                   <FaAddressBook className="mr-2" />
                   Contact
                </a>
