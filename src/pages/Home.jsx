@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // API
 import rawgApi from "../services/rawgApi";
@@ -11,6 +12,7 @@ import RawgGamesByGenreId from "../components/GamesByGenre";
 import AllGamesByPlatform from "../components/GamesByPlatform";
 import RawgPlatformList from "../components/RawgPlatformList";
 
+import CollapsibleSection from "../components/CollapsibleSection";
 
 const Home = () => {
    // State for top games list from RAWG Api
@@ -103,43 +105,45 @@ const Home = () => {
       <div className="grid grid-cols-4">
          <div className="col-span-1 bg-primary text-text flex flex-col">
 
-  {/* genreButton */}
-            <button
-               onClick={toggleGenres}
-               className="text-3xl font-bold text-text px-5 pt-2">
-               Genre
-            </button>
-
-            {/* Platform Button */}
-            <button
-               onClick={togglePlatforms} // Need to add onClick handler for platform button
-               className="text-3xl font-bold text-text px-5 pt-2 mt-2"> {/* Add mt-2 for margin-top */}
-               Platform
-            </button>
-
-
-            {showGenres && (
-               <div className="bg-primary text-text hidden md:block">
-                  <RawgGenreList onGenreSelect={(onGenreSelect) => fetchRawgGamesByGenreId(onGenreSelect)} />
+            <div className="bg-primary text-text hidden md:block">
+               <div className="bg-secondary p-5 rounded-md shadow-md">
+                  <div className="mb-4">
+                     <div className="flex items-center cursor-pointer">
+                        <h2 className="text-3xl font-bold mr-2">
+                           <Link to='/streams/'>Top Streaming</Link>
+                        </h2>
+                     </div>
+                  </div>
                </div>
-            )}
-
-            {showPlatforms && (
-               <div className="bg-primary text-text hidden md:block">
-                  <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} />
-
-                  {/* <AllGamesByPlatform onPlatformSelect={handlePlatformSelect} /> */}
-                  {/* <AllGamesByPlatform onPlatformSelect={(allGamesByPlatform) => fetchRawgGamesByPlatform(handlePlatformSelect)} /> */}
+            </div>
+            <div className="bg-primary text-text hidden md:block">
+               <div className="bg-secondary p-5 rounded-md shadow-md">
+                  <div className="mb-4">
+                     <div className="flex items-center cursor-pointer">
+                        <h2 className="text-3xl font-bold mr-2">
+                           <Link to='/games/top'>Top Rated</Link>
+                        </h2>
+                     </div>
+                  </div>
                </div>
-            )}
+            </div>
 
+            <div className="bg-primary text-text hidden md:block">
+               <RawgGenreList onGenreSelect={(onGenreSelect) => fetchRawgGamesByGenreId(onGenreSelect)} />
+            </div>
+
+            <div className="bg-primary text-text hidden md:block">
+               <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} />
+               {/* <AllGamesByPlatform onPlatformSelect={(allGamesByPlatform) => fetchRawgGamesByPlatform(onPlatformSelect)} /> */}
+
+            </div>
          </div>
          {allGamesList?.length > 0 && allGamesByGenreId.length > 0 && (
             <div className="col-span-3 bg-primary text-text">
-               <GameBanner game={allGamesList[Math.floor(Math.random() * allGamesList.length)]} />
-               <RawgTopRatedGames gamesList={allGamesList} />
+               <GameBanner game={allGamesByGenreId[Math.floor(Math.random() * allGamesList.length)]} />
+               {/* <RawgTopRatedGames gamesList={allGamesList} /> */}
                <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} />
-               <AllGamesByPlatform />
+               {/* <AllGamesByPlatform /> */}
             </div>
          )}
       </div>

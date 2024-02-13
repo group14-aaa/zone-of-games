@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import CollapsibleSection from './CollapsibleSection';
 
 // API
 import rawgApi from '../services/rawgApi'
@@ -9,6 +10,7 @@ const RawgGenreList = ({ onGenreSelect }) => {
 
     // State for genre list from RAWG Api
     const [genreList, setGenreList] = useState([]);
+    const [displayedGenres, setDisplayedGenres] = useState(5);
     const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
@@ -20,8 +22,6 @@ const RawgGenreList = ({ onGenreSelect }) => {
     const fetchRawgGenreList = async () => {
         try {
             const response = await rawgApi.getGenreList;
-            // display data to the console
-            // console.log(response.data.results);
 
             setGenreList(response.data.results);
         } catch (error) {
@@ -29,30 +29,68 @@ const RawgGenreList = ({ onGenreSelect }) => {
         }
     }
 
+    const handleShowMore = () => {
+        // Increase the number of displayed genres
+        setDisplayedGenres(displayedGenres + 5);
+    };
+
+    const handleShowLess = () => {
+        // Decrease the number of displayed genres, but ensure it's at least 5
+        setDisplayedGenres(Math.max(displayedGenres - 5, 5));
+    };
+
     return (
-        <>
-            {genreList.map((item, index) => (
-                // Each genre item
-                <div
-                    key={index}
-                    onClick={() => { setActiveIndex(index); onGenreSelect(item.id) }}
-                    className={`flex gap-2 items-center mb-2 ml-5 px-2 py-2 cursor-pointer hover:bg-secondary group rounded-lg ${activeIndex === index ? "bg-secondary" : ""}`}>
+        <div className="bg-secondary p-5 rounded-md shadow-md">
+            {/* Collapsible Genres Section */}
+            <CollapsibleSection title="Genres">
+                {genreList.slice(0, displayedGenres).map((item, index) => (
+                    // Each genre item
+                    <div
+                        key={index}
+                        onClick={() => {
+                            setActiveIndex(index);
+                            onGenreSelect(item.id);
+                        }}
+                        className={`flex gap-2 items-center mb-2 mt-3 px-2 py-2 cursor-pointer hover:bg-accent group rounded-lg ${activeIndex === index ? "bg-accent" : ""}`}
+                    >
+                        {/* Genre image */}
+                        <img
+                            src={item.image_background}
+                            alt={`Genre ${item.name} background`}
+                            className={`w-[40px] h-[40px] object-cover rounded-lg group-hover:scale-105 transition-all ease-out duration-300 ${activeIndex === index ? "scale-105" : ""}`}
+                        />
 
-                    {/* Genre image */}
-                    <img
-                        src={item.image_background}
-                        alt={`Genre ${item.name} background`}
-                        className={`w-[40px] h-[40px] object-cover rounded-lg group-hover:scale-105 transition-all ease-out duration-300 ${activeIndex === index ? "scale-105" : ""}`}
-                    />
+                        {/* Genre name */}
+                        <h3 className={`text-text text-[18px] group-hover:font-bold hover:text-white transition-all ease-out duration-300 ${activeIndex === index ? "font-bold text-white" : ""}`}>
+                            {item.name}
+                        </h3>
+                    </div>
+                ))}
 
-                    {/* Genre name */}
-                    <h3 className={`text-text text-[18px] group-hover:font-bold transition-all ease-out duration-300 ${activeIndex === index ? "font-bold" : ""}`}>
-                        {item.name}
-                    </h3>
+                <div className="flex justify-between mt-4">
+                    <button
+                        onClick={handleShowMore}
+                        className="bg-primary text-text px-4 py-2 rounded-md hover:bg-success hover:opacity-90 transition duration-150 ease-in-out"
+                    >
+                        Show More
+                    </button>
+                    {displayedGenres > 5 && (
+                        <button
+                            onClick={handleShowLess}
+                            className="bg-primary text-text px-4 py-2 rounded-md hover:bg-error hover:opacity-90 transition duration-150 ease-in-out"
+                        >
+                            Show Less
+                        </button>
+                    )}
                 </div>
-            ))}
-        </>
+            </CollapsibleSection>
+        </div>
     );
-}
+};
+
+
+
+
+
 
 export default RawgGenreList;

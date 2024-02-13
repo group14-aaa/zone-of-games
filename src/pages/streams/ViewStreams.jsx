@@ -42,10 +42,10 @@ const ViewStreams = ({ limit }) => {
 
     return (
         <div className="grid grid-cols-4">
-            <div className="bg-primary text-text h-full hidden md:block">
+            {/* <div className="bg-primary text-text h-full hidden md:block">
                 View Streams Sidebar
-            </div>
-            <div className="col-span-3 bg-primary text-text">
+            </div> */}
+            <div className="col-span-4 bg-primary text-text">
                 <h2 className="text-3xl font-bold text-gray-400 mb-4 mt-6 text-center">
                     Most viewed Live Streams on Twitch - {gameName}
                 </h2>
