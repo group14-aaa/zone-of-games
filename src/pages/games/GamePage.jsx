@@ -155,7 +155,7 @@ const GamePage = () => {
          <div className="relative flex flex-col items-center mt-20 mb-20">
             {/* Title, Release Date, and Rating */}
             <div className="text-center mb-10">
-               <h1 className="text-4xl font-bold mb-6">{gameData.name}</h1>
+               <h1 className="text-5xl cursor-pointer hover:scale-150 transition duration-200 ease-in-out font-bold mb-6">{gameData.name}</h1>
                <p className="text-lg">Released date: {formatReleaseDate(gameData.released)}</p>
                <p className="text-xl font-bold flex items-center justify-center gap-1 mt-2">
                   <FaStarHalfAlt alt="The number of ratings" /> {gameData.rating} / {gameData.rating_top}
@@ -165,6 +165,7 @@ const GamePage = () => {
             {/* Trailer and Description */}
             <div className="flex flex-col md:flex-row w-full mt-20 mb-20">
                <div className="md:w-1/2 md:pr-8 mb-16">
+                  <h2 className="text-2xl font-bold mb-5">Game Trailer</h2>
                   {/* Video Placeholder For Youtube Trailer */}
                   <div className="border border-accent rounded-md overflow-hidden">
                      <ReactPlayer
@@ -251,7 +252,7 @@ const GamePage = () => {
                      <h3 className="text-2xl font-bold mb-4">Platforms</h3>
                      <div className="flex flex-wrap">
                         {gameData.parent_platforms.map((platform, index) => (
-                           <p key={index} className="text-lg mr-4">
+                           <p key={index} className="text-lg mr-4 hover:scale-150 duration-300 ease-in-out">
                               {renderPlatformIcon(platform.platform.name)}
                            </p>
                         ))}
