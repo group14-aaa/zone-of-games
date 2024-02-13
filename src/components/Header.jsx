@@ -37,25 +37,16 @@ const Header = () => {
                </a>
             </div>
          </div>
-         <div>
-            {theme === "light" ? (
-               <MdDarkMode
-                  className="text-[30px] bg-slate-200 text-black p-1 rounded-full cursor-pointer"
-                  onClick={() => {
-                     setTheme("dark");
-                     localStorage.setItem("theme", "dark");
-                  }}
-               />
-            ) : (
-               <MdLightMode
-                  className="text-[30px] bg-slate-200 text-black p-1 rounded-full cursor-pointer"
-                  onClick={() => {
-                     setTheme("light");
-                     localStorage.setItem("theme", "light");
-                  }}
-               />
-            )}
-         </div>
+         <button
+            onClick={() => {
+               const newTheme = theme === "light" ? "dark" : "light";
+               setTheme(newTheme);
+               localStorage.setItem("theme", newTheme);
+            }}
+            className="bg-slate-200 text-black p-1 rounded-full cursor-pointer"
+         >
+            {theme === "light" ? <MdDarkMode className="text-[25px]" /> : <MdLightMode className="text-[25px]" />}
+         </button>
       </div>
    );
 };
