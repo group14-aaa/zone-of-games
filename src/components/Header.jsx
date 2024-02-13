@@ -7,7 +7,7 @@ import { ThemeContext } from "../context/ThemeContext";
 import logo from "./../assets/images/logo-no-background.png";
 
 // Icons
-import { IoSearchSharp } from "react-icons/io5";
+import { IoSearchSharp, IoCloseOutline } from "react-icons/io5";
 import { MdLightMode, MdDarkMode } from "react-icons/md";
 import { FaHome, FaInfoCircle, FaAddressBook } from "react-icons/fa";
 
@@ -31,8 +31,11 @@ const Header = () => {
             </svg>
          </button>
 
-         <div className={`fixed top-0 left-0 z-50 h-200 bg-white py-3 px-4 shadow-md sm:hidden ${openMenu ? "block" : "hidden"}`} style={{ width: "200px" }}>
-            <ul className="space-y-2">
+         <div className={`fixed rounded top-0 right-0 z-50 h-200 bg-white py-3 px-4 shadow-md sm:hidden ${openMenu ? "block" : "hidden"}`} style={{ width: "200px" }}>
+            <button onClick={() => setOpenMenu(false)} className="absolute top-2 right-2 text-gray-600 hover:text-gray-800">
+               <IoCloseOutline className="text-lg" />
+            </button>
+            <ul className="space-y-2 text-right">
                <li>
                   <a href="/" className="flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold" aria-current="page">
                      <FaHome className="mr-2" />
@@ -51,6 +54,16 @@ const Header = () => {
                      Contact
                   </a>
                </li>
+               <button
+                  onClick={() => {
+                     const newTheme = theme === "light" ? "dark" : "light";
+                     setTheme(newTheme);
+                     localStorage.setItem("theme", newTheme);
+                  }}
+                  className="bg-slate-200 text-black p-1 mr-2 rounded-full cursor-pointer"
+               >
+                  {theme === "light" ? <MdDarkMode className="text-[25px]" /> : <MdLightMode className="text-[25px]" />}
+               </button>
             </ul>
          </div>
 
@@ -68,18 +81,18 @@ const Header = () => {
                   <FaAddressBook className="mr-2" />
                   Contact
                </a>
+               <button
+                  onClick={() => {
+                     const newTheme = theme === "light" ? "dark" : "light";
+                     setTheme(newTheme);
+                     localStorage.setItem("theme", newTheme);
+                  }}
+                  className="bg-slate-200 text-black p-1 mr-2 rounded-full cursor-pointer"
+               >
+                  {theme === "light" ? <MdDarkMode className="text-[25px]" /> : <MdLightMode className="text-[25px]" />}
+               </button>
             </div>
          </div>
-         <button
-            onClick={() => {
-               const newTheme = theme === "light" ? "dark" : "light";
-               setTheme(newTheme);
-               localStorage.setItem("theme", newTheme);
-            }}
-            className="bg-slate-200 text-black p-1 mr-2 rounded-full cursor-pointer"
-         >
-            {theme === "light" ? <MdDarkMode className="text-[25px]" /> : <MdLightMode className="text-[25px]" />}
-         </button>
       </div>
    );
 };
