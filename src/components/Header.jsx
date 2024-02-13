@@ -31,11 +31,11 @@ const Header = () => {
             </svg>
          </button>
 
-         <div className={`fixed rounded top-0 right-0 z-50 h-200 bg-white py-3 px-4 shadow-md sm:hidden ${openMenu ? "block" : "hidden"}`} style={{ width: "200px" }}>
+         <div className={`fixed rounded-xl top-0 w-max right-0 z-50 py-5 pr-10 dark:bg-primary bg-white shadow-md sm:hidden ${openMenu ? "block" : "hidden"}`}>
             <button onClick={() => setOpenMenu(false)} className="absolute top-2 right-2 text-gray-600 hover:text-gray-800">
-               <IoCloseOutline className="text-lg" />
+               <IoCloseOutline className="text-2xl font-bold" />
             </button>
-            <ul className="space-y-2 text-right">
+            <ul className="space-y-2">
                <li>
                   <a href="/" className="flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold" aria-current="page">
                      <FaHome className="mr-2" />
@@ -54,15 +54,17 @@ const Header = () => {
                      Contact
                   </a>
                </li>
+
                <button
                   onClick={() => {
                      const newTheme = theme === "light" ? "dark" : "light";
                      setTheme(newTheme);
                      localStorage.setItem("theme", newTheme);
                   }}
-                  className="bg-slate-200 text-black p-1 mr-2 rounded-full cursor-pointer"
+                  className="flex items-center bg-slate-200 text-black px-3 py-1 ml-2 rounded-full cursor-pointer"
                >
                   {theme === "light" ? <MdDarkMode className="text-[25px]" /> : <MdLightMode className="text-[25px]" />}
+                  <span className="text-sm dark:text-black pl-2 font-bold text-text">{theme === "light" ? "Dark" : "Light"}</span>
                </button>
             </ul>
          </div>
@@ -87,9 +89,9 @@ const Header = () => {
                      setTheme(newTheme);
                      localStorage.setItem("theme", newTheme);
                   }}
-                  className="bg-slate-200 text-black p-1 mr-2 rounded-full cursor-pointer"
+                  className="bg-slate-200 dark:text-white hover:scale-125  bg-transparent cursor-pointer"
                >
-                  {theme === "light" ? <MdDarkMode className="text-[25px]" /> : <MdLightMode className="text-[25px]" />}
+                  {theme === "light" ? <MdDarkMode className="text-[30px]" /> : <MdLightMode className="text-[30px]" />}
                </button>
             </div>
          </div>
