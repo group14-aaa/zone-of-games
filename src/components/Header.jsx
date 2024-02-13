@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 // Context
 import { ThemeContext } from "../context/ThemeContext";
@@ -16,6 +17,27 @@ const Header = () => {
    const { theme, setTheme } = useContext(ThemeContext);
    const [openMenu, setOpenMenu] = useState(false);
    const logoSrc = theme === "dark" ? whiteLogo : blackLogo;
+   const [activeIndex, setActiveIndex] = useState(0);
+   const location = useLocation();
+
+   useEffect(() => {
+      // Define a function to determine the active index based on the pathname
+      const getActiveIndex = () => {
+         switch (location.pathname) {
+            case "/":
+               return 0;
+            case "/about":
+               return 1;
+            case "/contact":
+               return 2;
+            default:
+               return 0;
+         }
+      };
+
+      // Set the active index based on the current location
+      setActiveIndex(getActiveIndex());
+   }, [location]); // Re-run the effect when the location changes
 
    return (
       <div className="flex items-center p-3 border-b-2 border-accent">
@@ -42,19 +64,23 @@ const Header = () => {
             </button>
             <ul className="space-y-2">
                <li>
-                  <a href="/" className="flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold" aria-current="page">
+                  <a
+                     href="/"
+                     className={`flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold ${activeIndex === 0 ? "bg-white text-white" : ""}`}
+                     aria-current="page"
+                  >
                      <FaHome className="mr-2" />
                      Home
                   </a>
                </li>
                <li>
-                  <a href="/about" className="flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold">
+                  <a href="/about" className={`flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold ${activeIndex === 1 ? "bg-accent" : ""}`}>
                      <FaInfoCircle className="mr-2" />
                      About
                   </a>
                </li>
                <li>
-                  <a href="/contact" className="flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold">
+                  <a href="/contact" className={`flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold ${activeIndex === 2 ? "bg-accent" : ""}`}>
                      <FaAddressBook className="mr-2" />
                      Contact
                   </a>
@@ -76,15 +102,25 @@ const Header = () => {
 
          <div className="hidden sm:mr-5 sm:block">
             <div className="flex space-x-4">
-               <a href="/" className="flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold" aria-current="page">
+               <a
+                  href="/"
+                  className={`flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold ${activeIndex === 0 ? "border-b-4 border-accent" : ""}`}
+                  aria-current="page"
+               >
                   <FaHome className="mr-2" />
                   Home
                </a>
-               <a href="/about" className="flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold">
+               <a
+                  href="/about"
+                  className={`flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold ${activeIndex === 1 ? "border-b-4 border-accent" : ""}`}
+               >
                   <FaInfoCircle className="mr-2" />
                   About
                </a>
-               <a href="/contact" className="flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold">
+               <a
+                  href="/contact"
+                  className={`flex items-center text-text hover:bg-accent hover:text-white rounded-md px-3 py-2 text-sm font-bold ${activeIndex === 2 ? "border-b-4 border-accent" : ""}`}
+               >
                   <FaAddressBook className="mr-2" />
                   Contact
                </a>
