@@ -19,7 +19,10 @@ const Header = () => {
 
    return (
       <div className="flex items-center p-3 border-b-2 border-accent">
-         <img src={logoSrc} width={100} height={50} alt="Logo image" />
+         <a href="/">
+            <img className="hover:scale-125 ml-1" src={logoSrc} width={100} height={50} alt="Logo image" />
+         </a>
+
          <div className="flex bg-slate-200 p-2 w-full mx-5 rounded-full items-center">
             <IoSearchSharp />
             <input type="text" placeholder="Search Games..." className="px-2 bg-transparent outline-none w-full" />
