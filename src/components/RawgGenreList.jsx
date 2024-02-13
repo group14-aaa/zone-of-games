@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import CollapsibleSection from './CollapsibleSection';
-
-// API
 import rawgApi from '../services/rawgApi'
 
 
 
 const RawgGenreList = ({ onGenreSelect }) => {
-
     // State for genre list from RAWG Api
     const [genreList, setGenreList] = useState([]);
     const [displayedGenres, setDisplayedGenres] = useState(5);
@@ -51,7 +48,7 @@ const RawgGenreList = ({ onGenreSelect }) => {
                             setActiveIndex(index);
                             onGenreSelect(item.id);
                         }}
-                        className={`flex gap-2 items-center mb-2 mt-3 px-2 py-2 cursor-pointer hover:bg-accent group rounded-lg ${activeIndex === index ? "bg-accent" : ""}`}
+                        className={`flex gap-2 items-center mb-2 mt-3 px-2 py-2 cursor-pointer hover:bg-accent hover:text-white group rounded-lg ${activeIndex === index ? "bg-accent" : ""}`}
                     >
                         {/* Genre image */}
                         <img
@@ -61,7 +58,7 @@ const RawgGenreList = ({ onGenreSelect }) => {
                         />
 
                         {/* Genre name */}
-                        <h3 className={`text-text text-[18px] group-hover:font-bold hover:text-white transition-all ease-out duration-300 ${activeIndex === index ? "font-bold text-white" : ""}`}>
+                        <h3 className={`text-[18px] group-hover:font-bold transition-all ease-out duration-300 ${activeIndex === index ? "font-bold text-white" : ""}`}>
                             {item.name}
                         </h3>
                     </div>
@@ -87,10 +84,5 @@ const RawgGenreList = ({ onGenreSelect }) => {
         </div>
     );
 };
-
-
-
-
-
 
 export default RawgGenreList;
