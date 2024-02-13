@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import anjalProfile from "../assets/images/anjal-profile-pic.jpg";
 import adamProfile from "../assets/images/adam-profile-pic.png";
@@ -31,6 +31,40 @@ function Contact() {
          gitHubLink: "https://github.com/Revan369",
       },
    ];
+
+   const initialState = {
+      email: "",
+      subject: "",
+      message: "",
+   };
+
+   const [formData, setFormData] = useState(initialState);
+
+   const [showThankYouModal, setShowThankYouModal] = useState(false);
+
+   const handleChange = (e) => {
+      const { id, value } = e.target;
+      setFormData((prevFormData) => ({
+         ...prevFormData,
+         [id]: value,
+      }));
+   };
+
+   const resetForm = () => {
+      setFormData(initialState);
+   };
+
+   const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log(formData);
+      setShowThankYouModal(true);
+   };
+
+   const handleCloseModal = () => {
+      setShowThankYouModal(false);
+      resetForm();
+   };
+
    return (
       <>
          <div className="mx-auto px-4 py-8 text-center">
@@ -65,7 +99,7 @@ function Contact() {
                <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">
                   Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.
                </p>
-               <form action="#" className="space-y-8">
+               <form onSubmit={handleSubmit} className="space-y-8">
                   <div>
                      <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                         Email
@@ -73,6 +107,9 @@ function Contact() {
                      <input
                         type="email"
                         id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
                         placeholder="Enter your Email address"
                         required
@@ -85,6 +122,9 @@ function Contact() {
                      <input
                         type="text"
                         id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
                         className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
                         placeholder="Let us know how we can help you"
                         required
@@ -96,9 +136,12 @@ function Contact() {
                      </label>
                      <textarea
                         id="message"
+                        value={formData.message}
+                        onChange={handleChange}
                         rows="6"
                         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         placeholder="Leave a comment..."
+                        required
                      ></textarea>
                   </div>
                   <button
@@ -109,6 +152,17 @@ function Contact() {
                   </button>
                </form>
             </div>
+            {showThankYouModal && (
+               <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-filter backdrop-blur-sm flex justify-center items-center">
+                  <div className="bg-white p-5 rounded-lg shadow-lg">
+                     <h3 className="text-lg font-bold">Thank you for contacting us!</h3>
+                     <p>We will get back to you shortly.</p>
+                     <button onClick={handleCloseModal} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300">
+                        Close
+                     </button>
+                  </div>
+               </div>
+            )}
          </section>
       </>
    );
