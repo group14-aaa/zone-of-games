@@ -4,22 +4,22 @@ import React, { useContext, useState } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
 // Images
-import logo from "./../assets/images/logo-no-background.png";
+import whiteLogo from "./../assets/images/zog-logo-white.png";
+import blackLogo from "./../assets/images/zog-logo-black.png";
 
 // Icons
 import { IoSearchSharp, IoCloseOutline } from "react-icons/io5";
 import { MdLightMode, MdDarkMode } from "react-icons/md";
 import { FaHome, FaInfoCircle, FaAddressBook } from "react-icons/fa";
 
-
-
 const Header = () => {
    const { theme, setTheme } = useContext(ThemeContext);
    const [openMenu, setOpenMenu] = useState(false);
+   const logoSrc = theme === "dark" ? whiteLogo : blackLogo;
 
    return (
       <div className="flex items-center p-3 border-b-2 border-accent">
-         <img src={logo} width={100} height={50} alt="Logo image" />
+         <img src={logoSrc} width={100} height={50} alt="Logo image" />
          <div className="flex bg-slate-200 p-2 w-full mx-5 rounded-full items-center">
             <IoSearchSharp />
             <input type="text" placeholder="Search Games..." className="px-2 bg-transparent outline-none w-full" />
