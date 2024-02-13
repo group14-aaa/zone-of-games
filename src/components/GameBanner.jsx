@@ -26,7 +26,6 @@ const GameBanner = ({ game }) => {
                             alt={game.name}
                         />
                     </Link>
-
                 </div>
             </div>
         </div>

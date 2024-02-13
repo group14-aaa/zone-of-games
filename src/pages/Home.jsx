@@ -12,19 +12,19 @@ const RawgPlatformList = lazy(() => import('../components/RawgPlatformList'));
 import rawgApi from "../services/rawgApi";
 
 const Home = () => {
-   // State for top games list from RAWG Api
    const [allGamesList, setAllGamesList] = useState([]);
-   // State for top games list from RAWG Api
    const [allGamesByGenreId, setAllGamesByGenreId] = useState([]);
-   //state for genres at side
-   const [showGenres, setShowGenres] = useState(false);
+   const [randomGame, setRandomGame] = useState({});
    const [error, setError] = useState(null);
 
-   //state for platform at side
-   const [showPlatforms, setShowPlatforms] = useState(false);
-   // State for games by platform
    const [platformList, setPlatformList] = useState([]);
 
+   useEffect(() => {
+      // Set a random game when allGamesList or allGamesByGenreId changes
+      if (allGamesList.length > 0 && allGamesByGenreId.length > 0) {
+         setRandomGame(allGamesByGenreId[Math.floor(Math.random() * allGamesList.length)]);
+      }
+   }, [allGamesList, allGamesByGenreId]);
 
    useEffect(() => {
       // Fetch games list when component mounts
@@ -37,7 +37,7 @@ const Home = () => {
       try {
          const response = await rawgApi.getGamesList;
 
-         setAllGamesList(response.data.results);
+         setAllGamesList(response?.data?.results || []);
       } catch (error) {
          setError("Error fetching top rated games");
          console.error("Error fetching top rated games:", error);
@@ -107,7 +107,7 @@ const Home = () => {
 
          {allGamesList?.length > 0 && allGamesByGenreId.length > 0 && (
             <div className="col-span-4 md:col-span-3 bg-primary text-text">
-               <GameBanner game={allGamesByGenreId[Math.floor(Math.random() * allGamesList.length)]} />
+               <GameBanner game={randomGame} />
                {/* <RawgTopRatedGames gamesList={allGamesList} /> */}
                <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} />
                {/* <AllGamesByPlatform /> */}

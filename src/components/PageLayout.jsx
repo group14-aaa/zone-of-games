@@ -1,6 +1,3 @@
-// Fonts
-import '@fontsource/montserrat';
-
 // Components
 import Header from "./Header";
 import Footer from "./Footer";
