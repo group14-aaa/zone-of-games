@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+
+// Icons
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+
+// Images
 import anjalProfile from "../assets/images/anjal-profile-pic.jpg";
 import adamProfile from "../assets/images/adam-profile-pic.png";
 import mihaiProfile from "../assets/images/mihai-profile-pic.png";
 import chrisProfile from "../assets/images/chris-profile-pic.png";
-function Contact() {
+
+
+
+const Contact = () => {
    const profileLinks = [
       {
          name: "Anjal Sali",

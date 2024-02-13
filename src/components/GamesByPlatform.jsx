@@ -9,6 +9,8 @@ import { FaGripfire } from "react-icons/fa6";
 import { FaStarHalfAlt } from "react-icons/fa";
 
 
+
+
 const AllGamesByPlatform = ({ gamesByPlatform, onPlatformSelect }) => {
     useEffect(() => {
         if (gamesByPlatform) {

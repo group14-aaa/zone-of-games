@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
+
+// Components
 import CollapsibleSection from './CollapsibleSection';
 
 // API
@@ -7,7 +9,6 @@ import rawgApi from '../services/rawgApi'
 
 
 const RawgGenreList = ({ onGenreSelect }) => {
-
     // State for genre list from RAWG Api
     const [genreList, setGenreList] = useState([]);
     const [displayedGenres, setDisplayedGenres] = useState(5);
@@ -29,15 +30,13 @@ const RawgGenreList = ({ onGenreSelect }) => {
         }
     }
 
-    const handleShowMore = () => {
-        // Increase the number of displayed genres
+    const handleShowMore = useCallback(() => {
         setDisplayedGenres(displayedGenres + 5);
-    };
+    }, [displayedGenres]);
 
-    const handleShowLess = () => {
-        // Decrease the number of displayed genres, but ensure it's at least 5
+    const handleShowLess = useCallback(() => {
         setDisplayedGenres(Math.max(displayedGenres - 5, 5));
-    };
+    }, [displayedGenres]);
 
     return (
         <div className="bg-secondary p-5 rounded-md shadow-md">
@@ -46,12 +45,12 @@ const RawgGenreList = ({ onGenreSelect }) => {
                 {genreList.slice(0, displayedGenres).map((item, index) => (
                     // Each genre item
                     <div
-                        key={index}
+                        key={item.id}
                         onClick={() => {
                             setActiveIndex(index);
                             onGenreSelect(item.id);
                         }}
-                        className={`flex gap-2 items-center mb-2 mt-3 px-2 py-2 cursor-pointer hover:bg-accent group rounded-lg ${activeIndex === index ? "bg-accent" : ""}`}
+                        className={`flex gap-2 items-center mb-2 mt-3 px-2 py-2 cursor-pointer hover:bg-accent hover:text-white group rounded-lg ${activeIndex === index ? "bg-accent" : ""}`}
                     >
                         {/* Genre image */}
                         <img
@@ -61,7 +60,7 @@ const RawgGenreList = ({ onGenreSelect }) => {
                         />
 
                         {/* Genre name */}
-                        <h3 className={`text-text text-[18px] group-hover:font-bold hover:text-white transition-all ease-out duration-300 ${activeIndex === index ? "font-bold text-white" : ""}`}>
+                        <h3 className={`text-[18px] group-hover:font-bold transition-all ease-out duration-300 ${activeIndex === index ? "font-bold text-white" : ""}`}>
                             {item.name}
                         </h3>
                     </div>
@@ -87,10 +86,5 @@ const RawgGenreList = ({ onGenreSelect }) => {
         </div>
     );
 };
-
-
-
-
-
 
 export default RawgGenreList;

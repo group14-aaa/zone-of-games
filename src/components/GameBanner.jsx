@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 
 
 
 const GameBanner = ({ game }) => {
-    useEffect(() => {
-        // display game data
-        // console.log(game);
-    })
     return (
         <div className="flex flex-wrap justify-center mt-6 mx-3" >
             <div className="w-[1000px] mb-4">
@@ -30,12 +26,10 @@ const GameBanner = ({ game }) => {
                             alt={game.name}
                         />
                     </Link>
-
                 </div>
             </div>
         </div>
     );
 }
-
 
 export default GameBanner;

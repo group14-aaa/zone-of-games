@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 
-// Components
+// Context
 import { ThemeContext } from "../context/ThemeContext";
 
 // Images
@@ -10,6 +10,8 @@ import logo from "./../assets/images/logo-no-background.png";
 import { IoSearchSharp, IoCloseOutline } from "react-icons/io5";
 import { MdLightMode, MdDarkMode } from "react-icons/md";
 import { FaHome, FaInfoCircle, FaAddressBook } from "react-icons/fa";
+
+
 
 const Header = () => {
    const { theme, setTheme } = useContext(ThemeContext);
