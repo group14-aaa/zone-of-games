@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import { EffectCoverflow, Pagination, Navigation, Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
 
 import "../assets/styles/swiperstyle.css";
@@ -23,8 +23,14 @@ const GameBanner = ({ gameList }) => {
             modifier: 1,
             slideShadows: true,
          }}
-         pagination={true}
-         modules={[EffectCoverflow, Pagination]}
+         autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+         }}
+         pagination={{
+            clickable: true,
+         }}
+         modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}
          className="mySwiper"
       >
          {gameList.slice(0, 10).map((game, index) => (
@@ -32,21 +38,11 @@ const GameBanner = ({ gameList }) => {
                <Link to={`/game/${game.id}`}>
                   <img src={game.background_image} className="w-100 h-50 object-cover" alt={`Game ${index + 1}`} />
                   <div className="game-info">
-                     <h4>{game.name}</h4>
-                     <span>{game.genres.map((genre) => genre.name).join(", ")}</span>
+                     <h4 className="text-center">{game.name}</h4>
                   </div>
                </Link>
             </SwiperSlide>
          ))}
-         <div className="slider-controler">
-            <div className="swiper-button-prev slider-arrow">
-               <ion-icon name="arrow-back-outline"></ion-icon>
-            </div>
-            <div className="swiper-button-next slider-arrow">
-               <ion-icon name="arrow-forward-outline"></ion-icon>
-            </div>
-            <div className="swiper-pagination"></div>
-         </div>
       </Swiper>
    );
 };
