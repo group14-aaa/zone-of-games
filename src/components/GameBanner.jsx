@@ -1,7 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/effect-coverflow";
 import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -15,11 +14,12 @@ const GameBanner = ({ randomGames }) => {
       <Swiper
          effect={"cube"}
          grabCursor={true}
+         loop={true}
          cubeEffect={{
             shadow: true,
             slideShadows: true,
             shadowOffset: 25,
-            shadowScale: 0.94,
+            shadowScale: 0.75,
          }}
          autoplay={{
             delay: 3000,
