@@ -79,14 +79,10 @@ const Home = () => {
       );
    }
 
-   const handlePlatformSelect = async (platformId) => {
+   const handlePlatformSelect = (platformId) => {
       setSelectedPlatformId(platformId);
-      try {
-         const response = await rawgApi.getGamesByPlatform(platformId);
-         setAllGamesByGenreId(response?.data?.results || []);
-      } catch (error) {
-         handleApiError(error, "Error fetching games by platform");
-      }
+      // You can implement fetching games by platform here if needed.  // pass this id so this is passed to games by genre,
+      console.log("Platform ID selected:", platformId);
    };
 
    return (
