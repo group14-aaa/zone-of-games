@@ -1,24 +1,24 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
-// Context
-import { ThemeContext } from "../context/ThemeContext";
-
-// Images
-import whiteLogo from "./../assets/images/zog-logo-white.png";
-import blackLogo from "./../assets/images/zog-logo-black.png";
-
-// Icons
 import { IoSearchSharp, IoCloseOutline } from "react-icons/io5";
 import { MdLightMode, MdDarkMode } from "react-icons/md";
 import { FaHome, FaInfoCircle, FaAddressBook } from "react-icons/fa";
+import { ThemeContext } from "../context/ThemeContext";
+import whiteLogo from "./../assets/images/zog-logo-white.png";
+import blackLogo from "./../assets/images/zog-logo-black.png";
+// API
+import rawgApi from "../services/rawgApi";
 
 const Header = () => {
+   const [gameList, setGameList] = useState([]);
    const { theme, setTheme } = useContext(ThemeContext);
    const [openMenu, setOpenMenu] = useState(false);
    const logoSrc = theme === "dark" ? whiteLogo : blackLogo;
    const [activeIndex, setActiveIndex] = useState(0);
    const location = useLocation();
+   const [searchQuery, setSearchQuery] = useState("");
+   const [filteredGames, setFilteredGames] = useState([]);
+   const [showSuggestions, setShowSuggestions] = useState(false); // State to control visibility of suggestions
 
    useEffect(() => {
       // Define a function to determine the active index based on the pathname
@@ -34,10 +34,38 @@ const Header = () => {
                return 0;
          }
       };
-
       // Set the active index based on the current location
       setActiveIndex(getActiveIndex());
    }, [location]); // Re-run the effect when the location changes
+
+   useEffect(() => {
+      const fetchGameList = async () => {
+         try {
+            const response = await rawgApi.getGamesList; // Adjust this according to your API service
+            setGameList(response?.data?.results || []);
+         } catch (error) {
+            console.error("Error fetching game list:", error);
+         }
+      };
+
+      fetchGameList();
+   }, []);
+
+   useEffect(() => {
+      // Filter games based on search query
+      const filtered = gameList.filter((game) => game.name.toLowerCase().includes(searchQuery.toLowerCase()));
+      setFilteredGames(filtered);
+      setShowSuggestions(searchQuery !== "" && filtered.length > 0); // Show suggestions only if there are filtered games and search query is not empty
+   }, [searchQuery, gameList]);
+
+   const handleSearchChange = (event) => {
+      setSearchQuery(event.target.value);
+   };
+
+   const handleSuggestionClick = (gameName) => {
+      setSearchQuery(gameName); // Set search query to the clicked game name
+      setShowSuggestions(false); // Hide suggestions
+   };
 
    return (
       <div className="flex items-center p-3 border-b-2 border-accent">
@@ -45,9 +73,24 @@ const Header = () => {
             <img className="hover:scale-125 transition duration-200 ease-in-out ml-1" src={logoSrc} width={100} height={50} alt="Logo image" />
          </a>
 
-         <div className="flex bg-slate-200 p-2 w-screen mx-5 rounded-full items-center">
+         <div className="flex bg-slate-200 p-2 w-screen mx-5 rounded-full items-center relative">
+            {" "}
+            {/* Add relative positioning */}
             <IoSearchSharp />
-            <input type="text" placeholder="Search Games..." className="px-2 bg-transparent outline-none w-full" />
+            <input type="text" placeholder="Search Games..." className="px-2 bg-transparent outline-none w-full" value={searchQuery} onChange={handleSearchChange} />
+            {showSuggestions && (
+               <div className="absolute top-full left-0 w-full bg-white shadow-lg z-10">
+                  {" "}
+                  {/* Position suggestions below the input */}
+                  {filteredGames.map((game) => (
+                     <div key={game.id} className="p-2 border-b border-gray-200 cursor-pointer" onClick={() => handleSuggestionClick(game.name)}>
+                        {" "}
+                        {/* Make suggestions clickable */}
+                        {game.name}
+                     </div>
+                  ))}
+               </div>
+            )}
          </div>
          <button
             onClick={() => setOpenMenu(!openMenu)}
