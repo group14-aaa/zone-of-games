@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { IoSearchSharp, IoCloseOutline } from "react-icons/io5";
 import { MdLightMode, MdDarkMode } from "react-icons/md";
 import { FaHome, FaInfoCircle, FaAddressBook } from "react-icons/fa";
@@ -67,6 +67,13 @@ const Header = () => {
       setShowSuggestions(false); // Hide suggestions
    };
 
+   const handleEnterPress = (event, gameId) => {
+      if (event.key === "Enter") {
+         // Navigate to the selected game page
+         window.location.href = `/games/${gameId}`;
+      }
+   };
+
    return (
       <div className="flex items-center p-3 border-b-2 border-accent">
          <a href="/">
@@ -77,7 +84,14 @@ const Header = () => {
             {" "}
             {/* Add relative positioning */}
             <IoSearchSharp />
-            <input type="text" placeholder="Search Games..." className="px-2 bg-transparent outline-none w-full" value={searchQuery} onChange={handleSearchChange} />
+            <input
+               type="text"
+               placeholder="Search Games..."
+               className="px-2 bg-transparent outline-none w-full"
+               value={searchQuery}
+               onChange={handleSearchChange}
+               onKeyDown={(event) => handleEnterPress(event, filteredGames.length > 0 ? filteredGames[0].id : "")}
+            />
             {showSuggestions && (
                <div className="absolute top-full left-0 w-full bg-white shadow-lg z-10">
                   {" "}
