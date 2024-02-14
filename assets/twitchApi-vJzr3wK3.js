@@ -1,0 +1,1 @@
+import{d as i}from"./index-4v41wHwD.js";const s="https://api.twitch.tv/helix",t=i.create({baseURL:s,headers:{"Client-ID":"zwureqxluex12z785rogl00vj1q4mg",Authorization:"Bearer pimfzer21tzenaf5ld033yxiv1rkkp"}}),a=t.get("/games/top"),o=e=>t.get("/streams",e),c={getTwitchTopGames:a,getTwitchStreams:o};export{c as t};
