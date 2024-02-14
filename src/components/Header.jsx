@@ -58,13 +58,14 @@ const Header = () => {
       setShowSuggestions(searchQuery !== "" && filtered.length > 0); // Show suggestions only if there are filtered games and search query is not empty
    }, [searchQuery, gameList]);
 
-   const handleSearchChange = (event) => {
-      setSearchQuery(event.target.value);
-   };
-
    const handleSuggestionClick = (gameName) => {
+      //setShowSuggestions(!showSuggestions);
       setShowSuggestions(false);
       setSearchQuery(gameName); // Set search query to the clicked game name
+   };
+
+   const handleSearchChange = (event) => {
+      setSearchQuery(event.target.value);
    };
 
    const handleEnterPress = (event, gameId) => {
@@ -93,7 +94,7 @@ const Header = () => {
                onKeyDown={(event) => handleEnterPress(event, filteredGames.length > 0 ? filteredGames[0].id : "")}
             />
             {showSuggestions && (
-               <div className="absolute top-full left-0 w-2/3 bg-white rounded-xl z-10">
+               <div className="absolute top-full left-0 w-2/3 bg-white rounded-xl z-10 ">
                   {" "}
                   {/* Position suggestions below the input */}
                   {filteredGames.map((game) => (
