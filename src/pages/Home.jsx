@@ -12,10 +12,15 @@ const RawgPlatformList = lazy(() => import("../components/RawgPlatformList"));
 // API
 import rawgApi from "../services/rawgApi";
 
+const selectRandomGames = (games, count) => {
+   const shuffled = games.sort(() => 0.5 - Math.random());
+   return shuffled.slice(0, count);
+};
+
 const Home = () => {
    const [allGamesList, setAllGamesList] = useState([]);
    const [allGamesByGenreId, setAllGamesByGenreId] = useState([]);
-   const [randomGame, setRandomGame] = useState({});
+   const [randomGames, setRandomGames] = useState({});
    const [error, setError] = useState(null);
    const [selectedPlatformId, setSelectedPlatformId] = useState(null);
    const [platformList, setPlatformList] = useState([]);
@@ -23,7 +28,7 @@ const Home = () => {
    useEffect(() => {
       // Set a random game when allGamesList or allGamesByGenreId changes
       if (allGamesList.length > 0 && allGamesByGenreId.length > 0) {
-         setRandomGame(allGamesByGenreId[Math.floor(Math.random() * allGamesList.length)]);
+         setRandomGames(selectRandomGames(allGamesList, 10));
       }
    }, [allGamesList, allGamesByGenreId]);
 
@@ -107,7 +112,7 @@ const Home = () => {
 
          {allGamesList?.length > 0 && allGamesByGenreId.length > 0 && (
             <div className="col-span-4 md:col-span-3 bg-primary text-text">
-               {randomGame ? <GameBanner gameList={allGamesList} /> : <Loading />}
+               {randomGames.length > 0 ? <GameBanner randomGames={randomGames} /> : <Loading />}
 
                <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} platformId={selectedPlatformId} />
 

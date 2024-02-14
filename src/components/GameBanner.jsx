@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 import "../assets/styles/swiperstyle.css";
 
-const GameBanner = ({ gameList }) => {
+const GameBanner = ({ randomGames }) => {
    return (
       <Swiper
          effect={"coverflow"}
@@ -33,10 +33,10 @@ const GameBanner = ({ gameList }) => {
          modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}
          className="mySwiper"
       >
-         {gameList.slice(0, 10).map((game, index) => (
+         {randomGames.map((game, index) => (
             <SwiperSlide key={game.id}>
                <Link to={`/game/${game.id}`}>
-                  <img src={game.background_image} className="w-100 h-50 object-cover" alt={`Game ${index + 1}`} />
+                  <img src={game.background_image} alt={`Game ${index + 1}`} />
                   <div className="game-info">
                      <h4 className="text-center">{game.name}</h4>
                   </div>
