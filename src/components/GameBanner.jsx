@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { EffectCube, Pagination, Navigation, Autoplay } from "swiper/modules";
+import { EffectCube, Pagination, Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
 
 const GameBanner = ({ randomGames }) => {
@@ -12,11 +12,12 @@ const GameBanner = ({ randomGames }) => {
       <Swiper
          effect={"cube"}
          grabCursor={true}
+         loop={true}
          cubeEffect={{
             shadow: true,
             slideShadows: true,
-            shadowOffset: 25,
-            shadowScale: 0.75,
+            shadowOffset: 50,
+            shadowScale: 0.9,
          }}
          autoplay={{
             delay: 3000,
@@ -24,17 +25,18 @@ const GameBanner = ({ randomGames }) => {
          }}
          pagination={{
             clickable: true,
+            dynamicBullets: true,
          }}
-         modules={[EffectCube, Pagination, Autoplay, Navigation]}
-         className="w-3/4 mt-4"
+         modules={[EffectCube, Pagination, Autoplay]}
+         className="w-5/6"
       >
          {randomGames.map((game, index) => (
-            <SwiperSlide key={game.id}>
+            <SwiperSlide key={game.id} className="flex items-center justify-center my-[40px]">
                <div className="absolute bottom-0 p-5 bg-gradient-to-t from-slate-900 to-transparent w-full">
-                  <h2 className="text-[32px] text-white text-bold">{game.name}</h2>
+                  <h2 className="text-white text-pretty text-5xl font-black text-center">{game.name}</h2>
                </div>
                <Link to={`/games/${game.id}`}>
-                  <img className="w-full h-[400px] object-cover rounded-xl" src={game.background_image} alt={`Game ${index + 1}`} />
+                  <img className="w-full h-[400px] object-cover" src={game.background_image} alt={`Game ${index + 1}`} />
                </Link>
             </SwiperSlide>
          ))}
