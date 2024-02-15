@@ -1,7 +1,5 @@
 import React from "react";
 
-
-
 const About = () => {
    const techLinks = [
       { href: "https://html.com/", title: "HTML - The Standard Markup Language for Documents", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/8/82/Devicon-html5-plain.svg" },
@@ -13,8 +11,7 @@ const About = () => {
       {
          href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
          title: "JavaScript - MDN Web Docs",
-         imgSrc:
-            "https://png2.cleanpng.com/sh/46b3a444d0026659760dd8f3cfbbb20a/L0KzQYm3VsA2N5l9hJH0aYP2gLBuTfpifpJ4eARycISwgMP2hCJidZ5qip93b3ToPbv6Tgdmal5miOJ1aXPkhLr2jr13bZR5hAQ2bXH1e8b3Tfxidph6edluLUXlQYi6hvMzOGJqSaY8Lke4RIS6VcY0OWY3UKQAMEOzRoG3V8cveJ9s/kisspng-javascript-programmer-node-js-web-application-vector-markup-language-5b173fc201e143.7543356315282503060077.png",
+         imgSrc: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
       },
       { href: "https://nodejs.org/", title: "Node.js - JavaScript runtime", imgSrc: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Node.js_logo_2015.svg" },
 
@@ -27,12 +24,22 @@ const About = () => {
          title: "Tailwind CSS - A utility-first CSS framework for rapidly building custom designs",
          imgSrc: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg",
       },
+      {
+         href: "https://swiperjs.com",
+         title: "Swiper.js - Modern Mobile Touch Slider",
+         imgSrc: "https://swiperjs.com/images/swiper-logo.svg",
+      },
 
       { href: "https://git-scm.com/", title: "Git - Distributed Version Control System", imgSrc: "https://git-scm.com/images/logos/downloads/Git-Logo-1788C.svg" },
       {
          href: "https://github.com/",
          title: "GitHub - Development Platform",
          imgSrc: "https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.png",
+      },
+      {
+         href: "https://www.hostinger.com/",
+         title: "Hostinger - Web Hosting Services",
+         imgSrc: "https://upload.wikimedia.org/wikipedia/commons/8/82/Hostinger_logo.png",
       },
       {
          href: "https://www.adobe.com/products/photoshop.html",
@@ -77,7 +84,7 @@ const About = () => {
             </div>
             <div className="flex justify-center flex-wrap mt-8 ">
                {techLinks.map((tech, index) => (
-                  <div key={index} className="p-2 sm:w-1/5 mb-10 hover:scale-125 transition duration-200 ease-in-out">
+                  <div key={index} className="p-2 sm:w-1/4 mb-10 hover:scale-125 transition ease-in-out">
                      <a href={tech.href} target="_blank" rel="noopener noreferrer" title={tech.title}>
                         <img width={80} src={tech.imgSrc} alt={tech.title} className="h-20 mx-auto rounded-xl" />
                      </a>

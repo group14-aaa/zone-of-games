@@ -24,6 +24,7 @@ const Home = () => {
    const [error, setError] = useState(null);
    const [selectedPlatformId, setSelectedPlatformId] = useState(null);
    const [platformList, setPlatformList] = useState([]);
+   const [selectedGenreName, setSelectedGenreName] = useState("Action");
 
    useEffect(() => {
       // Set a random game when allGamesList or allGamesByGenreId changes
@@ -38,6 +39,11 @@ const Home = () => {
       fetchRawgGamesByGenreId(4);
       fetchRawgGamesByPlatform();
    }, []);
+
+   const handleGenreSelect = (name) => {
+      // You might want to do something with the genre ID as well
+      setSelectedGenreName(name);
+   };
 
    const handleApiError = (error, errorMessage) => {
       setError(errorMessage);
@@ -100,9 +106,9 @@ const Home = () => {
                </div>
             </Link>
 
-            <RawgGenreList onGenreSelect={(onGenreSelect) => fetchRawgGamesByGenreId(onGenreSelect)} />
+            <RawgGenreList onGenreSelect={(onGenreSelect) => fetchRawgGamesByGenreId(onGenreSelect)} onGenreName={handleGenreSelect} />
 
-            <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} />
+            <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} onGenreName={handleGenreSelect} />
             {/* <AllGamesByPlatform onPlatformSelect={(allGamesByPlatform) => fetchRawgGamesByPlatform(onPlatformSelect)} /> */}
          </div>
 
@@ -110,7 +116,7 @@ const Home = () => {
             <div className="col-span-4 md:col-span-3 bg-primary text-text">
                {randomGames.length > 0 ? <GameBanner randomGames={randomGames} /> : <Loading />}
 
-               <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} platformId={selectedPlatformId} />
+               <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} genereName={selectedGenreName} platformId={selectedPlatformId} />
 
                {/* <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} /> */}
                {/* Other components */}
