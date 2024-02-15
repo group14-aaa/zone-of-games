@@ -1,0 +1,1 @@
+import{j as e}from"./index-xcHvdLHv.js";const s=()=>e.jsxs("div",{className:"flex flex-col items-center justify-center h-screen",children:[e.jsx("h1",{className:"text-4xl font-bold text-red-500 mb-4",children:"404 Error"}),e.jsx("p",{className:"text-lg text-text mb-8",children:"This page doesn't exist!"})]});export{s as default};
