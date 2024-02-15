@@ -8,7 +8,7 @@ import rawgApi from "../services/rawgApi";
 
 const RawgPlatformList = ({ onPlatformSelect, onGenreName }) => {
    const [platformList, setPlatformList] = useState([]);
-   const [displayedPlatforms, setDisplayedPlatforms] = useState(5);
+   const [displayedPlatforms, setDisplayedPlatforms] = useState(10);
    const [activeIndex, setActiveIndex] = useState(0);
 
    useEffect(() => {
@@ -49,7 +49,7 @@ const RawgPlatformList = ({ onPlatformSelect, onGenreName }) => {
                   <img
                      src={item.image_background}
                      alt={`Platform ${item.name} background`}
-                     className={`w-[40px] h-[40px] object-cover rounded-lg group-hover:scale-105 transition-all ease-out duration-300 ${activeIndex === index ? "scale-105" : ""}`}
+                     className={`w-[40px] h-[40px] object-cover rounded-lg group-hover:scale-110 transition-all ease-out duration-300 ${activeIndex === index ? "scale-110" : ""}`}
                   />
                   <h3 className={`text-[18px] group-hover:font-bold transition-all ease-out duration-300 ${activeIndex === index ? "font-bold text-white" : ""}`}>{item.name}</h3>
                </div>

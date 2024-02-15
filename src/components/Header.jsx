@@ -93,11 +93,11 @@ const Header = () => {
                onKeyDown={(event) => handleEnterPress(event, filteredGames.length > 0 ? filteredGames[0].id : "")}
             />
             {showSuggestions && (
-               <div className="absolute top-full left-0 w-full bg-white shadow-lg z-10">
+               <div className="absolute top-full left-0 w-3/4 bg-white rounded-xl z-10">
                   {" "}
                   {/* Position suggestions below the input */}
                   {filteredGames.map((game) => (
-                     <div key={game.id} className="p-2 border-b border-gray-200 cursor-pointer" onClick={() => handleSuggestionClick(game.name)}>
+                     <div key={game.id} className="p-2 border-b border-gray-200 rounded-xl hover:bg-accent cursor-pointer" onClick={() => handleSuggestionClick(game.name)}>
                         {" "}
                         {/* Make suggestions clickable */}
                         {game.name}

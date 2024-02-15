@@ -9,7 +9,7 @@ import rawgApi from "../services/rawgApi";
 const RawgGenreList = ({ onGenreSelect, onGenreName }) => {
    // State for genre list from RAWG Api
    const [genreList, setGenreList] = useState([]);
-   const [displayedGenres, setDisplayedGenres] = useState(5);
+   const [displayedGenres, setDisplayedGenres] = useState(10);
    const [activeIndex, setActiveIndex] = useState(0);
 
    useEffect(() => {
