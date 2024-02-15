@@ -13,7 +13,7 @@ const Footer = () => {
             <hr className=" border-gray-900 sm:mx-auto dark:border-gray-100 mb-6" />
             <div className="md:flex md:justify-around">
                <div className="mb-6 md:mb-0 flex items-center">
-                  <a href="https://zoneOfGames.com/">
+                  <a href="https://zoneofgames.co.uk/">
                      <img src={logoSrc} className="max-h-32" alt="Zone Of Games Logo" />
                   </a>
                </div>
@@ -68,8 +68,8 @@ const Footer = () => {
             <hr className="my-6 border-gray-900 sm:mx-auto dark:border-gray-100 lg:my-8" />
             <div className="sm:flex sm:items-center sm:justify-between">
                <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                  © 2023{" "}
-                  <a href="https://zoneOfGames.com/" className="hover:underline">
+                  © 2024{" "}
+                  <a href="https://zoneofgames.co.uk/" className="hover:underline">
                      Zone Of Games™
                   </a>
                   . All Rights Reserved.
