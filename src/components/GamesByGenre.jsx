@@ -30,8 +30,9 @@ const GamesByGenre = ({ gamesByGenreList, genereName, platformId }) => {
 
    return (
       <div className="p-5">
-         <h2 className="text-3xl font-bold text-gray-400 mb-4 mt-6 text-center">{platformId ? "Games by Platform" : "Games by Genre"}</h2>
-         <h2 className="text-3xl font-bold text-gray-400 mb-4 mt-6">{genereName}</h2>
+         <h2 className="text-3xl font-bold text-gray-400 my-6 cursor-pointer text-center">
+            {platformId ? "Platform - " : "Genre - "} {genereName} Games
+         </h2>
          <div className="flex flex-wrap justify-center">
             <div className="flex flex-wrap w-full justify-center">
                {gamesList &&
