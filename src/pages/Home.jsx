@@ -95,14 +95,14 @@ const Home = () => {
       <div className="grid grid-cols-4">
          <div className="bg-secondary text-text hidden md:block">
             <Link to="/streams/">
-               <div className="p-5 hover:bg-accent hover:text-white">
-                  <h2 className="text-3xl font-bold mr-2">Top Streaming</h2>
+               <div className="p-5 hover:bg-accent hover:text-white ">
+                  <h2 className="text-2xl font-bold">Top Streaming</h2>
                </div>
             </Link>
 
             <Link to="/games/top">
                <div className="p-5 hover:bg-accent hover:text-white">
-                  <h2 className="text-3xl font-bold mr-2">Top Rated</h2>
+                  <h2 className="text-2xl font-bold ">Top Rated</h2>
                </div>
             </Link>
 
