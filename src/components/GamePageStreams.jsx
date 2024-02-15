@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 
 // Style
@@ -11,52 +10,42 @@ import twitchApi from "../services/twitchApi";
 
 
 const ViewStreams = ({ gameName }) => {
-    const [twitchGameId, setTwitchGameId] = useState([]);
     const [streamsByGameId, setStreamsByGameId] = useState([]);
     const [selectedStream, setSelectedStream] = useState(null);
 
     useEffect(() => {
-        console.log(gameName);
         fetchTwitchGameId(gameName);
     }, [gameName]);
 
-    useEffect(() => {
-
-        if (twitchGameId) {
-            fetchTwitchStreamsByGameId(twitchGameId);
-        }
-    }, [twitchGameId]);
-
-    // Get top streams from Twitch Api
+    // Get the game ID from Twitch API by game name
     const fetchTwitchGameId = async (gameName) => {
         try {
             const response = await twitchApi.getTwitchGameId(gameName);
-            console.log(response.data.data[0].id);
-            // console.log(response.data.data);
-            setTwitchGameId(response.data.data[0].id);
+            const twitchGameId = response.data.data[0]?.id;
+            if (twitchGameId) {
+                fetchTwitchStreamsByGameId(twitchGameId);
+            }
         } catch (error) {
-            console.error('Error fetching twitch streams:', error);
+            console.error('Error fetching twitch game ID:', error);
         }
     };
 
-    // Get top streams from Twitch Api
+    // Get top streams from Twitch API using the game ID
     const fetchTwitchStreamsByGameId = async (twitchGameId) => {
         try {
             const response = await twitchApi.getTwitchStreamsByGameId(twitchGameId);
-            console.log(response.data.data);
             setStreamsByGameId(response.data.data);
         } catch (error) {
-            console.error('Error fetching twitch streams:', error);
+            console.error('Error fetching twitch streams by game ID:', error);
         }
     };
 
-    // Function to handle thumbnail click and start playing the stream
+    // Handle thumbnail click and start playing the stream
     const handleThumbnailClick = (stream) => {
         setSelectedStream(stream);
     };
 
     return (
-
         <div className="text-text">
             <h2 className="text-3xl font-bold text-gray-400 mb-4 mt-6 text-center">
                 Most viewed Live Streams on Twitch - {gameName}
