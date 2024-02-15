@@ -9,6 +9,9 @@ import { SiNintendoswitch, SiNintendo } from "react-icons/si";
 import { RiMacbookLine } from "react-icons/ri";
 import { FcRating } from "react-icons/fc";
 
+// Components
+import GamePageStreams from "../../components/GamePageStreams";
+
 // API
 import rawgApi from "../../services/rawgApi";
 import youtubeAPI from "../../services/youtubeAPI";
@@ -264,6 +267,7 @@ const GamePage = () => {
                   </div>
                </div>
             </div>
+            <GamePageStreams gameName={gameData.name} />
          </div>
       </div>
    );
