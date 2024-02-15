@@ -9,8 +9,8 @@ const Footer = () => {
 
    return (
       <footer className="bg-white dark:bg-secondary">
-         <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-            <hr className=" border-gray-900 sm:mx-auto dark:border-gray-100 mb-6" />
+         <div className="mx-auto w-full p-4 py-6 lg:py-8">
+            <hr className="border-gray-900 sm:mx-auto dark:border-gray-100 mb-6" />
             <div className="md:flex md:justify-around">
                <div className="mb-6 md:mb-0 flex items-center">
                   <a href="https://zoneofgames.co.uk/">
