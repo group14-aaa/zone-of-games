@@ -34,7 +34,9 @@ const TopRatedGames = () => {
                 Streams Sidebar
             </div> */}
             <div className="col-span-4 bg-primary text-text">
-                <RawgTopRatedGames gamesList={allGamesList} />
+                {allGamesList?.length > 0 && (
+                    <RawgTopRatedGames gamesList={allGamesList} />
+                )}
             </div>
         </div>
     )

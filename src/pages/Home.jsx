@@ -18,50 +18,32 @@ const selectRandomGames = (games, count) => {
 };
 
 const Home = () => {
-   const [allGamesList, setAllGamesList] = useState([]);
    const [allGamesByGenreId, setAllGamesByGenreId] = useState([]);
    const [randomGames, setRandomGames] = useState({});
    const [error, setError] = useState(null);
    const [selectedPlatformId, setSelectedPlatformId] = useState(null);
    const [platformList, setPlatformList] = useState([]);
    const [selectedGenreName, setSelectedGenreName] = useState("Action");
+   const [currentPage, setCurrentPage] = useState(1);
 
    useEffect(() => {
-      // Set a random game when allGamesList or allGamesByGenreId changes
-      if (allGamesList.length > 0 && allGamesByGenreId.length > 0) {
-         setRandomGames(selectRandomGames(allGamesList, 10));
+      // Set a random game when allGamesByGenreId changes
+      if (allGamesByGenreId.length > 0) {
+         setRandomGames(selectRandomGames(allGamesByGenreId, 10));
       }
-   }, [allGamesList, allGamesByGenreId]);
+   }, [allGamesByGenreId]);
 
    useEffect(() => {
-      // Fetch games list when component mounts
-      fetchRawgAllGamesList();
-      fetchRawgGamesByGenreId(4);
-      fetchRawgGamesByPlatform();
-   }, []);
-
-   const handleGenreSelect = (name) => {
-      // You might want to do something with the genre ID as well
-      setSelectedGenreName(name);
-   };
-
-   const handleApiError = (error, errorMessage) => {
-      setError(errorMessage);
-      console.error(`Error: ${errorMessage}`, error);
-   };
-
-   const fetchRawgAllGamesList = async () => {
-      try {
-         const response = await rawgApi.getGamesList;
-         setAllGamesList(response?.data?.results || []);
-      } catch (error) {
-         handleApiError(error, "Error fetching top-rated games");
+      if (selectedPlatformId) {
+         fetchRawgGamesByPlatform(selectedPlatformId, currentPage);
+      } else {
+         fetchRawgGamesByGenreId(4, currentPage);
       }
-   };
+   }, [selectedPlatformId, currentPage]);
 
-   const fetchRawgGamesByGenreId = async (id) => {
+   const fetchRawgGamesByGenreId = async (id, page) => {
       try {
-         const response = await rawgApi.getGamesByGenreId(id);
+         const response = await rawgApi.getGamesByGenreId(id, page);
          setAllGamesByGenreId(response?.data?.results || []);
       } catch (error) {
          handleApiError(error, "Error fetching games by genre");
@@ -77,19 +59,33 @@ const Home = () => {
       }
    };
 
-   if (error) {
-      return (
-         <div className="p-5 text-text">
-            <p className="text-xl">Error: {error}</p>
-         </div>
-      );
-   }
+   const handleGenreSelect = (name) => {
+      // You might want to do something with the genre ID as well
+      setSelectedGenreName(name);
+   };
+
+   const handleApiError = (error, errorMessage) => {
+      setError(errorMessage);
+      console.error(`Error: ${errorMessage}`, error);
+   };
 
    const handlePlatformSelect = (platformId) => {
       setSelectedPlatformId(platformId);
       // You can implement fetching games by platform here if needed.  // pass this id so this is passed to games by genre,
       console.log("Platform ID selected:", platformId);
    };
+
+   const handlePageChange = (newPage) => {
+      setCurrentPage(newPage);
+   };
+
+   if (error) {
+      return (
+         <div className="p-5 text-text">
+            <p className="text-xl text-error">Error: {error}</p>
+         </div>
+      );
+   }
 
    return (
       <div className="grid grid-cols-4">
@@ -106,19 +102,40 @@ const Home = () => {
                </div>
             </Link>
 
-            <RawgGenreList onGenreSelect={(onGenreSelect) => fetchRawgGamesByGenreId(onGenreSelect)} onGenreName={handleGenreSelect} />
+            {/** Render a list of game genres */}
+            <RawgGenreList onGenreSelect={(onGenreSelect) => fetchRawgGamesByGenreId(onGenreSelect, 1)} onGenreName={handleGenreSelect} />
 
+            {/** Render a list of game platforms */}
             <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} onGenreName={handleGenreSelect} />
-            {/* <AllGamesByPlatform onPlatformSelect={(allGamesByPlatform) => fetchRawgGamesByPlatform(onPlatformSelect)} /> */}
          </div>
 
-         {allGamesList?.length > 0 && allGamesByGenreId.length > 0 && (
+         {/** Game banner and a list of games by genre or platform */}
+         {allGamesByGenreId.length > 0 && (
             <div className="col-span-4 md:col-span-3 bg-primary text-text">
                {randomGames.length > 0 ? <GameBanner randomGames={randomGames} /> : <Loading />}
 
-               <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} genereName={selectedGenreName} platformId={selectedPlatformId} />
+               <RawgGamesByGenreId
+                  gamesByGenreList={allGamesByGenreId}
+                  genereName={selectedGenreName}
+                  platformId={selectedPlatformId}
+               />
 
-               {/* <RawgGamesByGenreId gamesByGenreList={allGamesByGenreId} /> */}
+               {/* Pagination Controls */}
+               <div className="text-text flex justify-center items-center gap-5 my-20">
+                  <button
+                     className="bg-secondary  hover:text-white hover:bg-accent px-4 py-2 rounded-lg mr-2"
+                     onClick={() => handlePageChange(currentPage - 1)}
+                     disabled={currentPage === 1}
+                  >
+                     Previous Page
+                  </button>
+                  <button
+                     className="bg-secondary hover:text-white hover:bg-accent px-4 py-2 rounded-lg"
+                     onClick={() => handlePageChange(currentPage + 1)}
+                  >
+                     Next Page
+                  </button>
+               </div>
                {/* Other components */}
             </div>
          )}
