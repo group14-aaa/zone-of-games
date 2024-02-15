@@ -1,67 +1,61 @@
-import React, { useState, useEffect, lazy } from "react";
-import { Link } from "react-router-dom";
-import Loading from "../components/Loading";
-
-// Components
-const GameBanner = lazy(() => import("../components/GameBanner"));
-const RawgGenreList = lazy(() => import("../components/RawgGenreList"));
-const RawgGamesByGenreId = lazy(() => import("../components/GamesByGenre"));
-const AllGamesByPlatform = lazy(() => import("../components/GamesByPlatform"));
-const RawgPlatformList = lazy(() => import("../components/RawgPlatformList"));
-
-// API
+import React, { useState, useEffect } from "react";
 import rawgApi from "../services/rawgApi";
 
-const selectRandomGames = (games, count) => {
-   const shuffled = games.sort(() => 0.5 - Math.random());
-   return shuffled.slice(0, count);
-};
+
+import NavigationSidebar from "../components/NavigationSidebar";
+import MainContent from "../components/MainContent";
 
 const Home = () => {
-   const [allGamesByGenreId, setAllGamesByGenreId] = useState([]);
+   const [allGamesByGenreIdAndPlatformId, setAllGamesByGenreIdAndPlatformId] = useState([]);
    const [randomGames, setRandomGames] = useState({});
    const [error, setError] = useState(null);
-   const [selectedPlatformId, setSelectedPlatformId] = useState(null);
-   const [platformList, setPlatformList] = useState([]);
-   const [selectedGenreName, setSelectedGenreName] = useState("Action");
+
+   const [selectedGenreId, setSelectedGenreId] = useState(4);
+   const [selectedPlatformId, setSelectedPlatformId] = useState(4);
    const [currentPage, setCurrentPage] = useState(1);
 
-   useEffect(() => {
-      // Set a random game when allGamesByGenreId changes
-      if (allGamesByGenreId.length > 0) {
-         setRandomGames(selectRandomGames(allGamesByGenreId, 10));
-      }
-   }, [allGamesByGenreId]);
+   const [genreList, setGenreList] = useState([]);
+   const [displayedGenres, setDisplayedGenres] = useState(10);
+   const [genreActiveIndex, setGenreActiveIndex] = useState(4);
+
+   const [platformList, setPlatformList] = useState([]);
+   const [displayedPlatforms, setDisplayedPlatforms] = useState(10);
+   const [platformActiveIndex, setPlatformActiveIndex] = useState(4);
+
+   const [selectedGenreName, setSelectedGenreName] = useState("");
+   const [selectedPlatformName, setSelectedPlatformName] = useState("");
 
    useEffect(() => {
-      if (selectedPlatformId) {
-         fetchRawgGamesByPlatform(selectedPlatformId, currentPage);
-      } else {
-         fetchRawgGamesByGenreId(4, currentPage);
+      if (allGamesByGenreIdAndPlatformId.length > 0) {
+         setRandomGames(selectRandomGames(allGamesByGenreIdAndPlatformId, 10));
       }
-   }, [selectedPlatformId, currentPage]);
+   }, [allGamesByGenreIdAndPlatformId]);
 
-   const fetchRawgGamesByGenreId = async (id, page) => {
+   useEffect(() => {
+      fetchGamesAndLists();
+   }, [selectedGenreId, selectedPlatformId, currentPage]);
+
+   const fetchGamesAndLists = async () => {
       try {
-         const response = await rawgApi.getGamesByGenreId(id, page);
-         setAllGamesByGenreId(response?.data?.results || []);
-      } catch (error) {
-         handleApiError(error, "Error fetching games by genre");
-      }
-   };
+         const [gamesResponse, genreListResponse, platformListResponse] = await Promise.all([
+            rawgApi.getGamesByGenreIdAndPlatformId(selectedGenreId, selectedPlatformId, currentPage),
+            rawgApi.getGenreList,
+            rawgApi.getPlatformList,
+         ]);
 
-   const fetchRawgGamesByPlatform = async () => {
-      try {
-         const response = await rawgApi.getPlatformList();
-         setPlatformList(response?.data?.results || []);
-      } catch (error) {
-         handleApiError(error, "Error fetching games by platform");
-      }
-   };
+         setAllGamesByGenreIdAndPlatformId(gamesResponse.data.results);
+         setGenreList(genreListResponse.data.results);
+         setPlatformList(platformListResponse.data.results);
 
-   const handleGenreSelect = (name) => {
-      // You might want to do something with the genre ID as well
-      setSelectedGenreName(name);
+         // Get selected genre and platform names
+         const selectedGenre = genreListResponse.data.results.find((genre) => genre.id === selectedGenreId);
+         const selectedPlatform = platformListResponse.data.results.find((platform) => platform.id === selectedPlatformId);
+
+         setSelectedGenreName(selectedGenre ? selectedGenre.name : "");
+         setSelectedPlatformName(selectedPlatform ? selectedPlatform.name : "");
+      } catch (error) {
+         handleApiError(error, "Error fetching data");
+      }
    };
 
    const handleApiError = (error, errorMessage) => {
@@ -69,10 +63,22 @@ const Home = () => {
       console.error(`Error: ${errorMessage}`, error);
    };
 
-   const handlePlatformSelect = (platformId) => {
-      setSelectedPlatformId(platformId);
-      // You can implement fetching games by platform here if needed.  // pass this id so this is passed to games by genre,
-      console.log("Platform ID selected:", platformId);
+   const selectRandomGames = (games, count) => {
+      const shuffled = games.sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, count);
+   };
+
+   const handleShowMore = (setDisplayed, currentCount) => {
+      setDisplayed(currentCount + 5);
+   };
+
+   const handleShowLess = (setDisplayed, currentCount) => {
+      setDisplayed(Math.max(currentCount - 5, 5));
+   };
+
+   const handleSelect = (setId, setIndex, id) => {
+      setId(id);
+      setIndex(id);
    };
 
    const handlePageChange = (newPage) => {
@@ -89,56 +95,32 @@ const Home = () => {
 
    return (
       <div className="grid grid-cols-4">
-         <div className="bg-secondary text-text hidden md:block">
-            <Link to="/streams/">
-               <div className="p-5 hover:bg-accent hover:text-white ">
-                  <h2 className="text-2xl font-bold">Top Streaming</h2>
-               </div>
-            </Link>
+         {/* Navigation Sidebar */}
+         <NavigationSidebar
+            genreList={genreList}
+            displayedGenres={displayedGenres}
+            genreActiveIndex={genreActiveIndex}
+            onShowMore={() => handleShowMore(setDisplayedGenres, displayedGenres)}
+            onShowLess={() => handleShowLess(setDisplayedGenres, displayedGenres)}
+            onGenreSelect={(genreId) => handleSelect(setSelectedGenreId, setGenreActiveIndex, genreId)}
+            platformList={platformList}
+            displayedPlatforms={displayedPlatforms}
+            platformActiveIndex={platformActiveIndex}
+            onShowMorePlatforms={() => handleShowMore(setDisplayedPlatforms, displayedPlatforms)}
+            onShowLessPlatforms={() => handleShowLess(setDisplayedPlatforms, displayedPlatforms)}
+            onPlatformSelect={(platformId) => handleSelect(setSelectedPlatformId, setPlatformActiveIndex, platformId)}
+         />
 
-            <Link to="/games/top">
-               <div className="p-5 hover:bg-accent hover:text-white">
-                  <h2 className="text-2xl font-bold ">Top Rated</h2>
-               </div>
-            </Link>
-
-            {/** Render a list of game genres */}
-            <RawgGenreList onGenreSelect={(onGenreSelect) => fetchRawgGamesByGenreId(onGenreSelect, 1)} onGenreName={handleGenreSelect} />
-
-            {/** Render a list of game platforms */}
-            <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} onGenreName={handleGenreSelect} />
-         </div>
-
-         {/** Game banner and a list of games by genre or platform */}
-         {allGamesByGenreId.length > 0 && (
-            <div className="col-span-4 md:col-span-3 bg-primary text-text">
-               {randomGames.length > 0 ? <GameBanner randomGames={randomGames} /> : <Loading />}
-
-               <RawgGamesByGenreId
-                  gamesByGenreList={allGamesByGenreId}
-                  genereName={selectedGenreName}
-                  platformId={selectedPlatformId}
-               />
-
-               {/* Pagination Controls */}
-               <div className="text-text flex justify-center items-center gap-5 my-20">
-                  <button
-                     className="bg-secondary  hover:text-white hover:bg-accent px-4 py-2 rounded-lg mr-2"
-                     onClick={() => handlePageChange(currentPage - 1)}
-                     disabled={currentPage === 1}
-                  >
-                     Previous Page
-                  </button>
-                  <button
-                     className="bg-secondary hover:text-white hover:bg-accent px-4 py-2 rounded-lg"
-                     onClick={() => handlePageChange(currentPage + 1)}
-                  >
-                     Next Page
-                  </button>
-               </div>
-               {/* Other components */}
-            </div>
-         )}
+         {/* Main Content */}
+         <MainContent
+            allGamesByGenreIdAndPlatformId={allGamesByGenreIdAndPlatformId}
+            randomGames={randomGames}
+            selectedGenreName={selectedGenreName}
+            selectedPlatformName={selectedPlatformName}
+            currentPage={currentPage}
+            onPrevPage={() => handlePageChange(currentPage - 1)}
+            onNextPage={() => handlePageChange(currentPage + 1)}
+         />
       </div>
    );
 };
