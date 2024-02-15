@@ -24,7 +24,7 @@ const Home = () => {
    const [error, setError] = useState(null);
    const [selectedPlatformId, setSelectedPlatformId] = useState(null);
    const [platformList, setPlatformList] = useState([]);
-   const [selectedGenreName, setSelectedGenreName] = useState("");
+   const [selectedGenreName, setSelectedGenreName] = useState("Action");
 
    useEffect(() => {
       // Set a random game when allGamesList or allGamesByGenreId changes
@@ -108,7 +108,7 @@ const Home = () => {
 
             <RawgGenreList onGenreSelect={(onGenreSelect) => fetchRawgGamesByGenreId(onGenreSelect)} onGenreName={handleGenreSelect} />
 
-            <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} />
+            <RawgPlatformList platformList={platformList} onPlatformSelect={handlePlatformSelect} onGenreName={handleGenreSelect} />
             {/* <AllGamesByPlatform onPlatformSelect={(allGamesByPlatform) => fetchRawgGamesByPlatform(onPlatformSelect)} /> */}
          </div>
 
