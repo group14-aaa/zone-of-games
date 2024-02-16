@@ -1,11 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { EffectCube, Pagination, Autoplay } from "swiper/modules";
-import { Link } from "react-router-dom";
 
 const GameBanner = ({ randomGames }) => {
    return (

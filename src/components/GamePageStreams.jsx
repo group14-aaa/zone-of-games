@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
-
-// Style
-import "../assets/styles/twitch.css";
-
-// Components
 import Loading from "../components/Loading";
-
-// Api
 import twitchApi from "../services/twitchApi";
+import "../assets/styles/twitch.css";
 
 const ViewStreams = ({ gameName }) => {
     const [streamsByGameId, setStreamsByGameId] = useState([]);

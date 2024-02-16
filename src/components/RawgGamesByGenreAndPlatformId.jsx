@@ -5,7 +5,11 @@ import { MdRateReview } from "react-icons/md";
 import { FaGripfire } from "react-icons/fa6";
 import { FaStarHalfAlt } from "react-icons/fa";
 
-const RawgGamesByGenreAndPlatformId = ({ gamesByGenreAndPlatformList, genreName, platformName }) => {
+const RawgGamesByGenreAndPlatformId = ({
+   gamesByGenreAndPlatformList,
+   genreName,
+   platformName }) => {
+
    const [gamesList, setGamesList] = useState([]);
 
    useEffect(() => {

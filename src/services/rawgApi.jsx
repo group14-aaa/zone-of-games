@@ -6,14 +6,29 @@ const axiosCreateRawgApi = axios.create({
    baseURL: RAWG_BASE_URL,
 });
 
-const getGenreList = axiosCreateRawgApi.get("/genres?key=" + import.meta.env.VITE_RAWG_API_KEY);
-const getPlatformList = axiosCreateRawgApi.get("/platforms?key=" + import.meta.env.VITE_RAWG_API_KEY);
-
-const getGamesList = axiosCreateRawgApi.get("/games?key=" + import.meta.env.VITE_RAWG_API_KEY);
-const getGameData = (gId) => axiosCreateRawgApi.get("/games/" + gId + "?key=" + import.meta.env.VITE_RAWG_API_KEY);
-
-const getGamesByGenreIdAndPlatformId = (genreId, platformId, pageNumber) => axiosCreateRawgApi.get("/games?key=" + import.meta.env.VITE_RAWG_API_KEY + "&genres=" + genreId + "&platforms=" + platformId + "&page=" + pageNumber);
-const getGamesByPlatform = (platformId) => axiosCreateRawgApi.get("/games?key=" + import.meta.env.VITE_RAWG_API_KEY + "&platforms=" + platformId);
+const getGenreList = axiosCreateRawgApi.get(
+   "/genres?key=" + import.meta.env.VITE_RAWG_API_KEY
+);
+const getPlatformList = axiosCreateRawgApi.get(
+   "/platforms?key=" + import.meta.env.VITE_RAWG_API_KEY
+);
+const getGamesList = axiosCreateRawgApi.get(
+   "/games?key=" + import.meta.env.VITE_RAWG_API_KEY
+);
+const getGameData = (gId) => axiosCreateRawgApi.get(
+   "/games/" + gId +
+   "?key=" + import.meta.env.VITE_RAWG_API_KEY
+);
+const getGamesByGenreIdAndPlatformId = (genreId, platformId, pageNumber) => axiosCreateRawgApi.get(
+   "/games?key=" + import.meta.env.VITE_RAWG_API_KEY +
+   "&genres=" + genreId +
+   "&platforms=" + platformId +
+   "&page=" + pageNumber
+);
+const getGamesByPlatform = (platformId) => axiosCreateRawgApi.get(
+   "/games?key=" + import.meta.env.VITE_RAWG_API_KEY +
+   "&platforms=" + platformId
+);
 
 export default {
    getGenreList,

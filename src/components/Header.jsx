@@ -1,27 +1,26 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
-import { IoSearchSharp, IoCloseOutline } from "react-icons/io5";
-import { MdLightMode, MdDarkMode } from "react-icons/md";
-import { FaHome, FaInfoCircle, FaAddressBook } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext";
 import whiteLogo from "./../assets/images/zog-logo-white.png";
 import blackLogo from "./../assets/images/zog-logo-black.png";
-// API
+import { IoSearchSharp, IoCloseOutline } from "react-icons/io5";
+import { MdLightMode, MdDarkMode } from "react-icons/md";
+import { FaHome, FaInfoCircle, FaAddressBook } from "react-icons/fa";
 import rawgApi from "../services/rawgApi";
 
 const Header = () => {
-   const [gameList, setGameList] = useState([]);
    const { theme, setTheme } = useContext(ThemeContext);
-   const [openMenu, setOpenMenu] = useState(false);
    const logoSrc = theme === "dark" ? whiteLogo : blackLogo;
-   const [activeIndex, setActiveIndex] = useState(0);
+   const [gameList, setGameList] = useState([]);
+   const [openMenu, setOpenMenu] = useState(false);
    const location = useLocation();
+   const [activeIndex, setActiveIndex] = useState(0);
    const [searchQuery, setSearchQuery] = useState("");
    const [filteredGames, setFilteredGames] = useState([]);
-   const [showSuggestions, setShowSuggestions] = useState(false); // State to control visibility of suggestions
+   const [showSuggestions, setShowSuggestions] = useState(false);
 
    useEffect(() => {
-      // Define a function to determine the active index based on the pathname
+      // Determine the active index based on the pathname
       const getActiveIndex = () => {
          switch (location.pathname) {
             case "/":
@@ -41,7 +40,7 @@ const Header = () => {
    useEffect(() => {
       const fetchGameList = async () => {
          try {
-            const response = await rawgApi.getGamesList; // Adjust this according to your API service
+            const response = await rawgApi.getGamesList;
             setGameList(response?.data?.results || []);
          } catch (error) {
             console.error("Error fetching game list:", error);
@@ -55,7 +54,9 @@ const Header = () => {
       // Filter games based on search query
       const filtered = gameList.filter((game) => game.name.toLowerCase().includes(searchQuery.toLowerCase()));
       setFilteredGames(filtered);
-      setShowSuggestions(searchQuery !== "" && filtered.length > 0); // Show suggestions only if there are filtered games and search query is not empty
+      // Show suggestions only if there are filtered games
+      // and search query is not empty
+      setShowSuggestions(searchQuery !== "" && filtered.length > 0);
    }, [searchQuery, gameList]);
 
    const handleSearchChange = (event) => {
@@ -63,8 +64,10 @@ const Header = () => {
    };
 
    const handleSuggestionClick = (gameName) => {
-      setSearchQuery(gameName); // Set search query to the clicked game name
-      setShowSuggestions(false); // Hide suggestions
+      // Set search query to the clicked game name
+      setSearchQuery(gameName);
+      // Hide suggestions
+      setShowSuggestions(false);
    };
 
    const handleEnterPress = (event, gameId) => {

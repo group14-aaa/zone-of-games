@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
-
-// Style
+import twitchApi from '../services/twitchApi';
 import '../assets/styles/twitch.css';
 
-// API
-import twitchApi from '../services/twitchApi';
-
-
-function TwitchTopStreams({ gameId, limit }) {
+const TwitchTopStreams = ({ gameId, limit }) => {
     // State for top streams from Twitch Api
     const [twitchTopStreams, setTwitchTopStreams] = useState([]);
     // State to track the currently selected stream
@@ -16,11 +11,11 @@ function TwitchTopStreams({ gameId, limit }) {
 
     useEffect(() => {
         // Fetch top streams when the component mounts
-        fetchTwitchTopStreams(gameId, limit); // Replace '21779' with the actual game ID
+        fetchTwitchTopStreams(gameId, limit);
     }, []);
 
     // Get top streams from Twitch Api
-    const fetchTwitchTopStreams = async (gameId, limit = 3) => {
+    const fetchTwitchTopStreams = async (gameId, limit = 100) => {
         try {
             const response = await twitchApi.getTwitchStreams({
                 params: {
@@ -43,7 +38,7 @@ function TwitchTopStreams({ gameId, limit }) {
     return (
         <div className="p-5">
             <h2 className="text-3xl font-bold text-gray-400 mb-4 mt-6 text-center">
-                Live Streams
+                Top 100 Most viewed Live Streams on Twitch
             </h2>
             <div className="flex flex-wrap justify-center">
                 {twitchTopStreams.map((stream) => (

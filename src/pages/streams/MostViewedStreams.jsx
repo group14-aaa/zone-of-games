@@ -1,7 +1,7 @@
 import React, { lazy } from 'react';
+import TwitchTopStreams from '../../components/TwitchTopStreams';
 
 // Components
-const TwitchTopGames = lazy(() => import('../../components/TwitchTopGames'));
 
 const Streams = () => {
     return (
@@ -10,7 +10,7 @@ const Streams = () => {
                 Streams Sidebar
             </div> */}
             <div className="col-span-4 bg-primary text-text">
-                <TwitchTopGames />
+                <TwitchTopStreams />
             </div>
         </div>
     )

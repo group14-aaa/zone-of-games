@@ -1,11 +1,7 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-// Fonts
-import '@fontsource/montserrat';
-
-// Context
 import { ThemeContext } from "./context/ThemeContext";
+import '@fontsource/montserrat';
 
 // Components
 import PageLayout from "./components/PageLayout";
@@ -19,6 +15,7 @@ const GamePage = lazy(() => import('./pages/games/GamePage'));
 const TopRatedGames = lazy(() => import('./pages/games/top'));
 const Streams = lazy(() => import('./pages/streams'));
 const ViewStreams = lazy(() => import('./pages/streams/ViewStreams'));
+const MostViewedStreams = lazy(() => import('./pages/streams/MostViewedStreams'));
 const ErrorPage = lazy(() => import('./pages/404'));
 
 // Page path
@@ -27,18 +24,19 @@ const routes = [
    { path: "/about", component: About },
    { path: "/Contact", component: Contact },
    { path: "/streams/", component: Streams },
+   { path: "/streams/most-views", component: MostViewedStreams },
    { path: "/games/top", component: TopRatedGames },
    { path: "/games/:gId", component: GamePage },
    { path: "/streams/:gameId", component: ViewStreams },
    { path: "*", component: ErrorPage },
 ];
 
-
-
 function App() {
-   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
+   const [theme, setTheme] = useState(() =>
+      localStorage.getItem("theme") || "dark");
 
-   const getThemeClassName = () => `${theme} ${theme === "dark" ? "bg-background" : "bg-background"}`;
+   const getThemeClassName = () =>
+      `${theme} ${theme === "dark" ? "bg-background" : "bg-background"}`;
 
    // Update document root class when theme changes
    useEffect(() => {
@@ -49,8 +47,10 @@ function App() {
       <Router>
          <Routes>
             {routes.map(({ path, component: Component }, index) => (
-               <Route key={path} path={path} element=
-                  {
+               <Route
+                  key={path}
+                  path={path}
+                  element={
                      <ThemeContext.Provider value={{ theme, setTheme }}>
                         <div className={getThemeClassName()}>
                            <PageLayout>

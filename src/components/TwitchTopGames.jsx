@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-
-// API
 import twitchApi from "../services/twitchApi";
 
-
-
 function TwitchTopGames() {
-   // State for top games list from Twitch Api
    const [twitchTopGames, setTwitchTopGames] = useState([]);
 
    useEffect(() => {

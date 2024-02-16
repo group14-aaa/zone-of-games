@@ -9,13 +9,18 @@ const axiosCreateTwitchApi = axios.create({
       Authorization: `Bearer ${import.meta.env.VITE_TWITCH_OAUTH_TOKEN}`,
    },
 });
-
-const getTwitchTopGames = axiosCreateTwitchApi.get("/games/top");
-const getTwitchStreams = (params) => axiosCreateTwitchApi.get("/streams", params);
-
-const getTwitchGameId = (gameName) => axiosCreateTwitchApi.get("/games?name=" + encodeURIComponent(gameName));
-
-const getTwitchStreamsByGameId = (gameId) => axiosCreateTwitchApi.get("/streams?game_id=" + encodeURIComponent(gameId));
+const getTwitchTopGames = axiosCreateTwitchApi.get(
+   "/games/top"
+);
+const getTwitchStreams = (params) => axiosCreateTwitchApi.get(
+   "/streams", params
+);
+const getTwitchGameId = (gameName) => axiosCreateTwitchApi.get(
+   "/games?name=" + encodeURIComponent(gameName)
+);
+const getTwitchStreamsByGameId = (gameId) => axiosCreateTwitchApi.get(
+   "/streams?game_id=" + encodeURIComponent(gameId)
+);
 
 export default {
    getTwitchTopGames,

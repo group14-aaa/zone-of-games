@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 import whiteLogo from "./../assets/images/zog-logo-white.png";
 import blackLogo from "./../assets/images/zog-logo-black.png";
-import { ThemeContext } from "../context/ThemeContext";
 
 const Footer = () => {
    const { theme, setTheme } = useContext(ThemeContext);
