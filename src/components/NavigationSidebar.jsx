@@ -24,7 +24,7 @@ const NavigationSidebar = ({
                 </div>
             </Link>
 
-            <Link to="/streams/most-views">
+            <Link to="/streams/most-viewed">
                 <div className="p-5 hover:bg-accent hover:text-white ">
                     <h2 className="text-2xl font-bold">Top 100 Streams</h2>
                 </div>

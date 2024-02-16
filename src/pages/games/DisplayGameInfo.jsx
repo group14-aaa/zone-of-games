@@ -16,7 +16,7 @@ import GamePageStreams from "../../components/GamePageStreams";
 import rawgApi from "../../services/rawgApi";
 import youtubeAPI from "../../services/youtubeAPI";
 
-const GamePage = () => {
+const DisplayGameInfo = () => {
    const { gId } = useParams();
    const [gameData, setGameData] = useState(null);
    const [error, setError] = useState(null);
@@ -273,4 +273,4 @@ const GamePage = () => {
    );
 };
 
-export default GamePage;
+export default DisplayGameInfo;

@@ -11,11 +11,19 @@ import Loading from "./components/Loading";
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
-const GamePage = lazy(() => import('./pages/games/GamePage'));
+
 const TopRatedGames = lazy(() => import('./pages/games/top'));
-const Streams = lazy(() => import('./pages/streams'));
-const ViewStreams = lazy(() => import('./pages/streams/ViewStreams'));
-const MostViewedStreams = lazy(() => import('./pages/streams/MostViewedStreams'));
+const DisplayGameInfo = lazy(() => import('./pages/games/DisplayGameInfo'));
+
+const TopGamesStreaming = lazy(() => import(
+   './pages/streams'
+));
+const DisplayMostViewedStreams = lazy(() => import(
+   './pages/streams/DisplayMostViewedStreams'
+));
+const DisplayStreamsByGame = lazy(() => import(
+   './pages/streams/DisplayStreamsByGame'
+));
 const ErrorPage = lazy(() => import('./pages/404'));
 
 // Page path
@@ -23,11 +31,13 @@ const routes = [
    { path: "/", component: Home },
    { path: "/about", component: About },
    { path: "/Contact", component: Contact },
-   { path: "/streams/", component: Streams },
-   { path: "/streams/most-views", component: MostViewedStreams },
    { path: "/games/top", component: TopRatedGames },
-   { path: "/games/:gId", component: GamePage },
-   { path: "/streams/:gameId", component: ViewStreams },
+   { path: "/games/:gId", component: DisplayGameInfo },
+   { path: "/streams/", component: TopGamesStreaming },
+   { path: "/streams/most-viewed", component: DisplayMostViewedStreams },
+   { path: "/streams/:gameId", component: DisplayStreamsByGame },
+
+
    { path: "*", component: ErrorPage },
 ];
 

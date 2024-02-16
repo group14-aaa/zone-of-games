@@ -30,7 +30,7 @@ const TwitchTopStreams = ({ gameId, limit }) => {
         }
     };
 
-    // Function to handle thumbnail click and start playing the stream
+    // Handle thumbnail click and start playing the stream
     const handleThumbnailClick = (stream) => {
         setSelectedStream(stream);
     };

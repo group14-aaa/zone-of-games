@@ -1,34 +1,8 @@
-import React, { useState, useEffect, lazy } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import TwitchTopStreams from '../../components/TwitchTopStreams';
 
-// Components
-const RawgTopRatedGames = lazy(() => import(
-    '../../../components/RawgTopRatedGames'));
-
-// API
-import rawgApi from "../../../services/rawgApi";
-
-
-
-const TopRatedGames = () => {
-    // State for top games list from RAWG Api
-    const [allGamesList, setAllGamesList] = useState([]);
-
-    useEffect(() => {
-        // Fetch top games list when component mounts
-        fetchRawgAllGamesList();
-    }, []);
-
-    const fetchRawgAllGamesList = async () => {
-        try {
-            const response = await rawgApi.getGamesList;
-
-            setAllGamesList(response.data.results);
-        } catch (error) {
-            console.error("Error fetching top rated games:", error);
-        }
-    };
-
+const DisplayMostViewedStreams = () => {
     return (
         <div className="grid grid-cols-4">
             <div className="bg-secondary text-text h-full hidden md:block">
@@ -51,12 +25,9 @@ const TopRatedGames = () => {
                 </Link>
             </div>
             <div className="col-span-4 md:col-span-3 bg-primary text-text">
-                {allGamesList?.length > 0 && (
-                    <RawgTopRatedGames gamesList={allGamesList} />
-                )}
+                <TwitchTopStreams />
             </div>
         </div>
     )
 }
-
-export default TopRatedGames;
+export default DisplayMostViewedStreams;

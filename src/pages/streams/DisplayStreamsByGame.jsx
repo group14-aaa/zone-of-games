@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import twitchApi from '../../services/twitchApi';
 import '../../assets/styles/twitch.css';
 
-const ViewStreams = ({ limit }) => {
+const DisplayStreamsByGame = ({ limit }) => {
     const { gameId } = useParams();
     const [twitchTopStreams, setTwitchTopStreams] = useState([]);
     const [selectedStream, setSelectedStream] = useState(null);
@@ -40,10 +40,26 @@ const ViewStreams = ({ limit }) => {
 
     return (
         <div className="grid grid-cols-4">
-            {/* <div className="bg-primary text-text h-full hidden md:block">
-                View Streams Sidebar
-            </div> */}
-            <div className="col-span-4 bg-primary text-text">
+            <div className="bg-secondary text-text h-full hidden md:block">
+                <Link to="/streams/">
+                    <div className="p-5 hover:bg-accent hover:text-white ">
+                        <h2 className="text-2xl font-bold">Top Games Streaming</h2>
+                    </div>
+                </Link>
+
+                <Link to="/streams/most-viewed">
+                    <div className="p-5 hover:bg-accent hover:text-white ">
+                        <h2 className="text-2xl font-bold">Top 100 Streams</h2>
+                    </div>
+                </Link>
+
+                <Link to="/games/top">
+                    <div className="p-5 hover:bg-accent hover:text-white">
+                        <h2 className="text-2xl font-bold ">Top Rated Games</h2>
+                    </div>
+                </Link>
+            </div>
+            <div className="col-span-4 md:col-span-3 bg-primary text-text">
                 <h2 className="text-3xl font-bold text-gray-400 mb-4 mt-6 text-center">
                     Most viewed Live Streams on Twitch - {gameName}
                 </h2>
@@ -110,4 +126,4 @@ const ViewStreams = ({ limit }) => {
     );
 }
 
-export default ViewStreams;
+export default DisplayStreamsByGame;
