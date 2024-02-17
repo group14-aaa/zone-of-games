@@ -31,7 +31,7 @@ const NavigationSidebar = ({
                             }
                         >
                             {/* Genre image */}
-                            <img
+                            <img loading="lazy" width={40} height={40}
                                 src={item.image_background}
                                 alt={`Genre ${item.name} background`}
                                 className={
@@ -72,7 +72,7 @@ const NavigationSidebar = ({
                                 `flex gap-2 items-center mb-2 mt-3 px-2 py-2 cursor-pointer hover:bg-accent hover:text-white group rounded-lg ${platformActiveIndex === item.id ? "bg-accent" : ""}`
                             }
                         >
-                            <img
+                            <img loading="lazy" width={40} height={40}
                                 src={item.image_background}
                                 alt={`Platform ${item.name} background`}
                                 className={

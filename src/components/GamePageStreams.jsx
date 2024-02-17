@@ -4,7 +4,7 @@ import Loading from "../components/Loading";
 import twitchApi from "../services/twitchApi";
 import "../assets/styles/twitch.css";
 
-const ViewStreams = ({ gameName }) => {
+const GamePageStreams = ({ gameName }) => {
     const [streamsByGameId, setStreamsByGameId] = useState([]);
     const [selectedStream, setSelectedStream] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -119,4 +119,4 @@ const ViewStreams = ({ gameName }) => {
     );
 }
 
-export default ViewStreams;
+export default GamePageStreams;

@@ -1,7 +1,10 @@
-import React from "react";
-import GameBanner from "./GameBanner";
-import RawgGamesByGenreAndPlatformId from "./RawgGamesByGenreAndPlatformId";
+import React, { lazy } from "react";
+
+const GameBanner = lazy(() => import("./GameBanner"));
+const RawgGamesByGenreAndPlatformId = lazy(() => import("./RawgGamesByGenreAndPlatformId"));
+
 import Loading from "./Loading";
+
 
 const MainContent = ({
   allGamesByGenreIdAndPlatformId,

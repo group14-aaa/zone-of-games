@@ -36,7 +36,7 @@ const GameBanner = ({ randomGames }) => {
                   <h2 className="text-white text-pretty text-5xl font-black text-center">{game.name}</h2>
                </div>
                <Link to={`/games/${game.id}`}>
-                  <img className="w-full h-[400px] object-cover" src={game.background_image} alt={`Game ${index + 1}`} />
+                  <img loading="lazy" width={300} height={400} className="w-full h-[400px] object-cover" src={game.background_image} alt={`Game ${index + 1}`} />
                </Link>
             </SwiperSlide>
          ))}
