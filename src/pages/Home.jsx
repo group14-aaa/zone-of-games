@@ -43,23 +43,35 @@ const Home = () => {
             rawgApi.getPlatformList,
          ]);
 
-         setAllGamesByGenreIdAndPlatformId(gamesResponse.data.results);
-         setGenreList(genreListResponse.data.results);
-         setPlatformList(platformListResponse.data.results);
+         // Check if the response status is okay (200)
+         if (gamesResponse.status === 200 && genreListResponse.status === 200 && platformListResponse.status === 200) {
+            setAllGamesByGenreIdAndPlatformId(gamesResponse.data.results);
+            setGenreList(genreListResponse.data.results);
+            setPlatformList(platformListResponse.data.results);
 
-         // Get selected genre and platform names
-         const selectedGenre = genreListResponse.data.results.find((genre) => genre.id === selectedGenreId);
-         const selectedPlatform = platformListResponse.data.results.find((platform) => platform.id === selectedPlatformId);
+            // Get selected genre and platform names
+            const selectedGenre = genreListResponse.data.results.find((genre) => genre.id === selectedGenreId);
+            const selectedPlatform = platformListResponse.data.results.find((platform) => platform.id === selectedPlatformId);
 
-         setSelectedGenreName(selectedGenre ? selectedGenre.name : "");
-         setSelectedPlatformName(selectedPlatform ? selectedPlatform.name : "");
+            setSelectedGenreName(selectedGenre ? selectedGenre.name : "");
+            setSelectedPlatformName(selectedPlatform ? selectedPlatform.name : "");
+         } else {
+            // Handle the case where the page doesn't exist
+            handleApiError(null, "Page not found");
+         }
       } catch (error) {
+         // Handle other errors
          handleApiError(error, "Error fetching data");
       }
    };
 
    const handleApiError = (error, errorMessage) => {
-      setError(errorMessage);
+      if (error.response && error.response.status === 404) {
+         // If the error is a 404 (Not Found) status, update the error message
+         setError("No more pages available.");
+      } else {
+         setError(errorMessage);
+      }
       console.error(`Error: ${errorMessage}`, error);
    };
 
@@ -87,8 +99,13 @@ const Home = () => {
 
    if (error) {
       return (
-         <div className="p-5 text-text">
-            <p className="text-xl text-error">Error: {error}</p>
+         <div className='flex flex-col items-center justify-center h-screen'>
+            <h1 className='text-4xl font-bold text-red-500 mb-4'>Error: {error}</h1>
+            <p className='text-lg text-text mb-8'>
+               <a href="/" className="hover:text-accent">
+                  Go back to homepage!
+               </a>
+            </p>
          </div>
       );
    }
