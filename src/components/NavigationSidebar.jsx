@@ -18,7 +18,7 @@ const NavigationSidebar = ({
 }) => {
     return (
         <div className="bg-secondary text-text hidden md:block">
-        <LinksSidebar/>
+            <LinksSidebar />
             <div className="bg-secondary p-5 rounded-md shadow-md">
                 {/* Collapsible Genres Section */}
                 <CollapsibleSection title="Genres">
@@ -35,12 +35,12 @@ const NavigationSidebar = ({
                                 src={item.image_background}
                                 alt={`Genre ${item.name} background`}
                                 className={
-                                    `w-[40px] h-[40px] object-cover rounded-lg group-hover:scale-110 transition-all ease-out duration-300 ${genreActiveIndex === index ? "scale-110" : ""}`
+                                    `w-[40px] h-[40px] object-cover rounded-lg group-hover:scale-110 transition-all ease-out duration-300 ${genreActiveIndex === item.id ? "scale-110" : ""}`
                                 }
                             />
                             {/* Genre name */}
                             <h3 className={
-                                `text-[18px] group-hover:font-bold transition-all ease-out duration-300 ${genreActiveIndex === index ? "font-bold text-white" : ""}`
+                                `text-[18px] group-hover:font-bold transition-all ease-out duration-300 ${genreActiveIndex === item.id ? "font-bold text-white" : ""}`
                             }>
                                 {item.name}
                             </h3>
@@ -76,11 +76,11 @@ const NavigationSidebar = ({
                                 src={item.image_background}
                                 alt={`Platform ${item.name} background`}
                                 className={
-                                    `w-[40px] h-[40px] object-cover rounded-lg group-hover:scale-110 transition-all ease-out duration-300 ${platformActiveIndex === index ? "scale-110" : ""}`
+                                    `w-[40px] h-[40px] object-cover rounded-lg group-hover:scale-110 transition-all ease-out duration-300 ${platformActiveIndex === item.id ? "scale-110" : ""}`
                                 }
                             />
                             <h3 className={
-                                `text-[18px] group-hover:font-bold transition-all ease-out duration-300 ${platformActiveIndex === index ? "font-bold text-white" : ""}`
+                                `text-[18px] group-hover:font-bold transition-all ease-out duration-300 ${platformActiveIndex === item.id ? "font-bold text-white" : ""}`
                             }>
                                 {item.name}
                             </h3>
