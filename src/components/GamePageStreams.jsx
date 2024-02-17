@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import ReactPlayer from 'react-player';
+import React, { useEffect, useState } from "react";
+import ReactPlayer from "react-player";
 import Loading from "../components/Loading";
 import twitchApi from "../services/twitchApi";
 import "../assets/styles/twitch.css";
@@ -22,7 +22,7 @@ const ViewStreams = ({ gameName }) => {
                 fetchTwitchStreamsByGameId(twitchGameId);
             }
         } catch (error) {
-            console.error('Error fetching twitch game ID:', error);
+            console.error("Error fetching twitch game ID:", error);
             setIsLoading(false);
         }
     };
@@ -34,7 +34,7 @@ const ViewStreams = ({ gameName }) => {
             setStreamsByGameId(response.data.data);
             setIsLoading(false);
         } catch (error) {
-            console.error('Error fetching twitch streams by game ID:', error);
+            console.error("Error fetching twitch streams by game ID:", error);
             setIsLoading(false);
         }
     };
@@ -62,9 +62,9 @@ const ViewStreams = ({ gameName }) => {
                                 className="w-auto sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 bg-secondary rounded overflow-hidden shadow-lg m-5 group hover:scale-105 transition-all duration-300 ease cursor-pointer"
                             >
                                 {selectedStream && selectedStream.id === stream.id ? (
-                                    <div className='player-wrapper'>
+                                    <div className="player-wrapper">
                                         <ReactPlayer
-                                            className='react-player'
+                                            className="react-player"
                                             url={`https://www.twitch.tv/${stream.user_name}`}
                                             width="100%"
                                             height="100%"
@@ -76,7 +76,7 @@ const ViewStreams = ({ gameName }) => {
                                     <div className="thumbnail-container relative w-full h-40 cursor-pointer">
                                         {stream.thumbnail_url ? (
                                             <img
-                                                src={stream.thumbnail_url.replace('{width}', '640').replace('{height}', '360')}
+                                                src={stream.thumbnail_url.replace("{width}", "640").replace("{height}", "360")}
                                                 alt={`Thumbnail for ${stream.user_name}`}
                                                 width="100%"
                                                 height="100%"
@@ -108,7 +108,7 @@ const ViewStreams = ({ gameName }) => {
                                         <h3 className="text-text text-lg font-semibold">
                                             {stream.user_name}</h3>
                                     </div>
-                                    <p className='text-text'>Viewers: {stream.viewer_count}</p>
+                                    <p className="text-text">Viewers: {stream.viewer_count}</p>
                                 </div>
                             </div>
                         ))

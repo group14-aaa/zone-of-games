@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CollapsibleSection from "./CollapsibleSection";
-import { Link } from "react-router-dom";
+import LinksSidebar from "./LinksSidebar";
 
 const NavigationSidebar = ({
     genreList,
@@ -18,24 +18,7 @@ const NavigationSidebar = ({
 }) => {
     return (
         <div className="bg-secondary text-text hidden md:block">
-            <Link to="/streams/">
-                <div className="p-5 hover:bg-accent hover:text-white ">
-                    <h2 className="text-2xl font-bold">Top Games Streaming</h2>
-                </div>
-            </Link>
-
-            <Link to="/streams/most-viewed">
-                <div className="p-5 hover:bg-accent hover:text-white ">
-                    <h2 className="text-2xl font-bold">Top 100 Streams</h2>
-                </div>
-            </Link>
-
-            <Link to="/games/top">
-                <div className="p-5 hover:bg-accent hover:text-white">
-                    <h2 className="text-2xl font-bold ">Top Rated Games</h2>
-                </div>
-            </Link>
-
+        <LinksSidebar/>
             <div className="bg-secondary p-5 rounded-md shadow-md">
                 {/* Collapsible Genres Section */}
                 <CollapsibleSection title="Genres">

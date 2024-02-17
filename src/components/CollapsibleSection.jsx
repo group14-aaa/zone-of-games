@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { FaPlus, FaMinus } from 'react-icons/fa';
+import React, { useState } from "react"
+import { FaPlus, FaMinus } from "react-icons/fa";
 
 const CollapsibleSection = ({ title, children }) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
