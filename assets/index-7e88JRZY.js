@@ -1,0 +1,7 @@
+import{r as a,_ as l,d as i,j as e,L as t}from"./index-pUFErbTU.js";const d=a.lazy(()=>l(()=>import("./RawgTopRatedGames-kFeqtoUd.js"),__vite__mapDeps([0,1,2,3,4]))),m=()=>{const[r,o]=a.useState([]);a.useEffect(()=>{c()},[]);const c=async()=>{try{const s=await i.getGamesList;o(s.data.results)}catch(s){console.error("Error fetching top rated games:",s)}};return e.jsxs("div",{className:"grid grid-cols-4",children:[e.jsxs("div",{className:"bg-secondary text-text h-full hidden md:block",children:[e.jsx(t,{to:"/streams/",children:e.jsx("div",{className:"p-5 hover:bg-accent hover:text-white ",children:e.jsx("h2",{className:"text-2xl font-bold",children:"Top Games Streaming"})})}),e.jsx(t,{to:"/streams/most-viewed",children:e.jsx("div",{className:"p-5 hover:bg-accent hover:text-white ",children:e.jsx("h2",{className:"text-2xl font-bold",children:"Top 100 Streams"})})}),e.jsx(t,{to:"/games/top",children:e.jsx("div",{className:"p-5 hover:bg-accent hover:text-white",children:e.jsx("h2",{className:"text-2xl font-bold ",children:"Top Rated Games"})})})]}),e.jsx("div",{className:"col-span-4 md:col-span-3 bg-primary text-text",children:r?.length>0&&e.jsx(d,{gamesList:r})})]})};export{m as default};
+function __vite__mapDeps(indexes) {
+  if (!__vite__mapDeps.viteFileDeps) {
+    __vite__mapDeps.viteFileDeps = ["assets/RawgTopRatedGames-kFeqtoUd.js","assets/index-pUFErbTU.js","assets/index-p4idUA-V.css","assets/index-7p3fLvvq.js","assets/index-Zqsy9CiC.js"]
+  }
+  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
+}
