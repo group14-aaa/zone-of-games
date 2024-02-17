@@ -48,6 +48,8 @@
 
 
 ## 📍 Overview
+This repository contains a web app named Zone of Games with components for game banners, streaming, navigation, and more. It leverages React, React Router, and APIs like Youtube, Twitch and Rawg to offer a dynamic and interactive gaming experience. The project showcases top-rated games, streams, and allows users to explore games by genre and platform. Key features include collapsible sections, theme support, lazy loading, and responsive design.
+
 Zone of Games is a gaming-centric platform that caters to enthusiasts seeking a comprehensive gaming experience. The project's primary focus is on providing detailed information about specific games alongside live gaming streams sourced from Twitch, all conveniently accessible on a per-game basis.
 
 ![Logo Zone of Games](./public/assets/logo/logo-color.png?raw=true "logo-zone-of-games")
@@ -55,31 +57,17 @@ Zone of Games is a gaming-centric platform that caters to enthusiasts seeking a 
 
 ## 📦 Features
 
-### Game Information Page
-
 |    | Feature            | Description                                                                                                        |
 |----|--------------------|--------------------------------------------------------------------------------------------------------------------|
-|  | **Dedicated Pages**   | Each game has its dedicated page, easily accessible from the homepage or search results. |
-|  | **Comprehensive Details**   | Game pages include essential information such as release date, developer details,  trailers, scores, screenshots, and twitch streams.|
-
-### Live Streams Section
-
-|    | Feature            | Description                                                                                                        |
-|----|--------------------|--------------------------------------------------------------------------------------------------------------------|
-|  | **Dynamic Updates**   | At the bottom of each game page, a dedicated section display live gaming streams from Twitch related to the specific game being viewed. |
-|  | **Relevance**   | Ensures that the Twitch streams presented are relevant and engaging for users interested in a particular game. |
-
-### User-friendly Navigation
-
-|    | Feature            | Description                                                                                                        |
-|----|--------------------|--------------------------------------------------------------------------------------------------------------------|
-|  | **Intuitive Design**   | The website is user-friendly navigation, enabling smooth transitions between game pages and easy access to the live streams section. |
-
-### Responsive Design
-
-|    | Feature            | Description                                                                                                        |
-|----|--------------------|--------------------------------------------------------------------------------------------------------------------|
-|  | **Consistent Experience**   | The website boasts a responsive design, ensuring a consistent and enjoyable user experience across a variety of devices. |
+| ⚙️ | **Architecture**   | The system follows a component-based architecture with clear separation of concerns between components and services, enhancing maintainability and scalability. The use of React components, context API for theming, lazy loading for routes, Axios for API calls, and a structured directory tree indicate a well-organized architectural design.                                                 |
+| 🔗 | **Dependencies**   | The system relies on various dependencies like Axios, React Router, Tailwind CSS, ESLint, and more for functionality, styling, and code quality. Managing dependencies effectively and keeping them up to date is essential to ensure compatibility and security. Consider periodically reviewing and updating dependencies for maintainability.           |
+| 🧩 | **Modularity**     | The project exhibits good modularity by organizing components, context, and services into separate directories, facilitating reusability and maintainability. Each component serves a specific function, enabling easier testing, debugging, and updates. Encouraging modularity enhances code readability and fosters a clean project structure.        |
+| 🧪 | **Testing**        | The codebase lacks explicit information on testing strategies and tools. Incorporating unit tests, integration tests, or end-to-end testing using frameworks like Jest or React Testing Library could ensure code reliability, catch errors early, and promote robust application behavior. Testing documentation and practices should be enhanced for code quality assurance.      |
+| ⚡️  | **Performance**    | The performance is optimized with lazy loading, efficient rendering of components, and API requests. Leveraging lazy loading for routes, optimized Axios requests, and responsive design techniques enhance the system's speed and resource efficiency. Regular performance monitoring and optimizations can further improve user experience.                                 |
+| 🔐 | **Security**       | Security measures like environment variable handling for API keys and OAuth tokens are in services. Implementing secure practices like data validation, input sanitization, and HTTPS usage can fortify the system against vulnerabilities. Regular security audits, updates, and best practices can reinforce data protection and system integrity.  |
+| 🔀 | **Version Control**| Version control is managed through GitHub with a workflow for build generation and deployment. Utilizing Git for versioning, feature branching, and CI/CD workflows ensures code collaboration, traceability, and deployment automation. Enhancements in commit conventions, branching strategies, and PR reviews can further streamline version control practices. |
+| 🔌 | **Integrations**   | The system integrates with external APIs like RAWG, Twitch, and YouTube for fetching game and stream data, contributing to rich content display. Evaluating API usage for efficiency, rate limits, and error handling could optimize integrations. Exploring new integrations and monitoring API changes can enhance the system's functionality and adaptability.  |
+| 📶 | **Scalability**    | The system has potential for scalability with dynamic content loading, theming support, and API data management.
 ---
 
 
@@ -96,21 +84,23 @@ Zone of Games is a gaming-centric platform that caters to enthusiasts seeking a 
     ├── package.json
     ├── postcss.config.js
     ├── public/
+    │   └── screenshots/
     ├── src/
     │   ├── App.jsx
     │   ├── components/
     │   │   ├── CollapsibleSection.jsx
     │   │   ├── Footer.jsx
     │   │   ├── GameBanner.jsx
-    │   │   ├── GamesByGenre.jsx
-    │   │   ├── GamesByPlatform.jsx
+    │   │   ├── GamePageStreams.jsx
     │   │   ├── Header.jsx
+    │   │   ├── LinksSidebar.jsx
     │   │   ├── Loading.jsx
     │   │   ├── MainContent.jsx
+    │   │   ├── NavigationSidebar.jsx
     │   │   ├── PageLayout.jsx
-    │   │   ├── RawgGenreList.jsx
-    │   │   ├── RawgPlatformList.jsx
+    │   │   ├── RawgGamesByGenreAndPlatformId.jsx
     │   │   ├── RawgTopRatedGames.jsx
+    │   │   ├── RoutesPath.jsx
     │   │   ├── TwitchTopGames.jsx
     │   │   └── TwitchTopStreams.jsx
     │   ├── context/
