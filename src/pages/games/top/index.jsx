@@ -8,8 +8,6 @@ const RawgTopRatedGames = lazy(() => import(
 // API
 import rawgApi from "../../../services/rawgApi";
 
-
-
 const TopRatedGames = () => {
     // State for top games list from RAWG Api
     const [allGamesList, setAllGamesList] = useState([]);

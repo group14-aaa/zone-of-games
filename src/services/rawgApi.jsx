@@ -15,6 +15,10 @@ const getPlatformList = axiosCreateRawgApi.get(
 const getGamesList = axiosCreateRawgApi.get(
    "/games?key=" + import.meta.env.VITE_RAWG_API_KEY
 );
+const getSearchAllGames = (query) => axiosCreateRawgApi.get(
+   "/games?key=" + import.meta.env.VITE_RAWG_API_KEY +
+   "&search=" + query
+);
 const getGameData = (gId) => axiosCreateRawgApi.get(
    "/games/" + gId +
    "?key=" + import.meta.env.VITE_RAWG_API_KEY
@@ -37,4 +41,5 @@ export default {
    getGameData,
    getGamesByGenreIdAndPlatformId,
    getGamesByPlatform,
+   getSearchAllGames,
 };
