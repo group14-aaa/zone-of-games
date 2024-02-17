@@ -48,8 +48,6 @@
 
 
 ## 📍 Overview
-This repository contains a web app named Zone of Games with components for game banners, streaming, navigation, and more. It leverages React, React Router, and APIs like Youtube, Twitch and Rawg to offer a dynamic and interactive gaming experience. The project showcases top-rated games, streams, and allows users to explore games by genre and platform. Key features include collapsible sections, theme support, lazy loading, and responsive design.
-
 Zone of Games is a gaming-centric platform that caters to enthusiasts seeking a comprehensive gaming experience. The project's primary focus is on providing detailed information about specific games alongside live gaming streams sourced from Twitch, all conveniently accessible on a per-game basis.
 
 ![Logo Zone of Games](./public/assets/logo/logo-color.png?raw=true "logo-zone-of-games")
@@ -57,18 +55,31 @@ Zone of Games is a gaming-centric platform that caters to enthusiasts seeking a 
 
 ## 📦 Features
 
+### Game Information Page
+
 |    | Feature            | Description                                                                                                        |
 |----|--------------------|--------------------------------------------------------------------------------------------------------------------|
-| ⚙️ | **Architecture**   | The system follows a component-based architecture with clear separation of concerns between components and services, enhancing maintainability and scalability. The use of React components, context API for theming, lazy loading for routes, Axios for API calls, and a structured directory tree indicate a well-organized architectural design.                                                 |
-| 🔗 | **Dependencies**   | The system relies on various dependencies like Axios, React Router, Tailwind CSS, ESLint, and more for functionality, styling, and code quality. Managing dependencies effectively and keeping them up to date is essential to ensure compatibility and security. Consider periodically reviewing and updating dependencies for maintainability.           |
-| 🧩 | **Modularity**     | The project exhibits good modularity by organizing components, context, and services into separate directories, facilitating reusability and maintainability. Each component serves a specific function, enabling easier testing, debugging, and updates. Encouraging modularity enhances code readability and fosters a clean project structure.        |
-| 🧪 | **Testing**        | The codebase lacks explicit information on testing strategies and tools. Incorporating unit tests, integration tests, or end-to-end testing using frameworks like Jest or React Testing Library could ensure code reliability, catch errors early, and promote robust application behavior. Testing documentation and practices should be enhanced for code quality assurance.      |
-| ⚡️  | **Performance**    | The performance is optimized with lazy loading, efficient rendering of components, and API requests. Leveraging lazy loading for routes, optimized Axios requests, and responsive design techniques enhance the system's speed and resource efficiency. Regular performance monitoring and optimizations can further improve user experience.                                 |
-| 🔐 | **Security**       | Security measures like environment variable handling for API keys and OAuth tokens are in services. Implementing secure practices like data validation, input sanitization, and HTTPS usage can fortify the system against vulnerabilities. Regular security audits, updates, and best practices can reinforce data protection and system integrity.  |
-| 🔀 | **Version Control**| Version control is managed through GitHub with a workflow for build generation and deployment. Utilizing Git for versioning, feature branching, and CI/CD workflows ensures code collaboration, traceability, and deployment automation. Enhancements in commit conventions, branching strategies, and PR reviews can further streamline version control practices. |
-| 🔌 | **Integrations**   | The system integrates with external APIs like RAWG, Twitch, and YouTube for fetching game and stream data, contributing to rich content display. Evaluating API usage for efficiency, rate limits, and error handling could optimize integrations. Exploring new integrations and monitoring API changes can enhance the system's functionality and adaptability.  |
-| 📶 | **Scalability**    | The system has potential for scalability with dynamic content loading, theming support, and API data management.
+|  | **Dedicated Pages**   | Each game has its dedicated page, easily accessible from the homepage or search results. |
+|  | **Comprehensive Details**   | Game pages include essential information such as release date, developer details,  trailers, scores, screenshots, and twitch streams.|
 
+### Live Streams Section
+
+|    | Feature            | Description                                                                                                        |
+|----|--------------------|--------------------------------------------------------------------------------------------------------------------|
+|  | **Dynamic Updates**   | At the bottom of each game page, a dedicated section display live gaming streams from Twitch related to the specific game being viewed. |
+|  | **Relevance**   | Ensures that the Twitch streams presented are relevant and engaging for users interested in a particular game. |
+
+### User-friendly Navigation
+
+|    | Feature            | Description                                                                                                        |
+|----|--------------------|--------------------------------------------------------------------------------------------------------------------|
+|  | **Intuitive Design**   | The website is user-friendly navigation, enabling smooth transitions between game pages and easy access to the live streams section. |
+
+### Responsive Design
+
+|    | Feature            | Description                                                                                                        |
+|----|--------------------|--------------------------------------------------------------------------------------------------------------------|
+|  | **Consistent Experience**   | The website boasts a responsive design, ensuring a consistent and enjoyable user experience across a variety of devices. |
 ---
 
 
@@ -85,23 +96,21 @@ Zone of Games is a gaming-centric platform that caters to enthusiasts seeking a 
     ├── package.json
     ├── postcss.config.js
     ├── public/
-    │   └── screenshots/
     ├── src/
     │   ├── App.jsx
     │   ├── components/
     │   │   ├── CollapsibleSection.jsx
     │   │   ├── Footer.jsx
     │   │   ├── GameBanner.jsx
-    │   │   ├── GamePageStreams.jsx
+    │   │   ├── GamesByGenre.jsx
+    │   │   ├── GamesByPlatform.jsx
     │   │   ├── Header.jsx
-    │   │   ├── LinksSidebar.jsx
     │   │   ├── Loading.jsx
     │   │   ├── MainContent.jsx
-    │   │   ├── NavigationSidebar.jsx
     │   │   ├── PageLayout.jsx
-    │   │   ├── RawgGamesByGenreAndPlatformId.jsx
+    │   │   ├── RawgGenreList.jsx
+    │   │   ├── RawgPlatformList.jsx
     │   │   ├── RawgTopRatedGames.jsx
-    │   │   ├── RoutesPath.jsx
     │   │   ├── TwitchTopGames.jsx
     │   │   └── TwitchTopStreams.jsx
     │   ├── context/
@@ -121,14 +130,15 @@ Zone of Games is a gaming-centric platform that caters to enthusiasts seeking a 
     │       └── youtubeAPI.jsx
     ├── tailwind.config.js
     └── vite.config.js
----
+
+```
 
 ---
 
 
 ## ⚙️ Modules
 
-<details closed><summary>Root</summary>
+<details open><summary>Root</summary>
 
 | File                                                                                                                                         | Summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ---                                                                                                                                          | ---                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -153,7 +163,7 @@ Zone of Games is a gaming-centric platform that caters to enthusiasts seeking a 
 | [MainContent.jsx](https://github.com/group14-aaa/zone-of-games/blob/main/src\components\MainContent.jsx)                                     | The `MainContent` component in the zone-of-games project displays a GameBanner, RawgGamesByGenreAndPlatformId, and pagination controls. It dynamically renders games based on genre and platform, with buttons to navigate through pages of game content. Lazy loading of components optimizes performance, while a Loading component handles loading states.                                                                                                                                                                                     |
 | [NavigationSidebar.jsx](https://github.com/group14-aaa/zone-of-games/blob/main/src\components\NavigationSidebar.jsx)                         | The code defines the `Navigation Sidebar` component in the React application. It displays collapsible sections for Genres and Platforms, allowing users to select and interact with items from each list. Users can show more or less items within each section, with dynamic styling and interactive behaviors based on user selections. The component facilitates seamless navigation and interaction with genre and platform information in a visually appealing manner.                                                                           |
 | [PageLayout.jsx](https://github.com/group14-aaa/zone-of-games/blob/main/src\components\PageLayout.jsx)                                       | The code defines the `PageLayout` component in the web application. It imports Header and Footer components, sets a custom font, and structures the layout with the header, children content, and footer within a div container.                                                                                                                                                                                                                                                                                                            |
-| [RawgGamesByGenreAndPlatformId.jsx](https://github.com/group14-aaa/zone-of-games/blob/main/src\components\RawgGamesByGenreAndPlatformId.jsx) | The `RawgGamesByGenreAndPlatformId` component renders games based on genre and platform. It displays game information, including ratings, reviews, and suggestions. Users can click on games to view details. The component dynamically fetches and updates the game list using React's state and effect hooks. Each game card features an image, name, ratings, and counts. The UI offers a visually appealing and interactive experience for browsing and selecting games within specified genre and platform criteria.                       |
+| [RawgGamesByGenreAndPlatformId.jsx](https://github.com/group14-aaa/zone-of-games/blob/main/src\components\RawgGamesByGenreAndPlatformId.jsx) | The `RawgGamesByGenreAndPlatformId` component renders games based on genre and platform. It displays game information, including ratings, reviews, and suggestions. Users can click on games to view details. The component dynamically fetches and updates the game list using React's state and effect hooks. Each game card features an image, name, ratings, and counts. The UI offers a visually appealing and interactive experience for browsing and selecting games within specified genre and platform criteria.                                                                                                                                                          |
 | [RawgTopRatedGames.jsx](https://github.com/group14-aaa/zone-of-games/blob/main/src\components\RawgTopRatedGames.jsx)                         | `RawgTopRatedGames` component displays top-rated games with ratings, reviews, and suggestions counts, sorted by rating. Each game card includes game details, Metacritic rating, and icons for ratings, reviews, and suggestions. The component uses React Router for navigation and various React icons for visual elements.                                                                                                                                                                                                                     |
 | [RoutesPath.jsx](https://github.com/group14-aaa/zone-of-games/blob/main/src\components\RoutesPath.jsx)                                       | The code in `RoutesPath.jsx` imports React and lazy loads various pages for a dynamic routing setup. It defines routes for Home, About, Contact, Top Rated Games, Display Game Info, Top Games Streaming, Most Viewed Streams, Streams by Game, and an Error Page. Each route maps a path to its corresponding component for navigation within the application.                                                                                                                                                                                   |
 | [TwitchTopGames.jsx](https://github.com/group14-aaa/zone-of-games/blob/main/src\components\TwitchTopGames.jsx)                               | The `TwitchTopGames` component fetches and displays top games streaming on Twitch. It makes an API call to Twitch for the data, then renders game name and image links in a responsive grid layout. Each game box includes a clickable image linking to the respective stream page.                                                                                                                                                                                                                                                               |
@@ -172,7 +182,8 @@ Zone of Games is a gaming-centric platform that caters to enthusiasts seeking a 
 | [twitchApi.jsx](https://github.com/group14-aaa/zone-of-games/blob/main/src\services\twitchApi.jsx)                                           | The code in `twitchApi.jsx` sets up an Axios instance for Twitch API requests. It includes functions to get top games, streams, game ID, and streams by game ID. The instance is configured with the Twitch API base URL and required headers using client ID and OAuth token from environment variables. The functions utilize this instance to make Twitch API calls and are exported for use in the project.                                                                                                                                 |
 | [youtubeAPI.jsx](https://github.com/group14-aaa/zone-of-games/blob/main/src\services\youtubeAPI.jsx)                                         | The code in `youtubeAPI.jsx` fetches game trailers using the YouTube Data API. It defines a function getGameTrailer, which searches for a game trailer based on the provided gameName. If found, it returns the trailer URL; otherwise, it throws an error. The function uses axios to make API requests, with params including the game name and YouTube API key. Any errors during the process are caught and rethrown with appropriate messages.                                                                                               |
 
-</details>
+</details>                                                                                     |
+
 
 ---
 
