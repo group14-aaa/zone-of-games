@@ -1,34 +1,26 @@
-import { Link, useLocation } from "react-router-dom";
+import StoreSidebarNav from "./StoreSidebarNav";
 
-const links = [
-   { to: "/streams/", label: "Top games streaming" },
-   { to: "/streams/most-viewed", label: "Top 100 live streams" },
-   { to: "/games/top", label: "Top rated games" },
-];
-
+/** Shared rail for stream / top-rated pages — matches home sidebar patterns. */
 export default function LinksSidebar() {
-   const location = useLocation();
-
    return (
-      <nav className="pb-1" aria-label="Game and stream sections">
-         <p className="browse-aside-label mb-2 px-1">Store &amp; streams</p>
-         <div className="border border-borderTheme bg-primary/30">
-            {links.map(({ to, label }) => {
-               const active =
-                  to === "/streams/"
-                     ? location.pathname === "/streams" || location.pathname === "/streams/"
-                     : location.pathname === to;
-               return (
-                  <Link
-                     key={to}
-                     to={to}
-                     className={`browse-quick-link border-b border-borderTheme last:border-b-0 ${active ? "browse-quick-link-active" : ""}`}
-                  >
-                     {label}
-                  </Link>
-               );
-            })}
+      <div className="flex flex-col gap-3 px-1 pb-1 pt-1">
+         <header className="px-2">
+            <div className="flex gap-3">
+               <div
+                  className="w-1 shrink-0 self-stretch rounded-full bg-accent shadow-[0_0_12px_rgb(var(--color-accent)/0.45)]"
+                  aria-hidden
+               />
+               <div className="min-w-0">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted">
+                     Zone of Games
+                  </p>
+                  <p className="mt-0.5 text-base font-extrabold tracking-tight text-text">Browse</p>
+               </div>
+            </div>
+         </header>
+         <div className="zog-rail-surface p-2.5">
+            <StoreSidebarNav />
          </div>
-      </nav>
+      </div>
    );
 }

@@ -1,34 +1,41 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import rawgApi from "../services/rawgApi";
 import useGameGridPageSize from "../hooks/useGameGridPageSize";
+import { useBrowseSidebar } from "../context/BrowseSidebarContext";
 
-import NavigationSidebar from "../components/NavigationSidebar";
 import MainContent from "../components/MainContent";
+import ScrollReveal from "../components/ScrollReveal";
 
 const Home = () => {
+   const {
+      genreList,
+      platformList,
+      selectedGenreId,
+      selectedPlatformId,
+      selectedOrdering,
+   } = useBrowseSidebar();
+
    const [allGamesByGenreIdAndPlatformId, setAllGamesByGenreIdAndPlatformId] = useState([]);
    const [randomGames, setRandomGames] = useState({});
    const [error, setError] = useState(null);
 
-   const [selectedGenreId, setSelectedGenreId] = useState(4);
-   const [selectedPlatformId, setSelectedPlatformId] = useState(4);
    const [currentPage, setCurrentPage] = useState(1);
 
-   const [genreList, setGenreList] = useState([]);
-   const [displayedGenres, setDisplayedGenres] = useState(10);
-   const [genreActiveIndex, setGenreActiveIndex] = useState(4);
-
-   const [platformList, setPlatformList] = useState([]);
-   const [displayedPlatforms, setDisplayedPlatforms] = useState(10);
-   const [platformActiveIndex, setPlatformActiveIndex] = useState(4);
-
-   const [selectedGenreName, setSelectedGenreName] = useState("");
-   const [selectedPlatformName, setSelectedPlatformName] = useState("");
    const [gamesTotalCount, setGamesTotalCount] = useState(0);
    const [gamesHasNextPage, setGamesHasNextPage] = useState(false);
    const skipScrollRef = useRef(true);
 
    const gridPageSize = useGameGridPageSize();
+
+   const selectedGenreName = useMemo(() => {
+      const g = genreList.find((genre) => genre.id === selectedGenreId);
+      return g ? g.name : "";
+   }, [genreList, selectedGenreId]);
+
+   const selectedPlatformName = useMemo(() => {
+      const p = platformList.find((platform) => platform.id === selectedPlatformId);
+      return p ? p.name : "";
+   }, [platformList, selectedPlatformId]);
 
    const totalPages = useMemo(
       () => Math.max(1, Math.ceil((gamesTotalCount || 0) / gridPageSize)),
@@ -42,13 +49,13 @@ const Home = () => {
       return shuffled.slice(0, n);
    };
 
-   const handleApiError = useCallback((error, errorMessage) => {
-      if (error.response && error.response.status === 404) {
+   const handleApiError = useCallback((err, errorMessage) => {
+      if (err?.response && err.response.status === 404) {
          setError("No more pages available.");
       } else {
          setError(errorMessage);
       }
-      console.error(`Error: ${errorMessage}`, error);
+      console.error(`Error: ${errorMessage}`, err);
    }, []);
 
    useEffect(() => {
@@ -59,7 +66,7 @@ const Home = () => {
 
    useEffect(() => {
       setCurrentPage(1);
-   }, [selectedGenreId, selectedPlatformId]);
+   }, [selectedGenreId, selectedPlatformId, selectedOrdering]);
 
    useEffect(() => {
       if (currentPage > totalPages) {
@@ -75,54 +82,32 @@ const Home = () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
    }, [currentPage]);
 
-   const fetchGamesAndLists = useCallback(async () => {
+   const fetchGames = useCallback(async () => {
       try {
-         const [gamesResponse, genreListResponse, platformListResponse] = await Promise.all([
-            rawgApi.getGamesByGenreIdAndPlatformId(selectedGenreId, selectedPlatformId, currentPage, gridPageSize),
-            rawgApi.getGenreList,
-            rawgApi.getPlatformList,
-         ]);
+         const gamesResponse = await rawgApi.getGamesByGenreIdAndPlatformId(
+            selectedGenreId,
+            selectedPlatformId,
+            currentPage,
+            gridPageSize,
+            selectedOrdering
+         );
 
-         // Check if the response status is okay (200)
-         if (gamesResponse.status === 200 && genreListResponse.status === 200 && platformListResponse.status === 200) {
+         if (gamesResponse.status === 200) {
             setError(null);
             setAllGamesByGenreIdAndPlatformId(gamesResponse.data.results);
             setGamesTotalCount(gamesResponse.data.count ?? 0);
             setGamesHasNextPage(Boolean(gamesResponse.data.next));
-            setGenreList(genreListResponse.data.results);
-            setPlatformList(platformListResponse.data.results);
-
-            // Get selected genre and platform names
-            const selectedGenre = genreListResponse.data.results.find((genre) => genre.id === selectedGenreId);
-            const selectedPlatform = platformListResponse.data.results.find((platform) => platform.id === selectedPlatformId);
-
-            setSelectedGenreName(selectedGenre ? selectedGenre.name : "");
-            setSelectedPlatformName(selectedPlatform ? selectedPlatform.name : "");
          } else {
-            // Handle the case where the page doesn't exist
             handleApiError(null, "Page not found");
          }
-      } catch (error) {
-         handleApiError(error, "Error fetching data");
+      } catch (err) {
+         handleApiError(err, "Error fetching data");
       }
-   }, [selectedGenreId, selectedPlatformId, currentPage, gridPageSize, handleApiError]);
+   }, [selectedGenreId, selectedPlatformId, currentPage, gridPageSize, selectedOrdering, handleApiError]);
 
    useEffect(() => {
-      fetchGamesAndLists();
-   }, [fetchGamesAndLists]);
-
-   const handleShowMore = (setDisplayed, currentCount) => {
-      setDisplayed(currentCount + 5);
-   };
-
-   const handleShowLess = (setDisplayed, currentCount) => {
-      setDisplayed(Math.max(currentCount - 5, 5));
-   };
-
-   const handleSelect = (setId, setIndex, id) => {
-      setId(id);
-      setIndex(id);
-   };
+      fetchGames();
+   }, [fetchGames]);
 
    const handlePageChange = (newPage) => {
       setCurrentPage(newPage);
@@ -130,7 +115,7 @@ const Home = () => {
 
    if (error) {
       return (
-         <div className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-4 text-center">
+         <ScrollReveal className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-4 text-center">
             <div className="zog-card max-w-md px-8 py-10">
                <h1 className="mb-3 text-2xl font-bold text-error md:text-3xl">Error: {error}</h1>
                <p className="text-muted">
@@ -139,42 +124,23 @@ const Home = () => {
                   </a>
                </p>
             </div>
-         </div>
+         </ScrollReveal>
       );
    }
 
    return (
-      <div className="flex w-full flex-col md:flex-row md:items-start">
-         {/* Navigation Sidebar — fixed store-standard width on md+ */}
-         <NavigationSidebar
-            genreList={genreList}
-            displayedGenres={displayedGenres}
-            genreActiveIndex={genreActiveIndex}
-            onShowMore={() => handleShowMore(setDisplayedGenres, displayedGenres)}
-            onShowLess={() => handleShowLess(setDisplayedGenres, displayedGenres)}
-            onGenreSelect={(genreId) => handleSelect(setSelectedGenreId, setGenreActiveIndex, genreId)}
-            platformList={platformList}
-            displayedPlatforms={displayedPlatforms}
-            platformActiveIndex={platformActiveIndex}
-            onShowMorePlatforms={() => handleShowMore(setDisplayedPlatforms, displayedPlatforms)}
-            onShowLessPlatforms={() => handleShowLess(setDisplayedPlatforms, displayedPlatforms)}
-            onPlatformSelect={(platformId) => handleSelect(setSelectedPlatformId, setPlatformActiveIndex, platformId)}
-         />
-
-         {/* Main Content */}
-         <MainContent
-            allGamesByGenreIdAndPlatformId={allGamesByGenreIdAndPlatformId}
-            randomGames={randomGames}
-            selectedGenreName={selectedGenreName}
-            selectedPlatformName={selectedPlatformName}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            totalCount={gamesTotalCount}
-            pageSize={gridPageSize}
-            hasNextPage={gamesHasNextPage}
-            onPageChange={handlePageChange}
-         />
-      </div>
+      <MainContent
+         allGamesByGenreIdAndPlatformId={allGamesByGenreIdAndPlatformId}
+         randomGames={randomGames}
+         selectedGenreName={selectedGenreName}
+         selectedPlatformName={selectedPlatformName}
+         currentPage={currentPage}
+         totalPages={totalPages}
+         totalCount={gamesTotalCount}
+         pageSize={gridPageSize}
+         hasNextPage={gamesHasNextPage}
+         onPageChange={handlePageChange}
+      />
    );
 };
 
